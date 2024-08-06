@@ -1,0 +1,1 @@
+ALTER TABLE `projects` ADD `type` text NOT NULL;

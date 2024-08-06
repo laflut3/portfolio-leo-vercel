@@ -1,0 +1,152 @@
+/* global.css */
+
+@font-face {
+    font-family: 'AkayaKanadaka';
+    src: url('/assets/fonts/AkayaKanadaka-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ErasBoldITC';
+    src: url('/assets/fonts/ErasBoldITC.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-primary: #0C0304;
+    --bg-secondary: #EB9D5A;
+    --bg-tertiary: #ffffff;
+    --color-primary: #FFFFFF;
+    --color-secondary: #EB9D5A;
+    --color-tertiary: #000000;
+    --font-primary: 'AkayaKanadaka', sans-serif;
+    --font-secondary: 'ErasBoldITC', sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--color-primary);
+    font-family: var(--font-primary);
+}
+
+@keyframes slide-in-from-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.5s ease-out forwards;
+}
+
+.skill-content {
+    transition: opacity 0.3s ease-out, transform 0.5s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.skill-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.float-animation {
+    animation: float 5s ease-in-out infinite;
+}
+
+.second-section {
+    position: relative;
+    transform: translateY(-3%);
+    z-index: 1;
+}
+
+.border-secondary {
+    border: 5px solid var(--bg-secondary);
+}
+
+/* styles/LandingPageAnimation.css */
+.landing-page {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+  }
+  
+  .overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .banner {
+    width: 100%;
+    height: 25%;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 2px 0;
+  }
+  
+  .enter-button {
+    position: absolute;
+    bottom: 20px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    color: #fff;
+    background: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .enter-button:hover {
+    background: #0056b3;
+  }
+  
