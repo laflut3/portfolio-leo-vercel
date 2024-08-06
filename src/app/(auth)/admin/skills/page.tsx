@@ -1,4 +1,3 @@
-// /admin/skills/page.tsx
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -16,17 +15,17 @@ export default function SkillsAdminPage() {
   const [editSkill, setEditSkill] = useState<{ id: number; title: string; content: string; image: string } | null>(null);
   const router = useRouter();
 
-    useEffect(() => {
-        const checkAuth = () => {
-            if (typeof document !== 'undefined') {
-                const authCookie = document.cookie.split('; ').find(row => row.startsWith('admin_auth='));
-                if (!authCookie) {
-                    router.push('/admin');
-                }
-            }
-        };
-        checkAuth();
-    }, [router]);
+  useEffect(() => {
+    const checkAuth = () => {
+      if (typeof document !== 'undefined') {
+        const authCookie = document.cookie.split('; ').find(row => row.startsWith('admin_auth='));
+        if (!authCookie) {
+          router.push('/admin');
+        }
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   useEffect(() => {
     const fetchSkills = async () => {
@@ -73,7 +72,6 @@ export default function SkillsAdminPage() {
       console.error('Error deleting skill:', error);
     }
   };
-  
 
   const SkillCard = ({ id, title, content, image }: { id: number; title: string; content: string; image: string }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -107,13 +105,13 @@ export default function SkillsAdminPage() {
               }}
               className="px-2 py-1 rounded-lg"
             >
-              <Image src='/assets/edit-icon.svg' alt="Modifier" width={24} height={24} />
+              <Image src='/assets/edit-icon.svg' alt='Modifier' width={24} height={24} />
             </button>
             <button
               onClick={() => handleDeleteSkill(id)}
               className="px-2 py-1 rounded-lg"
             >
-              <Image src='/assets/delete-icon.svg' alt="Supprimer" width={24} height={24} />
+              <Image src='/assets/delete-icon.svg' alt='Supprimer' width={24} height={24} />
             </button>
           </div>
         </div>
@@ -168,7 +166,7 @@ export default function SkillsAdminPage() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium mb-1 text-tertiary" htmlFor="image">URL de l'image</label>
+                <label className="block text-sm font-medium mb-1 text-tertiary" htmlFor="image">URL de l&apos;image</label>
                 <input
                   id="image"
                   type="text"
@@ -230,7 +228,7 @@ export default function SkillsAdminPage() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium mb-1" htmlFor="editImage">URL de l'image</label>
+                <label className="block text-sm font-medium mb-1" htmlFor="editImage">URL de l&apos;image</label>
                 <input
                   id="editImage"
                   type="text"
@@ -245,12 +243,12 @@ export default function SkillsAdminPage() {
                   type="submit"
                   className="bg-secondary text-primary px-4 py-2 rounded-lg"
                 >
-                  Sauvegarder
+                  Enregistrer
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEditSkill(null)}
-                  className="border text-tertiary px-4 py-2 rounded-lg"
+                  onClick={() => setShowEditModal(false)}
+                  className="bg-tertiary text-tertiary border px-4 py-2 rounded-lg"
                 >
                   Annuler
                 </button>

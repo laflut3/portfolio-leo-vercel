@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { getAllProjects } from '@/db/queries/select';
 import { createProject } from '@/db/queries/insert';
-import { updateProject } from '@/db/queries/update';
 import { deleteProject } from '@/db/queries/delete';
 
 export default function ProjectsAdminPage() {
@@ -160,7 +159,7 @@ export default function ProjectsAdminPage() {
                                 />
                             </div>
                             <div className="mb-4">
-                                <label className="block text-sm font-medium mb-1 text-tertiary" htmlFor="image">URL de l'image</label>
+                                <label className="block text-sm font-medium mb-1 text-tertiary" htmlFor="image">URL de l&apos;image</label>
                                 <input
                                     id="image"
                                     type="text"
@@ -204,8 +203,6 @@ export default function ProjectsAdminPage() {
                     </div>
                 </div>
             )}
-
-
         </main>
     );
 }

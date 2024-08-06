@@ -38,7 +38,7 @@ export default function FifthSection() {
             setFormData({ name: '', email: '', message: '' });
             setConsent(false);
         } catch (error) {
-            console.error('Error submitting contact form:', error);
+            console.error('Erreur lors de l&apos;envoi du formulaire de contact :', error);
             setStatus('error');
         }
     };
@@ -97,7 +97,7 @@ export default function FifthSection() {
                             onChange={handleConsentChange}
                             required
                         />
-                        <label htmlFor="consent" className="text-sm">J'accepte que mes informations soient utilisées pour le traitement de ma demande*</label>
+                        <label htmlFor="consent" className="text-sm">J&apos;accepte que mes informations soient utilisées pour le traitement de ma demande*</label>
                     </div>
                     <button
                         type="submit"
@@ -107,7 +107,7 @@ export default function FifthSection() {
                         {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
                     </button>
                     {status === 'sent' && <p className="text-green-500 text-center mt-4">Message envoyé avec succès !</p>}
-                    {status === 'error' && <p className="text-red-500 text-center mt-4">Erreur lors de l'envoi. Veuillez réessayer.</p>}
+                    {status === 'error' && <p className="text-red-500 text-center mt-4">Erreur lors de l&apos;envoi. Veuillez réessayer.</p>}
                 </form>
                 <div className="mt-8 md:mt-0">
                     <h3 className="text-3xl md:text-4xl font-bold text-center">Entrer en contact</h3>

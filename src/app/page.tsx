@@ -29,7 +29,6 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,7 +37,7 @@ export default function HomePage() {
           setActualSituation(data.content);
         }
       } catch (error) {
-        console.error('Error fetching or creating actual situation:', error);
+        console.error('Erreur lors de la récupération ou de la création de la situation actuelle :', error);
       } finally {
         setLoading(false);
       }
@@ -49,7 +48,7 @@ export default function HomePage() {
         const skillsData = await getAllSkills();
         setSkills(skillsData);
       } catch (error) {
-        console.error('Error fetching skills:', error);
+        console.error('Erreur lors de la récupération des compétences :', error);
       }
     };
 
@@ -90,7 +89,7 @@ export default function HomePage() {
           Salut je suis Léo Full Stack Developer
         </h1>
         <p className="text-lg md:text-xl text-primary text-stroke pt-4 md:pt-[5%] w-full md:w-1/2">
-          {loading ? 'Loading...' : actualSituation}
+          {loading ? 'Chargement...' : actualSituation}
         </p>
         <div className="absolute bottom-10 left-0 p-4">
           <button className="text-primary text-lg md:text-xl p-2 rounded flex items-center" onClick={() => handleNavClick("contactUs")}>
@@ -167,7 +166,6 @@ export default function HomePage() {
         </div>
       </section>
 
-
       <div id="company"></div>
       <section className="py-8 mt-5 fourth-section">
         <div className="flex items-center md:flex-row md:items-center justify-center w-full mb-12">
@@ -188,7 +186,7 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center md:items-start w-full md:w-1/2">
             <p className="text-center md:text-left w-full md:w-3/4 px-4 md:px-0">
-              Durant l'été 2023, mon ami Florian et moi avons décidé de nous lancer dans l'entrepreneuriat, plus précisément dans le domaine du dropshipping. Nous avons réussi à faire cinq ventes sans trop d'efforts grâce à la publicité, la création d'un site de vente et le design d'un logo. Nous avons aussi mis en place une campagne publicitaire pour la promotion de nos produits. Nous avons constitué un capital de départ de 1500€ et visons des ventes importantes avec des prévisions de bénéfices substantiels.
+              Durant l'été 2023, mon ami Florian et moi avons décidé de nous lancer dans l&apos;entrepreneuriat, plus précisément dans le domaine du dropshipping. Nous avons réussi à faire cinq ventes sans trop d&apos;efforts grâce à la publicité, la création d&apos;un site de vente et le design d&apos;un logo. Nous avons aussi mis en place une campagne publicitaire pour la promotion de nos produits. Nous avons constitué un capital de départ de 1500€ et visons des ventes importantes avec des prévisions de bénéfices substantiels.
             </p>
           </div>
         </div>
