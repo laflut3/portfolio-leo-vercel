@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getActualSituation, getAllSkills } from "@/db/queries/select";
-import ThirdSectionContainer from "@/components/ThirdSectionContainer";
+import ThirdSectionContainer from "@/components/home/ThirdSectionContainer";
 import bg_first_sec from "../../public/assets/bg-trou-noir2.png";
 import bg_third_sec from "../../public/assets/planet-icon.png";
-import FifthSection from "@/components/FifthSection";
+import FifthSection from "@/components/home/FifthSection";
 
 interface Skill {
   id: number;
@@ -186,10 +186,10 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col items-center md:items-start w-full md:w-1/2">
             <p className="text-center md:text-left w-full md:w-3/4 px-4 md:px-0">
-              Durant l&apos;été 2023, mon ami Florian et moi avons décidé de nous lancer dans l&apos;entrepreneuriat, 
-              plus précisément dans le domaine du dropshipping. Nous avons réussi à faire cinq ventes sans trop d&apos;efforts 
-              grâce à la publicité, la création d&apos;un site de vente et le design d&apos;un logo. Nous avons aussi mis en place 
-              une campagne publicitaire pour la promotion de nos produits. Nous avons constitué un capital de départ de 1500€ et visons 
+              Durant l&apos;été 2023, mon ami Florian et moi avons décidé de nous lancer dans l&apos;entrepreneuriat,
+              plus précisément dans le domaine du dropshipping. Nous avons réussi à faire cinq ventes sans trop d&apos;efforts
+              grâce à la publicité, la création d&apos;un site de vente et le design d&apos;un logo. Nous avons aussi mis en place
+              une campagne publicitaire pour la promotion de nos produits. Nous avons constitué un capital de départ de 1500€ et visons
               des ventes importantes avec des prévisions de bénéfices substantiels.
             </p>
           </div>

@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import SiteCard from './SiteCard';
-import FilterBar from './FilterBar';
+import SiteCard from '../carousel/SiteCard';
+import FilterBar from '../carousel/FilterBar';
 import { getAllProjects } from '@/db/queries/select';
 
 export default function ThirdSectionContainer() {
@@ -16,7 +16,7 @@ export default function ThirdSectionContainer() {
             try {
                 const projectsData = await getAllProjects();
                 setProjects(projectsData);
-                setFilteredProjects(projectsData); 
+                setFilteredProjects(projectsData);
             } catch (error) {
                 console.error('Error fetching projects:', error);
             }
