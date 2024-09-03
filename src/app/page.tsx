@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getActualSituation, getAllSkills } from "@/db/queries/select";
 import ThirdSectionContainer from "@/components/home/ThirdSectionContainer";
 import bg_first_sec from "../../public/assets/bg-trou-noir2.png";
 import bg_third_sec from "../../public/assets/planet-icon.png";
 import FifthSection from "@/components/home/FifthSection";
+import Preloader from "@/components/home/Preload";
 
 interface Skill {
   id: number;
@@ -19,6 +20,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [preloaderVisible, setPreloaderVisible] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,7 +39,7 @@ export default function HomePage() {
           setActualSituation(data.content);
         }
       } catch (error) {
-        console.error('Erreur lors de la récupération ou de la création de la situation actuelle :', error);
+        console.error("Erreur lors de la récupération ou de la création de la situation actuelle :", error);
       } finally {
         setLoading(false);
       }
@@ -54,7 +56,14 @@ export default function HomePage() {
 
     fetchSkills();
     fetchData();
+
+    const timer = setTimeout(() => {
+      setPreloaderVisible(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
+
 
   const handleNavClick = (targetId: string) => {
     const targetElement = document.getElementById(targetId);
@@ -69,6 +78,7 @@ export default function HomePage() {
 
   return (
     <main className="w-full">
+      {preloaderVisible && <Preloader />}
       <section
         className="min-h-[105vh] flex flex-col justify-center items-start w-full pl-4 md:pl-[5%] bg-primary relative first-section"
         style={{ background: `url(${bg_first_sec.src}) no-repeat center center/cover` }}
