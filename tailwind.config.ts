@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         akaya: ['AkayaKanadaka', 'sans-serif'],
         erasbold: ['ErasBoldITC', 'sans-serif'],
+        aquire: ['Aquire', 'sans-serif'],
       },
     },
   },
