@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { getActualSituation, getAllSkills } from "@/db/queries/select";
@@ -173,11 +174,11 @@ export default function HomePage() {
             Découvrez une sélection de mes réalisations, incluant des sites web hébergés sur mon GitHub,
             des projets développés pour des clients, ainsi que diverses contributions à des initiatives collaboratives.
           </p>
-          <ThirdSectionContainer />
+          <ThirdSectionContainer/>
         </div>
       </section>
       <CompanySection/>
-      <FifthSection />
+      <FifthSection/>
     </main>
   );
 }

@@ -1,10 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useSession } from 'next-auth/react';
+import Link from "next/link";
+import {AiOutlineUser} from "react-icons/ai";
 
 export default function Navbar() {
   const [isBlurred, setIsBlurred] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const {data: session} = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,53 +64,74 @@ export default function Navbar() {
                 <li onClick={() => handleNavClick("company")}>Mon entreprise</li>
               </ul>
             </div>
+            <div className="flex w-1/3 justify-end items-center pr-2 space-x-2">
+
+              <div className="hidden md:block">
+                {!session?.user ? (
+                    <Link href="/login" className="bg-secondary text-primary rounded-xl px-4 py-2">Se
+                      connecter</Link>
+                ) : (
+                    <Link href="/profile"
+                          className="bg-secondary text-primary rounded-xl px-4 py-2 flex items-center">
+                      <AiOutlineUser size={35}/>
+                    </Link>
+                )}
+              </div>
+            </div>
             <button className="block md:hidden" onClick={toggleMenu}>
               ☰
             </button>
+
             <div className="flex space-x-1 ml-4">
               <a
-                href="https://www.linkedin.com/in/leo-torres-804687264/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                  href="https://www.linkedin.com/in/leo-torres-804687264/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
               >
-                <Image src='/assets/linkedin-icon.svg' alt='linkedin icon' width={30} height={30} style={{ objectFit: 'contain' }} />
+                <Image src='/assets/linkedin-icon.svg' alt='linkedin icon' width={30} height={30}
+                       style={{objectFit: 'contain'}}/>
               </a>
               <a
-                href="https://github.com/laflut3/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                  href="https://github.com/laflut3/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
               >
-                <Image src='/assets/github-icon.svg' alt='github icon' width={30} height={30} style={{ objectFit: 'contain' }} />
+                <Image src='/assets/github-icon.svg' alt='github icon' width={30} height={30}
+                       style={{objectFit: 'contain'}}/>
               </a>
               <a
-                href="https://www.instagram.com/le0_trs/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                  href="https://www.instagram.com/le0_trs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
               >
-                <Image src='/assets/insta-icon.png' alt='instagram icon' width={30} height={30} style={{ objectFit: 'contain' }} />
+                <Image src='/assets/insta-icon.png' alt='instagram icon' width={30} height={30}
+                       style={{objectFit: 'contain'}}/>
               </a>
-              <button className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
-                onClick={() => handleNavClick("contactUs")}>
+              <button
+                  className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
+                  onClick={() => handleNavClick("contactUs")}>
                 Nous connecter
               </button>
               <button className="md:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
-                onClick={() => handleNavClick("contactUs")}
+                      onClick={() => handleNavClick("contactUs")}
               >
-                <Image src="/assets/phone-icon2.png" alt="Phone Icon" width={24} height={24} style={{ objectFit: 'contain' }} />
+                <Image src="/assets/phone-icon2.png" alt="Phone Icon" width={24} height={24}
+                       style={{objectFit: 'contain'}}/>
               </button>
             </div>
           </div>
         </div>
         {isMenuOpen && (
-          <div className="md:hidden flex flex-col items-start space-y-2 bg-black bg-opacity-90 text-primary p-4 absolute top-full left-0 w-full z-50">
-            <a href="#" className="block py-2" onClick={() => handleNavClick("top")}>Accueil</a>
-            <a href="#" className="block py-2" onClick={() => handleNavClick("skills")}>Compétences</a>
-            <a href="#" className="block py-2" onClick={() => handleNavClick("projects")}>Projets</a>
-            <a href="#" className="block py-2" onClick={() => handleNavClick("company")}>Mon entreprise</a>
-          </div>
+            <div
+                className="md:hidden flex flex-col items-start space-y-2 bg-black bg-opacity-90 text-primary p-4 absolute top-full left-0 w-full z-50">
+              <a href="#" className="block py-2" onClick={() => handleNavClick("top")}>Accueil</a>
+              <a href="#" className="block py-2" onClick={() => handleNavClick("skills")}>Compétences</a>
+              <a href="#" className="block py-2" onClick={() => handleNavClick("projects")}>Projets</a>
+              <a href="#" className="block py-2" onClick={() => handleNavClick("company")}>Mon entreprise</a>
+            </div>
         )}
       </nav>
     </header>

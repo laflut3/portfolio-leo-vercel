@@ -2,6 +2,7 @@ import ClientNavbar from "@/components/navbar/ClientNavbar";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import "../styles/global.css";
+import {Provider} from "@/app/provider";
 
 export const metadata: Metadata = {
   title: "LEO TORRES",
@@ -19,9 +20,11 @@ export default function RootLayout({
         <link rel="icon" href="/icon.png" />
       </head>
       <body className="font-akaya" suppressHydrationWarning={true}>
+      <Provider>
         <ClientNavbar />
         {children}
         <Footer />
+      </Provider>
       </body>
     </html>
   );
