@@ -3,7 +3,7 @@
 import React, {FormEvent, useRef, useState} from 'react';
 import {FaGoogle, FaEye, FaEyeSlash} from 'react-icons/fa';
 import {useRouter} from "next/navigation";
-import {register} from "@/../Lib/UserLib/actions/register";
+import {register} from "../../../Lib/UserLib/actions/register";
 import styles from "@/styles/Button.module.css";
 
 const RegistrationForm: React.FC = () => {

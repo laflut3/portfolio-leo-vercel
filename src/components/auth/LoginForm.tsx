@@ -21,7 +21,7 @@ const LoginForm: React.FC = () => {
             setError(res.error as string);
         }
         if (res?.ok) {
-            return router.push("/admin/home");
+            return router.push("/validation");
         }
     };
 
@@ -78,6 +78,16 @@ const LoginForm: React.FC = () => {
                             LOGIN
                         </button>
                     </div>
+                </div>
+                <div className="bg-white h-20 p-8 flex items-center justify-between">
+                    <a href="/register"
+                       className="inline-block align-baseline font-bold text-sm text-black hover:text-gray-400">
+                        Pas encore de compte ?
+                    </a>
+                    <a href="/forgot"
+                       className="inline-block align-baseline font-bold text-sm text-black hover:text-gray-400">
+                        Mot de passe oublié ?
+                    </a>
                 </div>
             </form>
         </section>
