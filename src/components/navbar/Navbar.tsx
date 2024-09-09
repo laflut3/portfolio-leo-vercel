@@ -4,11 +4,13 @@ import Image from "next/image";
 import {useSession} from 'next-auth/react';
 import Link from "next/link";
 import {AiOutlineUser} from "react-icons/ai";
+import {useRouter} from "next/navigation";
 
 export default function Navbar() {
     const [isBlurred, setIsBlurred] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {data: session} = useSession();
+    const router = useRouter()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,6 +44,10 @@ export default function Navbar() {
                 behavior: "smooth",
             });
         }
+
+        if (window.location.pathname !== "/") {
+            router.push("/");
+        }
     };
 
     return (
@@ -68,7 +74,7 @@ export default function Navbar() {
                                 {!session?.user ? (
                                     <li>
                                         <Link
-                                            href="/login"
+                                            href="/sign"
                                         >
                                             Se connecter
                                         </Link>
