@@ -23,7 +23,7 @@ const LoginForm: React.FC<{ onSwitchToCreate: () => void }> = ({ onSwitchToCreat
             setError(res.error as string);
         }
         if (res?.ok) {
-            return router.push("/Validation");
+            return router.push("/validation");
         }
     };
 
