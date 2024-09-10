@@ -5,6 +5,9 @@ import Image from 'next/image';
 import SiteCard from '../carousel/SiteCard';
 import FilterBar from '../carousel/FilterBar';
 import { getAllProjects } from '@/db/queries/select';
+import left from "@/../public/assets/image/utils/left-icon.svg"
+import right from "@/../public/assets/image/utils/right-arrow-icon.svg"
+
 
 export default function ThirdSectionContainer() {
     const [projects, setProjects] = useState<{ id: number; title: string; url: string; image: string; type: string }[]>([]);
@@ -53,7 +56,7 @@ export default function ThirdSectionContainer() {
                     className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full shadow-md z-10 hidden md:flex"
                     onClick={scrollLeft}
                 >
-                    <Image src="/assets/left-icon.svg" alt="Scroll left" width={24} height={24} />
+                    <Image src={left} alt="Scroll left" width={24} height={24} />
                 </button>
                 <div
                     className="overflow-x-auto whitespace-nowrap scroll-smooth"
@@ -77,7 +80,7 @@ export default function ThirdSectionContainer() {
                     className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full shadow-md z-10 hidden md:flex"
                     onClick={scrollRight}
                 >
-                    <Image src="/assets/right-arrow-icon.svg" alt="Scroll right" width={24} height={24} />
+                    <Image src={right} alt="Scroll right" width={24} height={24} />
                 </button>
             </div>
         </section>

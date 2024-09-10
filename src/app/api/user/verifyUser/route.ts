@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { connectDB } from '@/../_lib/MongoLib/mongodb';
-import User from '@/../_lib/UserLib/models/User';
+import { connectDB } from '@/../Lib/MongoLib/mongodb';
+import User from '@/../Lib/UserLib/models/User';
 import * as process from 'node:process';
 
 export async function GET(request: NextRequest) {
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
         await user.save();
 
         // Redirection vers la page de validation spécifiée dans l'environnement
-        return NextResponse.redirect(`${process.env.REDIRECTION_VALIDATION}`);
+        return NextResponse.redirect(`${process.env.NEXTAUTH_URL}`);
     } catch (error) {
         console.error('Erreur lors de la vérification du compte:', error);
         return NextResponse.json({ message: 'Erreur lors de la vérification du compte' }, { status: 500 });

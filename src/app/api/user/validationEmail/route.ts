@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { connectDB } from '@/../_lib/MongoLib/mongodb';
-import User from '@/../_lib/UserLib/models/User';
+import { connectDB } from '@/../Lib/MongoLib/mongodb';
+import User from '@/../Lib/UserLib/models/User';
 import nodemailer from 'nodemailer';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/../_lib/UserLib/lib/auth';
+import { authOptions } from '@/../Lib/UserLib/lib/auth';
 import { NextRequest } from 'next/server';
 import * as process from "node:process";
 

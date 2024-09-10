@@ -1,5 +1,8 @@
 import Image from "next/image";
 import React from "react";
+import fleo from "@/../public/assets/image/fleo/fleo-logo.svg"
+import rocket from "@/../public/assets/image/designIcon/rocket-icon.png"
+import cloud from "@/../public/assets/image/designIcon/cloud-icon.svg"
 
 export default function CompanySection() {
     return (
@@ -8,16 +11,16 @@ export default function CompanySection() {
             <section className="py-8 mt-5 fourth-section">
                 <div className="flex items-center md:flex-row md:items-center justify-center w-full mb-12">
                     <h2 className="text-3xl md:text-4xl text-primary font-bold mb-4">FLEO-Web</h2>
-                    <Image src="/assets/fleo-logo.svg" alt="FLEO-Web" width={80} height={80}
+                    <Image src={fleo} alt="FLEO-Web" width={80} height={80}
                            style={{objectFit: 'contain'}}/>
                 </div>
                 <div className="flex flex-col md:flex-row w-full mx-auto">
                     <div className="flex justify-center md:justify-start w-full md:w-1/2 relative">
-                        <Image src="/assets/rocket-icon.svg" alt="Rocket" width={300} height={600}
+                        <Image src={rocket} alt="Rocket" width={300} height={600}
                                className="relative z-0 left-0 md:left-40 bottom-0 md:bottom-32"
                                style={{objectFit: 'contain'}}/>
                         <Image
-                            src="/assets/cloud-icon.svg"
+                            src={cloud}
                             alt="Cloud"
                             width={300}
                             height={300}
