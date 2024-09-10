@@ -1,5 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import mail from "@/../public/assets/image/utils/mail-icon.svg"
+import phone from "@/../public/assets/image/utils/phone-icon.png"
+import location from "@/../public/assets/image/utils/location-icon.png"
+import upArrow from "@/../public/assets/image/utils/up-arrow-icon.svg"
+import github from "@/../public/assets/image/reseauSociaux/github-icon.svg"
+import linkedin from "@/../public/assets/image/reseauSociaux/linkedin-icon.svg"
+import insta from "@/../public/assets/image/reseauSociaux/insta-icon.png"
 
 export default function Footer() {
     return (
@@ -7,15 +14,15 @@ export default function Footer() {
             <div className='flex flex-col items-center md:items-start md:w-1/3 mb-8 md:mb-0'>
                 <h4 className='text-white text-lg md:text-xl mb-4 text-center md:text-left'>RAPIDE CONTACT</h4>
                 <div className='flex items-center mb-4'>
-                    <Image src='/assets/mail-icon.svg' alt='Mail icon' width={24} height={24} />
+                    <Image src={mail} alt='Mail icon' width={24} height={24} />
                     <p className='ml-2 text-white text-sm md:text-base'>leo0609leo@gmail.com</p>
                 </div>
                 <div className='flex items-center mb-4'>
-                    <Image src='/assets/phone-icon.png' alt='Phone icon' width={24} height={24} />
+                    <Image src={phone} alt='Phone icon' width={24} height={24} />
                     <p className='ml-2 text-white text-sm md:text-base'>07.83.08.49.92</p>
                 </div>
                 <div className='flex items-center'>
-                    <Image src='/assets/location-icon.png' alt='Location icon' width={24} height={24} />
+                    <Image src={location} alt='Location icon' width={24} height={24} />
                     <p className='ml-2 text-white text-sm md:text-base'>206 rue du triolet, 34090 Montpellier</p>
                 </div>
             </div>
@@ -27,22 +34,22 @@ export default function Footer() {
             <div className='flex flex-col items-center md:items-end md:w-1/3'>
                 <a href="#top" className='flex items-center mb-6 text-white text-sm md:text-base'>
                     Retournez en haut
-                    <Image src='/assets/up-arrow-icon.svg' alt='Up arrow icon' width={24} height={24} className='ml-2' />
+                    <Image src={upArrow} alt='Up arrow icon' width={24} height={24} className='ml-2' />
                 </a>
                 <div className="flex space-x-2 md:space-x-4">
                     <a href="https://www.linkedin.com/in/leo-torres-804687264/" target="_blank" rel="noopener noreferrer">
                         <button className="rounded-full bg-tertiary border border-black w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                            <Image src='/assets/linkedin-icon.svg' alt='LinkedIn icon' width={24} height={24} />
+                            <Image src={linkedin} alt='LinkedIn icon' width={24} height={24} />
                         </button>
                     </a>
                     <a href="https://github.com/laflut3/" target="_blank" rel="noopener noreferrer">
                         <button className="rounded-full bg-tertiary border border-black w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                            <Image src='/assets/github-icon.svg' alt='GitHub icon' width={24} height={24} />
+                            <Image src={github} alt='GitHub icon' width={24} height={24} />
                         </button>
                     </a>
                     <a href="https://www.instagram.com/le0_trs/" target="_blank" rel="noopener noreferrer">
                         <button className="rounded-full bg-tertiary border border-black w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                            <Image src='/assets/insta-icon.png' alt='Instagram icon' width={24} height={24} />
+                            <Image src={insta} alt='Instagram icon' width={24} height={24} />
                         </button>
                     </a>
                 </div>

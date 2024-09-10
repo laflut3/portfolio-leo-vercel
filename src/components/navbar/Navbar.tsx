@@ -2,9 +2,15 @@
 import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import {useSession} from 'next-auth/react';
-import Link from "next/link";
 import {AiOutlineUser} from "react-icons/ai";
 import {useRouter} from "next/navigation";
+
+import france from "@/../public/assets/image/designIcon/france-icon.jpg"
+import github from "@/../public/assets/image/reseauSociaux/github-icon.svg"
+import linkedin from "@/../public/assets/image/reseauSociaux/linkedin-icon.svg"
+import insta from "@/../public/assets/image/reseauSociaux/insta-icon.png"
+import phone from "@/../public/assets/image/utils/phone-icon2.png"
+
 
 export default function Navbar() {
     const [isBlurred, setIsBlurred] = useState(false);
@@ -68,7 +74,7 @@ export default function Navbar() {
                 <span className="flex items-center text-primary text-xl md:text-2xl">
                     LEO TORRES
                     <Image
-                        src='/assets/france-icon.jpg'
+                        src={france}
                         alt='France Icon' width={20} height={20}
                         style={{objectFit: 'contain'}}/>
                 </span>
@@ -110,7 +116,7 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
                             >
-                                <Image src='/assets/image/reseauSociaux/linkedin-icon.svg' alt='linkedin icon' width={30} height={30}
+                                <Image src={linkedin} alt='linkedin icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <a
@@ -119,7 +125,7 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
                             >
-                                <Image src='/assets/image/logoDev/github-icon.svg' alt='github icon' width={30} height={30}
+                                <Image src={github} alt='github icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <a
@@ -128,14 +134,14 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
                             >
-                                <Image src='/assets/insta-icon.png' alt='instagram icon' width={30} height={30}
+                                <Image src={insta} alt='instagram icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <button
                                 className="md:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
                                 onClick={() => handleNavClick("contactUs")}
                             >
-                                <Image src="/assets/phone-icon2.png" alt="Phone Icon" width={24} height={24}
+                                <Image src={phone} alt="Phone Icon" width={24} height={24}
                                        style={{objectFit: 'contain'}}/>
                             </button>
                         </div>
