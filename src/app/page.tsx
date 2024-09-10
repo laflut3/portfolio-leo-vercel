@@ -9,6 +9,15 @@ import bg_third_sec from "../../public/assets/image/designIcon/planet-icon.png";
 import FifthSection from "@/components/home/FifthSection";
 import Preloader from "@/components/home/Preload";
 import CompanySection from "@/components/home/CompanySection";
+import logo1 from"@/../public/assets/image/logoDev/git-icon.svg"
+import logo2 from"@/../public/assets/image/logoDev/burp-icon.svg"
+import logo3 from"@/../public/assets/image/logoDev/docker-icon.svg"
+import logo4 from"@/../public/assets/image/logoDev/apache-icon.svg"
+import logo5 from"@/../public/assets/image/logoDev/scrum-icon.svg"
+import logo6 from"@/../public/assets/image/logoDev/oracle-server-icon.svg"
+import logo7 from"@/../public/assets/image/logoDev/windows-server-icon.svg"
+import logo8 from"@/../public/assets/image/logoDev/linux-icon.svg"
+import logo9 from"@/../public/assets/image/logoDev/wireshark-icon.svg"
 
 interface Skill {
   id: number;
@@ -98,21 +107,21 @@ export default function HomePage() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-primary font-erasbold text-stroke w-full md:w-3/4 pt-6 md:pt-9">
-          Salut je suis Léo Full Stack Developer
+          Salut je suis Léo, Full Stack Developer
         </h1>
         <p className="text-lg md:text-xl text-primary text-stroke pt-4 md:pt-[5%] w-full md:w-1/2">
           {loading ? 'Chargement...' : actualSituation}
         </p>
         <div className="absolute bottom-10 left-0 p-4">
           <button className="text-primary text-lg md:text-xl p-2 rounded flex items-center" onClick={() => handleNavClick("contactUs")}>
-            Nous connecter
-            <Image src="/assets/special-arrow-icon.svg" alt="special arrow icon" width={32} height={32} className="pl-2" style={{ objectFit: 'contain' }} />
+            Me contacter
+            <Image src="/assets/image/utils/special-arrow-icon.svg" alt="special arrow icon" width={32} height={32} className="pl-2" style={{ objectFit: 'contain' }} />
           </button>
         </div>
         <div className="absolute bottom-0 right-0 hidden md:block">
           <div className="overflow-hidden">
             <div className="animate-slide-in-from-right">
-              <Image src='/assets/leo-photo.svg' alt="Photo de Léo" width={700} height={949} style={{ objectFit: 'contain' }} />
+              <Image src='/assets/image/leo-photo.svg' alt="Photo de Léo" width={700} height={949} style={{ objectFit: 'contain' }} />
             </div>
           </div>
         </div>
@@ -132,15 +141,15 @@ export default function HomePage() {
           <div className="tools pt-16 w-full md:w-3/4 mx-auto">
             <h4 className="text-xl md:text-2xl text-tertiary font-normal">Outils :</h4>
             <div className="flex flex-wrap items-start justify-start gap-4 pt-4 ml-14">
-              <Image src="/assets/git-icon.svg" alt="git icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/burp-icon.svg" alt="burp icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/docker-icon.svg" alt="docker icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/apache-icon.svg" alt="apache icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/scrum-icon.svg" alt="scrum icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/oracle-server-icon.svg" alt="oracle server icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/windows-server-icon.svg" alt="windows server icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/linux-icon.svg" alt="linux icon" width={40} height={40} style={{ objectFit: 'contain' }} />
-              <Image src="/assets/wireshark-icon.svg" alt="wireshark icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo1} alt="git icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo2}  alt="burp icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo3}  alt="docker icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo4}  alt="apache icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo5}  alt="scrum icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo6}  alt="oracle server icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo7}  alt="windows server icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo8}  alt="linux icon" width={40} height={40} style={{ objectFit: 'contain' }} />
+              <Image src={logo9}  alt="wireshark icon" width={40} height={40} style={{ objectFit: 'contain' }} />
             </div>
           </div>
           <div className="protocols pt-16 w-full md:w-3/4 mx-auto">
