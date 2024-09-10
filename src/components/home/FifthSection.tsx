@@ -1,45 +1,64 @@
 "use client";
-import React, { useState } from 'react';
-import { createContact } from '@/db/queries/insert';
+
+import { dotWave } from "ldrs";
 import Image from 'next/image';
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import ValidationPopUp from "@/components/utils/ValidationPopUp";
+import astronaute from "@/../public/assets/image/designIcon/astronaute-icon.png"
 
 export default function FifthSection() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
 
-    const [consent, setConsent] = useState(false);
-    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = event.target;
-        setFormData(prevData => ({ ...prevData, [name]: value }));
-    };
-
-    const handleConsentChange = () => {
-        setConsent(!consent);
-    };
-
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-
-        if (!consent) {
-            alert('Vous devez accepter le consentement pour envoyer le message.');
-            return;
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            dotWave.register();
         }
+    }, []);
 
-        setStatus('sending');
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: "",
+        consent: false,
+    });
+    const [status, setStatus] = useState<string>("");
+    const [showPopup, setShowPopup] = useState(false);
 
-        try {
-            await createContact(formData);
-            setStatus('sent');
-            setFormData({ name: '', email: '', message: '' });
-            setConsent(false);
-        } catch (error) {
-            console.error('Erreur lors de l&apos;envoi du formulaire de contact :', error);
-            setStatus('error');
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value, type } = e.target;
+        if (type === "checkbox") {
+            const { checked } = e.target as HTMLInputElement;
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: checked,
+            }));
+            if (name === "consent" && checked) {
+                setShowPopup(true);
+            }
+        } else {
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        }
+    };
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        setStatus("Sending");
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            setStatus("Message envoyé !");
+            setFormData({ name: "", email: "", message: "", consent: false });
+        } else {
+            setStatus("Problème lors de l'envoi du mail");
         }
     };
 
@@ -60,7 +79,7 @@ export default function FifthSection() {
                                 placeholder="Votre nom et prénom"
                                 className="border w-full rounded-lg px-6 py-2 placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                                 value={formData.name}
-                                onChange={handleInputChange}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -73,7 +92,7 @@ export default function FifthSection() {
                                 placeholder="Votre email"
                                 className="border rounded-lg w-full px-6 py-2 placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                                 value={formData.email}
-                                onChange={handleInputChange}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -84,7 +103,7 @@ export default function FifthSection() {
                         placeholder="Votre message"
                         className="border rounded-lg w-full px-6 py-2 h-32 resize-none text-tertiary placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                         value={formData.message}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         required
                     />
                     <div className="flex items-center space-x-2 mb-4">
@@ -93,8 +112,8 @@ export default function FifthSection() {
                             id="consent"
                             name="consent"
                             className="h-5 w-5"
-                            checked={consent}
-                            onChange={handleConsentChange}
+                            checked={formData.consent}
+                            onChange={handleChange}
                             required
                         />
                         <label htmlFor="consent" className="text-sm">J&apos;accepte que mes informations soient utilisées pour le traitement de ma demande*</label>
@@ -112,7 +131,7 @@ export default function FifthSection() {
                 <div className="mt-8 md:mt-0">
                     <h3 className="text-3xl md:text-4xl font-bold text-center">Entrer en contact</h3>
                     <Image
-                        src='/assets/astronaute-icon.png'
+                        src={astronaute}
                         alt="Astronaute"
                         width={280}
                         height={661}
@@ -121,6 +140,13 @@ export default function FifthSection() {
                     />
                 </div>
             </div>
+            {showPopup && (
+                <ValidationPopUp
+                    title="Consentement requis"
+                    text="Avant de procéder à l'envoi, nous vous prions de bien vouloir confirmer votre consentement. Nous respectons votre vie privée et nous engageons à protéger vos informations personnelles conformément à notre politique de confidentialité. Veuillez lire attentivement les informations fournies et valider votre consentement pour continuer. Si vous avez des questions, n'hésitez pas à nous contacter."
+                    onClose={() => setShowPopup(false)}
+                />
+            )}
         </section>
     );
 }

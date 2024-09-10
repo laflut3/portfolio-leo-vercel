@@ -122,7 +122,11 @@ const SectionProfile: React.FC = () => {
     };
 
     return (
-        <section className="min-h-screen flex flex-col justify-center text-center items-center w-full">
+        <section
+            className="min-h-screen flex flex-col justify-center text-center items-center w-full"
+            style={{background: "url('/assets/image/background/fondEtoile.png') center center / cover no-repeat"}}
+
+        >
             <h2 className="text-2xl font-bold text-center mb-8">Profil</h2>
             <div className="shadow-2xl w-1/4 rounded-lg p-8 bg-white bg-opacity-80 flex flex-col items-center">
                 <div className="mb-8">
