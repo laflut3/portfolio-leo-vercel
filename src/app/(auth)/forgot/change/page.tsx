@@ -7,9 +7,7 @@ const ChangePassword: React.FC = () => {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between">
-            <Suspense fallback={<div>Chargement...</div>}>
-                <ResetForm />
-            </Suspense>
+            <ResetForm />
         </main>
     );
 };

@@ -54,7 +54,7 @@ const ResetForm: React.FC = () => {
             if (response.ok) {
                 setSuccess('Votre mot de passe a été réinitialisé avec succès.');
                 setTimeout(() => {
-                    router.push('/sign');
+                    router.push('/login');
                 }, 2000);
             } else {
                 const data = await response.json();
@@ -64,7 +64,6 @@ const ResetForm: React.FC = () => {
             setError('Une erreur est survenue. Veuillez réessayer.');
         }
     };
-
 
     return (
         <section
