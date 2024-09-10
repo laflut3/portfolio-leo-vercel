@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
     }
 
     // Permettre l'accès aux pages de login et register
-    if (!token && (url.pathname === '/sign')) {
+    if (!token && url.pathname === '/sign') {
         return NextResponse.next();
     }
 
@@ -34,8 +34,8 @@ export async function middleware(req: NextRequest) {
     }
 
     // Rediriger les utilisateurs connectés essayant d'accéder à /login ou /register
-    if (token && (url.pathname === '/sign')) {
-        url.pathname = '/profile';
+    if (token && url.pathname === '/sign'){
+        url.pathname = '/';
         const response = NextResponse.redirect(url);
         response.cookies.set('flashMessage', 'Vous êtes déjà connecté.', { path: '/' });
         return response;
@@ -76,5 +76,7 @@ export const config = {
         '/profile',
         '/sign',
         '/validation',
+        '/forgot/:path*',
+        '/univ',
     ],
 };
