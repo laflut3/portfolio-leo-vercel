@@ -91,14 +91,14 @@ export default function Navbar() {
                         <div className="flex space-x-1 ml-4">
                             {session?.user ? (
                                 <button
-                                    className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
+                                    className="hidden md:flex items-center justify-center rounded-full text-center bg-secondary px-2"
                                     onClick={ProfileClick}
                                 >
                                     <AiOutlineUser size={35}/>
                                 </button>
                             ) : (
                                 <button
-                                    className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
+                                    className="hidden md:flex items-center justify-center rounded-full text-center bg-secondary px-2"
                                     onClick={SignClick}
                                 >
                                     Se connecter
