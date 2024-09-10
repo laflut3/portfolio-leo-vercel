@@ -110,7 +110,7 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
                             >
-                                <Image src='/assets/linkedin-icon.svg' alt='linkedin icon' width={30} height={30}
+                                <Image src='/assets/image/reseauSociaux/linkedin-icon.svg' alt='linkedin icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <a
@@ -119,7 +119,7 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
                             >
-                                <Image src='/assets/github-icon.svg' alt='github icon' width={30} height={30}
+                                <Image src='/assets/image/logoDev/github-icon.svg' alt='github icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <a
