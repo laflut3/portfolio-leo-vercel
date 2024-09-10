@@ -9,7 +9,6 @@ import logo7 from "@/../public/assets/image/logoDev/windows-server-icon.svg";
 import logo8 from "@/../public/assets/image/logoDev/linux-icon.svg";
 import logo9 from "@/../public/assets/image/logoDev/wireshark-icon.svg";
 import React, {useEffect, useState} from "react";
-import {getAllSkills} from "@/db/queries/select";
 
 interface Skill {
     id: number;
@@ -47,21 +46,8 @@ function SkillCard({title, content, image}: Skill) {
 }
 
 export default function SkillSection() {
-    const [skills, setSkills] = useState<Skill[]>([]);
 
-    useEffect(() => {
-        const fetchSkills = async () => {
-            try {
-                const skillsData = await getAllSkills();
-                setSkills(skillsData);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des compétences :', error);
-            }
-        };
 
-        fetchSkills();
-        }
-    )
     return (
         <section id="skills" className="min-h-screen relative z-10 mt-[-15px] second-section">
             <div className="bg-tertiary py-12 w-full md:w-3/4 mx-auto flex flex-col items-center rounded-3xl">
@@ -70,10 +56,7 @@ export default function SkillSection() {
                     Un aperçu de mon expertise dans le domaine :
                 </p>
                 <div className="skills flex flex-wrap justify-center gap-12">
-                    {skills.map(skill => (
-                        <SkillCard key={skill.id} title={skill.title} content={skill.content} image={skill.image}
-                                   id={0}/>
-                    ))}
+
                 </div>
                 <div className="tools pt-16 w-full md:w-3/4 mx-auto">
                     <h4 className="text-xl md:text-2xl text-tertiary font-normal">Outils :</h4>

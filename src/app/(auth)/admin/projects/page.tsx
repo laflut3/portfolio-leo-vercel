@@ -2,9 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { getAllProjects } from '@/db/queries/select';
-import { createProject } from '@/db/queries/insert';
-import { deleteProject } from '@/db/queries/delete';
 
 export default function ProjectsAdminPage() {
     const [projects, setProjects] = useState<{ id: number; title: string; url: string; image: string; type: string }[]>([]);
@@ -24,39 +21,6 @@ export default function ProjectsAdminPage() {
         };
         checkAuth();
     }, [router]);
-
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const projectsData = await getAllProjects();
-                setProjects(projectsData);
-            } catch (error) {
-                console.error('Error fetching projects:', error);
-            }
-        };
-
-        fetchProjects();
-    }, []);
-
-    const handleAddProject = async () => {
-        try {
-            await createProject(newProject);
-            setProjects([...projects, { ...newProject, id: projects.length + 1 }]); // Update with a placeholder ID
-            setNewProject({ title: '', url: '', image: '', type: '' });
-            setShowAddModal(false);
-        } catch (error) {
-            console.error('Error adding project:', error);
-        }
-    };
-
-    const handleDeleteProject = async (id: number) => {
-        try {
-            await deleteProject(id);
-            setProjects(projects.filter(project => project.id !== id));
-        } catch (error) {
-            console.error('Error deleting project:', error);
-        }
-    };
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
@@ -82,7 +46,6 @@ export default function ProjectsAdminPage() {
                 </div>
                 <div className="absolute bottom-2 right-2">
                     <button
-                        onClick={() => handleDeleteProject(id)}
                         className="px-2 py-1 rounded-lg bg-secondary text-primary"
                     >
                         Supprimer
@@ -133,7 +96,6 @@ export default function ProjectsAdminPage() {
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                handleAddProject();
                             }}
                         >
                             <div className="mb-4">

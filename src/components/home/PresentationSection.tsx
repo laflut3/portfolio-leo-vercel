@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, {useEffect, useState} from "react";
-import {getActualSituation} from "@/db/queries/select";
 import bg_first_sec from "@/../public/assets/image/background/bg-trou-noir2.png";
 import leo1 from "@/../public/assets/image/leoSansFond.png";
 import specialArrow from "@/../public/assets/image/utils/special-arrow-icon.svg";
@@ -8,8 +7,6 @@ import leo2 from "@/../public/assets/image/leo-photo.svg";
 
 export default function PresentationSection() {
 
-    const [actualSituation, setActualSituation] = useState('');
-    const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
     useEffect(() => {
@@ -19,23 +16,6 @@ export default function PresentationSection() {
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getActualSituation();
-                if (data && data.content) {
-                    setActualSituation(data.content);
-                }
-            } catch (error) {
-                console.error("Erreur lors de la récupération ou de la création de la situation actuelle :", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
     }, []);
 
 
@@ -71,9 +51,6 @@ export default function PresentationSection() {
             <h1 className="text-4xl md:text-5xl font-bold text-primary font-erasbold text-stroke w-full md:w-3/4 pt-6 md:pt-9">
                 Salut je suis Léo, Full Stack Developer
             </h1>
-            <p className="text-lg md:text-xl text-primary text-stroke pt-4 md:pt-[5%] w-full md:w-1/2">
-                {loading ? 'Chargement...' : actualSituation}
-            </p>
             <div className="absolute bottom-10 left-0 p-4">
                 <button className="text-primary text-lg md:text-xl p-2 rounded flex items-center"
                         onClick={() => handleNavClick("contactUs")}>

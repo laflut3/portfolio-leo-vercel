@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { updateActualSituation } from '@/db/queries/update';
-import { getActualSituation } from '@/db/queries/select';
 
 export default function AdminHomePage() {
     const [actualSituation, setActualSituation] = useState('');
@@ -22,33 +20,6 @@ export default function AdminHomePage() {
         checkAuth();
     }, [router]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getActualSituation();
-                console.log('Fetched data:', data);
-                if (data && data.content) {
-                    setActualSituation(data.content);
-                    setOriginalSituation(data.content);
-                }
-            } catch (error) {
-                console.error('Error fetching actual situation:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []); 
-
-    const handleClickApply = async () => {
-        try {
-            await updateActualSituation(1, { content: actualSituation });
-            console.log('Actual situation updated');
-        } catch (error) {
-            console.error('Error updating actual situation:', error);
-        }
-    };
 
     const handleClickBack = () => {
         setActualSituation(originalSituation);
@@ -73,7 +44,6 @@ export default function AdminHomePage() {
                 />
                 <div className="flex mt-4 flex-col sm:flex-row gap-4 items-center justify-center">
                     <button
-                        onClick={handleClickApply}
                         className="bg-secondary w-1/2 py-2 rounded-xl text-primary"
                     >
                         Appliquer

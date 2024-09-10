@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAllContacts } from '@/db/queries/select';
-import { deleteContact } from '@/db/queries/delete';
 import Image from 'next/image';
 
 export default function ContactsAdminPage() {
@@ -23,28 +21,6 @@ export default function ContactsAdminPage() {
         };
         checkAuth();
     }, [router]);
-
-    useEffect(() => {
-        const fetchContacts = async () => {
-            try {
-                const contactsData = await getAllContacts();
-                setContacts(contactsData);
-            } catch (error) {
-                console.error('Error fetching contacts:', error);
-            }
-        };
-
-        fetchContacts();
-    }, []);
-
-    const handleDeleteContact = async (id: number) => {
-        try {
-            await deleteContact(id);
-            setContacts(contacts.filter(contact => contact.id !== id));
-        } catch (error) {
-            console.error('Error deleting contact:', error);
-        }
-    };
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
@@ -68,7 +44,6 @@ export default function ContactsAdminPage() {
                 </div>
                 <div className="absolute bottom-2 right-2">
                     <button
-                        onClick={() => handleDeleteContact(id)}
                         className="px-2 py-1 rounded-lg bg-secondary text-primary"
                     >
                         Supprimer

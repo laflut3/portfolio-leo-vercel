@@ -2,10 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { getAllSkills } from '@/db/queries/select';
-import { createSkill } from '@/db/queries/insert';
-import { updateSkill } from '@/db/queries/update';
-import { deleteSkill } from '@/db/queries/delete';
 
 export default function SkillsAdminPage() {
   const [skills, setSkills] = useState<{ id: number; title: string; content: string; image: string }[]>([]);
@@ -26,52 +22,6 @@ export default function SkillsAdminPage() {
     };
     checkAuth();
   }, [router]);
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const skillsData = await getAllSkills();
-        setSkills(skillsData);
-      } catch (error) {
-        console.error('Error fetching skills:', error);
-      }
-    };
-
-    fetchSkills();
-  }, []);
-
-  const handleAddSkill = async () => {
-    try {
-      await createSkill(newSkill);
-      setSkills([...skills, { ...newSkill, id: skills.length + 1 }]); // Update with a placeholder ID
-      setNewSkill({ title: '', content: '', image: '' });
-      setShowAddModal(false);
-    } catch (error) {
-      console.error('Error adding skill:', error);
-    }
-  };
-
-  const handleEditSkill = async () => {
-    if (editSkill) {
-      try {
-        await updateSkill(editSkill.id, editSkill);
-        setSkills(skills.map(skill => skill.id === editSkill.id ? editSkill : skill));
-        setEditSkill(null);
-        setShowEditModal(false);
-      } catch (error) {
-        console.error('Error updating skill:', error);
-      }
-    }
-  };
-
-  const handleDeleteSkill = async (id: number) => {
-    try {
-      await deleteSkill(id);
-      setSkills(skills.filter(skill => skill.id !== id));
-    } catch (error) {
-      console.error('Error deleting skill:', error);
-    }
-  };
 
   const SkillCard = ({ id, title, content, image }: { id: number; title: string; content: string; image: string }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -108,7 +58,6 @@ export default function SkillsAdminPage() {
               <Image src='/assets/edit-icon.svg' alt='Modifier' width={24} height={24} />
             </button>
             <button
-              onClick={() => handleDeleteSkill(id)}
               className="px-2 py-1 rounded-lg"
             >
               <Image src='/assets/delete-icon.svg' alt='Supprimer' width={24} height={24} />
@@ -141,7 +90,6 @@ export default function SkillsAdminPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                handleAddSkill();
               }}
             >
               <div className="mb-4">
@@ -203,7 +151,6 @@ export default function SkillsAdminPage() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                handleEditSkill();
               }}
             >
               <div className="mb-4">

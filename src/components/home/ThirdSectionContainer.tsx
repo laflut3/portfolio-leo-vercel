@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import SiteCard from '../carousel/SiteCard';
 import FilterBar from '../carousel/FilterBar';
-import { getAllProjects } from '@/db/queries/select';
 import left from "@/../public/assets/image/utils/left-icon.svg"
 import right from "@/../public/assets/image/utils/right-arrow-icon.svg"
 
@@ -13,20 +12,6 @@ export default function ThirdSectionContainer() {
     const [projects, setProjects] = useState<{ id: number; title: string; url: string; image: string; type: string }[]>([]);
     const [filteredProjects, setFilteredProjects] = useState<{ id: number; title: string; url: string; image: string; type: string }[]>([]);
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const projectsData = await getAllProjects();
-                setProjects(projectsData);
-                setFilteredProjects(projectsData);
-            } catch (error) {
-                console.error('Error fetching projects:', error);
-            }
-        };
-
-        fetchProjects();
-    }, []);
 
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
