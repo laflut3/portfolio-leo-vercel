@@ -67,7 +67,7 @@ const EmailValidationSection: React.FC = () => {
                         {session?.user?.isVerified ? (
                             <button
                                 onClick={handleReturnToShop}
-                                className="bg-secondary text-white py-2 px-6 rounded-full mb-4 hover:bg-orange-600 transition"
+                                className="bg-secondary text-white py-2 px-6 rounded-full hover:bg-orange-400 transition"
                             >
                                 Retour dans la boutique
                             </button>
@@ -75,7 +75,7 @@ const EmailValidationSection: React.FC = () => {
                             <>
                                 <button
                                     onClick={handleSendValidationEmail}
-                                    className="bg-secondary text-white py-2 px-6 rounded-full hover:bg-blue-600 transition"
+                                    className="bg-secondary text-white py-2 px-6 rounded-full hover:bg-orange-400 transition"
                                 >
                                     Validation
                                 </button>
