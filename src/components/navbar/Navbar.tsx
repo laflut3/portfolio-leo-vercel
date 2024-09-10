@@ -50,6 +50,14 @@ export default function Navbar() {
         }
     };
 
+    const SignClick = () => {
+        router.push("/sign");
+    }
+
+    const ProfileClick = () => {
+        router.push("/profile");
+    }
+
     return (
         <header
             className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isBlurred ? 'bg-black bg-opacity-50 backdrop-blur-md pb-2' : 'bg-transparent'
@@ -71,17 +79,7 @@ export default function Navbar() {
                                 <li onClick={() => handleNavClick("skills")}>Compétences</li>
                                 <li onClick={() => handleNavClick("projects")}>Projets</li>
                                 <li onClick={() => handleNavClick("company")}>Mon entreprise</li>
-                                {!session?.user ? (
-                                    <li>
-                                        <Link
-                                            href="/sign"
-                                        >
-                                            Se connecter
-                                        </Link>
-                                    </li>
-                                ) : (
-                                    <></>
-                                )}
+                                <li onClick={() => handleNavClick("contactUs")}> Contact</li>
                             </ul>
                         </div>
                     </div>
@@ -92,12 +90,19 @@ export default function Navbar() {
 
                         <div className="flex space-x-1 ml-4">
                             {session?.user ? (
-                                <Link href="/profile"
-                                      className="bg-secondary text-primary rounded-xl px-4 py-2 flex items-center">
+                                <button
+                                    className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
+                                    onClick={ProfileClick}
+                                >
                                     <AiOutlineUser size={35}/>
-                                </Link>
+                                </button>
                             ) : (
-                                <></>
+                                <button
+                                    className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
+                                    onClick={SignClick}
+                                >
+                                    Se connecter
+                                </button>
                             )}
                             <a
                                 href="https://www.linkedin.com/in/leo-torres-804687264/"
@@ -126,11 +131,6 @@ export default function Navbar() {
                                 <Image src='/assets/insta-icon.png' alt='instagram icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
-                            <button
-                                className="hidden md:flex items-center justify-center rounded-full w-40 h-10 text-center bg-secondary px-2"
-                                onClick={() => handleNavClick("contactUs")}>
-                                Nous connecter
-                            </button>
                             <button
                                 className="md:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
                                 onClick={() => handleNavClick("contactUs")}
