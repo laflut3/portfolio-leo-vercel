@@ -23,14 +23,14 @@ export async function middleware(req: NextRequest) {
 
     // Si l'utilisateur n'est pas connecté
     if (!token) {
-        if (pathname.startsWith(protectedRoutes.profile) || pathname.startsWith(protectedRoutes.admin)) {
+        if ((pathname.startsWith(protectedRoutes.profile)) || (pathname.startsWith(protectedRoutes.admin))) {
             res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
             res.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
             return res;
         }
     } else if (token) {
         // Si l'utilisateur est connecté mais pas admin
-        if (pathname.startsWith(protectedRoutes.admin) && !token.isAdmin) {
+        if ((pathname.startsWith(protectedRoutes.admin)) && !(token.isAdmin)) {
             res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
             res.cookies.set('flashMessage', 'Accès réservé aux administrateurs.', { path: '/' });
             return res;
@@ -51,7 +51,7 @@ export async function middleware(req: NextRequest) {
         }
 
         // Bloquer l'accès à la page de validation si déjà vérifié
-        if (pathname.startsWith(protectedRoutes.verify) && token.isVerified) {
+        if ((pathname.startsWith(protectedRoutes.verify)) && (token.isVerified)) {
             res = NextResponse.redirect(new URL("/", req.url));
             res.cookies.set('flashMessage', 'Votre compte est déjà vérifié.', { path: '/' });
             return res;
