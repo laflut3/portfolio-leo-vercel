@@ -50,39 +50,6 @@ export const authOptions: NextAuthOptions = {
         async jwt({token, user, account, profile}) {
             await connectDB();
 
-            // Si l'utilisateur se connecte pour la première fois avec Google
-            if (account && profile) {
-                let existingUser = await User.findOne({email: profile.email});
-
-                // Si l'utilisateur existe déjà, on récupère ses informations
-                if (existingUser) {
-                    token.id = existingUser._id.toString();
-                    token.name = existingUser.username;
-                    token.email = existingUser.email;
-                    token.firstName = existingUser.prenom;
-                    token.lastName = existingUser.nom;
-                    token.isAdmin = existingUser.isAdmin;
-                    token.isVerified = existingUser.isVerified;
-                    token.dateOfBirth = existingUser.dateOfBirth;
-                } else {
-                    // Si l'utilisateur n'existe pas, on en crée un nouveau
-                    existingUser = await User.create({
-                        username: profile.name,
-                        email: profile.email,
-                        // Ajouter les champs nécessaires ici
-                    });
-
-                    token.id = existingUser._id.toString();
-                    token.name = existingUser.username;
-                    token.email = existingUser.email;
-                    token.firstName = existingUser.prenom;
-                    token.lastName = existingUser.nom;
-                    token.isAdmin = existingUser.isAdmin;
-                    token.isVerified = existingUser.isVerified;
-                    token.dateOfBirth = existingUser.dateOfBirth;
-                }
-            }
-
             // Si l'utilisateur est déjà connecté (ex: via email/mot de passe)
             if (user) {
                 token.id = user.id;
