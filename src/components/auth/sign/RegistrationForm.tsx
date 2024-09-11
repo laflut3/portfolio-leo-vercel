@@ -30,7 +30,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
     return (
         <form className="mt-8 space-y-6" ref={ref} onSubmit={handleSubmit}>
             {error && <div className="">{error}</div>}
-            <div className="rounded-md shadow-sm space-y-4">
+            <div className="text-black rounded-md shadow-sm space-y-4">
                 <div>
                     <label className="sr-only">Nom</label>
                     <input
@@ -66,7 +66,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="date"
                         placeholder="Date de naissance"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block text-black w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="DateOfBirth"
                         required
                     />
