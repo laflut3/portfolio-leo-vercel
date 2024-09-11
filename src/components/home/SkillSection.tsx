@@ -13,6 +13,7 @@ import saturne from '@/../public/assets/image/planete/saturne.png';
 import uranus from '@/../public/assets/image/planete/uranus.png';
 import neptune from '@/../public/assets/image/planete/neptune.png';
 import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
+import WebDiv from "@/components/home/skillUtils/WebDiv";
 
 
 function ScrollSection() {
@@ -28,12 +29,12 @@ function ScrollSection() {
                 translateX: 0,
             },
             {
-                translateX: "-700vw",  // Adjust for the number of images (7 planets + earth)
+                translateX: "-805vw",  // Adjust for the number of images (7 planets + earth)
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: "8500 top",  // Adjust end based on scroll length needed
+                    end: "9500 top",  // Adjust end based on scroll length needed
                     scrub: 0.6,
                     pin: true,
                 },
@@ -48,22 +49,29 @@ function ScrollSection() {
     return (
         <section className="overflow-hidden">
             <div ref={triggerRef}>
-                <div ref={sectionRef} className="min-h-screen w-[800vw] flex flex-row relative">
+                <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
+
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <h2 className="text-6xl text-center items-center">Bienvenue dans mon système de compétences</h2>
+                        <Image src={arrow} alt={arrow} className={"ml-10 mt-3"}/>
+                    </div>
+
                     {/* Mercury */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className="text-3xl">WEb</h3>
                         <Image
                             src={mercury}
                             alt="Mercure"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
-
+                        <WebDiv/>
                     </div>
                     {/* Venus */}
                     <div className="min-h-screen w-screen flex justify-center items-center">
                         <Image
                             src={venus}
                             alt="Venus"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Earth */}
@@ -71,7 +79,7 @@ function ScrollSection() {
                         <Image
                             src={terre}
                             alt="Terre"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Mars */}
@@ -79,7 +87,7 @@ function ScrollSection() {
                         <Image
                             src={mars}
                             alt="Mars"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Jupiter */}
@@ -87,7 +95,7 @@ function ScrollSection() {
                         <Image
                             src={jupiter}
                             alt="Jupiter"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Saturn */}
@@ -95,7 +103,7 @@ function ScrollSection() {
                         <Image
                             src={saturne}
                             alt="Saturne"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Uranus */}
@@ -103,7 +111,7 @@ function ScrollSection() {
                         <Image
                             src={uranus}
                             alt="Uranus"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     {/* Neptune */}
@@ -111,7 +119,7 @@ function ScrollSection() {
                         <Image
                             src={neptune}
                             alt="Neptune"
-                            className="object-contain h-[80vh] w-auto"
+                            className="object-contain h-[70vh] w-auto"
                         />
                     </div>
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center">
