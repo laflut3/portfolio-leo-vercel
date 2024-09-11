@@ -10,12 +10,12 @@ export async function middleware(req: NextRequest) {
 
     // Routes protégées avec le routeur app
     const protectedRoutes: { [key: string]: string } = {
-        admin: process.env.NEXTAUTH_URL + 'admin',
-        sign: process.env.NEXTAUTH_URL + 'sign',
-        profile: process.env.NEXTAUTH_URL + 'profile',
-        verify: process.env.NEXTAUTH_URL + '/(auth)/validation',
-        forgot: process.env.NEXTAUTH_URL + 'forgot',
-        change: process.env.NEXTAUTH_URL + 'forgot/change',
+        admin: process.env.NEXTAUTH_URL + '/admin',
+        sign: process.env.NEXTAUTH_URL + '/sign',
+        profile: process.env.NEXTAUTH_URL + '/profile',
+        verify: process.env.NEXTAUTH_URL + '/validation',
+        forgot: process.env.NEXTAUTH_URL + '/forgot',
+        change: process.env.NEXTAUTH_URL + '/forgot/change',
     };
 
     // Préparer la réponse
