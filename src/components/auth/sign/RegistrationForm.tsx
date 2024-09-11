@@ -30,7 +30,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
     return (
         <form className="mt-8 space-y-6" ref={ref} onSubmit={handleSubmit}>
             {error && <div className="">{error}</div>}
-            <div className="rounded-md shadow-sm space-y-4">
+            <div className="text-black rounded-md shadow-sm space-y-4">
                 <div>
                     <label className="sr-only">Nom</label>
                     <input
