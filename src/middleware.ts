@@ -28,7 +28,7 @@ export async function middleware(req: NextRequest) {
             res.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
             return res;
         }
-    } else {
+    } else if (token) {
         // Si l'utilisateur est connecté mais pas admin
         if (pathname.startsWith(protectedRoutes.admin) && !token.isAdmin) {
             res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
@@ -44,7 +44,7 @@ export async function middleware(req: NextRequest) {
         }
 
         // Si l'utilisateur est connecté mais non vérifié
-        if (token && !(pathname.startsWith('/validation')) && !(token.isVerified)) {
+        if (!(pathname.startsWith('/validation')) && !(token.isVerified)) {
             res = NextResponse.redirect(new URL('/validation', req.url));
             res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
             return res;
@@ -70,5 +70,13 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/:path*'], // Applique le middleware à toutes les pages d'authentification avec le routeur app
+    matcher: [
+        '/',
+        '/admin',
+        '/sign',
+        '/validation',
+        '/profile',
+        '/forgot',
+        '/forgot/change',
+    ],
 };
