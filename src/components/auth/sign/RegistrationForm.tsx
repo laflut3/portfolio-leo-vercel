@@ -36,7 +36,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="text"
                         placeholder="Nom"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-primary rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="nom"
                         required
                     />
@@ -46,7 +46,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="text"
                         placeholder="Prénom"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-primary rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="prenom"
                         required
                     />
@@ -56,7 +56,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="text"
                         placeholder="Username"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-primary rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="username"
                         required
                     />
@@ -66,7 +66,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="date"
                         placeholder="Date de naissance"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 text-gray-500 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="DateOfBirth"
                         required
                     />
@@ -76,7 +76,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                     <input
                         type="email"
                         placeholder="Adresse Email"
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-primary rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         name="email"
                         required
                     />
@@ -88,7 +88,7 @@ const RegisterForm: React.FC<{ onSwitchToSignIn: () => void }> = ({ onSwitchToSi
                         id="passwordRegister"
                         name="password"
                         type={showPassword ? "text" : "password"}
-                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-primary rounded-b-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
+                        className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-b-md focus:outline-none focus:ring-[#0C388D] focus:border-[#0C388D] focus:z-10 sm:text-sm"
                         placeholder="Mot de passe"
                         required
                     />
