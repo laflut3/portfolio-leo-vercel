@@ -23,15 +23,15 @@ export async function middleware(req: NextRequest) {
 
     // Si l'utilisateur n'est pas connecté
     if (!token) {
-        if ((pathname.startsWith(protectedRoutes.profile)) || (pathname.startsWith(protectedRoutes.admin))) {
-            res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
+        if ((pathname.startsWith(protectedRoutes.profile)) || (pathname.startsWith('/admin'))) {
+            res = NextResponse.redirect(new URL('/sign', req.url));
             res.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
             return res;
         }
     } else if (token) {
         // Si l'utilisateur est connecté mais pas admin
-        if ((pathname.startsWith(protectedRoutes.admin)) && !(token.isAdmin)) {
-            res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
+        if ((pathname.startsWith('/admin')) && !(token.isAdmin)) {
+            res = NextResponse.redirect(new URL('/sign', req.url));
             res.cookies.set('flashMessage', 'Accès réservé aux administrateurs.', { path: '/' });
             return res;
         }
