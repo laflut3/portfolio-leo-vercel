@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
         admin: process.env.NEXTAUTH_URL + 'admin',
         sign: process.env.NEXTAUTH_URL + 'sign',
         profile: process.env.NEXTAUTH_URL + 'profile',
-        verify: process.env.NEXTAUTH_URL + 'validation',
+        verify: process.env.NEXTAUTH_URL + '/(auth)/validation',
         forgot: process.env.NEXTAUTH_URL + 'forgot',
         change: process.env.NEXTAUTH_URL + 'forgot/change',
     };
