@@ -43,16 +43,16 @@ export async function middleware(req: NextRequest) {
             return res;
         }
 
-        // // Si l'utilisateur est connecté mais non vérifié
-        // if (!(pathname.startsWith(protectedRoutes.verify)) && !(token.isVerified)) {
-        //     res = NextResponse.redirect(new URL(protectedRoutes.verify, req.url));
-        //     res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
-        //     return res;
-        // }
+        // Si l'utilisateur est connecté mais non vérifié
+        if (token && !(pathname.startsWith('/validation')) && !(token.isVerified)) {
+            res = NextResponse.redirect(new URL('/validation', req.url));
+            res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
+            return res;
+        }
 
         // Bloquer l'accès à la page de validation si déjà vérifié
         if (pathname.startsWith(protectedRoutes.verify) && token.isVerified) {
-            res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
+            res = NextResponse.redirect(new URL("/", req.url));
             res.cookies.set('flashMessage', 'Votre compte est déjà vérifié.', { path: '/' });
             return res;
         }
