@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         }
 
         const verificationToken = user._id.toString();
-        const verificationLink = `${process.env.NEXTAUTH_URL}/api/user/verifyUser?token=${verificationToken}`;
+        const verificationLink = `${process.env.NEXTAUTH_URL}api/user/verifyUser?token=${verificationToken}`;
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',

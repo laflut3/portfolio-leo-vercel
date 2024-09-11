@@ -44,7 +44,7 @@ export async function middleware(req: NextRequest) {
         }
 
         // Si l'utilisateur est connecté mais non vérifié
-        if (!token.isVerified) {
+        if (!pathname.startsWith(protectedRoutes.verify) && !token.isVerified) {
             res = NextResponse.redirect(new URL(protectedRoutes.verify, req.url));
             res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
             return res;
