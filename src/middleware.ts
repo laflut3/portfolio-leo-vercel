@@ -2,82 +2,73 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-// Interface représentant les informations du token utilisateur
-interface UserPayload {
-    isAdmin: boolean;
-    isVerified: boolean;
-    [key: string]: any;
-}
+const secret = process.env.NEXTAUTH_SECRET;
 
 export async function middleware(req: NextRequest) {
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-    const url = req.nextUrl.clone();
+    const token = await getToken({ req, secret });
+    const { pathname } = req.nextUrl;
 
-    // Par défaut, l'utilisateur n'est ni admin ni vérifié
-    let isAdmin = false;
-    let isVerified = false;
+    // Routes protégées avec le routeur app
+    const protectedRoutes: { [key: string]: string } = {
+        admin: '/admin',
+        sign: '/sign',
+        profile: '/profile',
+        verify: '/validation',
+        forgot: '/forgot',
+        change: '/forgot/change',
+    };
 
-    // Si un token est présent, extraire les informations de l'utilisateur
-    if (token) {
-        const userPayload = token as UserPayload;
-        isAdmin = userPayload.isAdmin;
-        isVerified = userPayload.isVerified;
+    // Préparer la réponse
+    let res = NextResponse.next();
+
+    // Si l'utilisateur n'est pas connecté
+    if (!token) {
+        if (pathname.startsWith(protectedRoutes.profile) || pathname.startsWith(protectedRoutes.admin)) {
+            res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
+            res.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
+            return res;
+        }
+    } else {
+        // Si l'utilisateur est connecté mais pas admin
+        if (pathname.startsWith(protectedRoutes.admin) && !token.isAdmin) {
+            res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
+            res.cookies.set('flashMessage', 'Accès réservé aux administrateurs.', { path: '/' });
+            return res;
+        }
+
+        // Empêcher l'accès à la page de connexion si déjà connecté
+        if (pathname.startsWith(protectedRoutes.sign)) {
+            res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
+            res.cookies.set('flashMessage', 'Vous êtes déjà connecté.', { path: '/' });
+            return res;
+        }
+
+        // Si l'utilisateur est connecté mais non vérifié
+        if (pathname.startsWith(protectedRoutes.profile) && !token.isVerified) {
+            res = NextResponse.redirect(new URL(protectedRoutes.verify, req.url));
+            res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
+            return res;
+        }
+
+        // Bloquer l'accès à la page de validation si déjà vérifié
+        if (pathname.startsWith(protectedRoutes.verify) && token.isVerified) {
+            res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
+            res.cookies.set('flashMessage', 'Votre compte est déjà vérifié.', { path: '/' });
+            return res;
+        }
+
+        // Bloquer l'accès à /forgot et /change si l'utilisateur est connecté
+        if (pathname.startsWith(protectedRoutes.forgot) || pathname.startsWith(protectedRoutes.change)) {
+            res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
+            res.cookies.set('flashMessage', 'Vous êtes déjà connecté, pas besoin de changer le mot de passe.', { path: '/' });
+            return res;
+        }
     }
 
-    // Autoriser l'accès aux pages de login et de register si l'utilisateur n'est pas connecté
-    if (!token && (url.pathname === 'sign')) {
-        return NextResponse.next();
-    }
-
-    // Rediriger vers /login si l'utilisateur n'est pas connecté et tente d'accéder à /profile
-    if (!token && url.pathname === '/profile') {
-        const response = NextResponse.redirect(new URL('/sign', req.url));
-        response.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
-        return response;
-    }
-
-    // Rediriger les utilisateurs connectés essayant d'accéder à /login ou /register
-    if (token && (url.pathname === 'sign')) {
-        url.pathname = '/';
-        const response = NextResponse.redirect(url);
-        response.cookies.set('flashMessage', 'Vous êtes déjà connecté.', { path: '/' });
-        return response;
-    }
-
-    // Bloquer l'accès à /validation si l'utilisateur est déjà vérifié
-    if (token && isVerified && url.pathname === '/validation') {
-        url.pathname = '/';
-        const response = NextResponse.redirect(url);
-        response.cookies.set('flashMessage', 'Vous avez déjà vérifié votre compte.', { path: '/' });
-        return response;
-    }
-
-    // Rediriger les utilisateurs non-vérifiés vers /validation
-    if (token && !isVerified && url.pathname !== '/validation' && !url.pathname.startsWith('/admin')) {
-        url.pathname = '/validation';
-        const response = NextResponse.redirect(url);
-        response.cookies.set('flashMessage', 'Veuillez vérifier votre compte.', { path: '/' });
-        return response;
-    }
-
-    // Rediriger les utilisateurs non-admin essayant d'accéder aux pages admin
-    if (token && isVerified && !isAdmin && url.pathname.startsWith('/admin')) {
-        url.pathname = '/';
-        const response = NextResponse.redirect(url);
-        response.cookies.set('flashMessage', 'Accès interdit. Administrateurs uniquement.', { path: '/' });
-        return response;
-    }
-
-    // Si aucune redirection n'est nécessaire, continuer normalement
-    return NextResponse.next();
+    // Continuer si aucune redirection n'est nécessaire
+    return res;
 }
 
 export const config = {
-    matcher: [
-        '/',
-        '/admin/:path*',  // Assurez-vous que toutes les routes admin sont protégées
-        '/profile',
-        '/sign',
-        '/validation',
-    ],
+    matcher: ['/:path*'], // Applique le middleware à toutes les pages d'authentification avec le routeur app
 };
