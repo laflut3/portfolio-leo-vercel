@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/../Lib/MongoLib/mongodb';
-import Link from '../../../../Lib/ProjectsLib/models/Projects';
+import Link from '@/../Lib/ProjectsLib/models/Projects';
 
 export async function POST(request: Request) {
     await connectDB();

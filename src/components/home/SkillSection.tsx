@@ -1,48 +1,127 @@
-import Image from "next/image";
-import logo1 from "@/../public/assets/image/logoDev/git-icon.svg";
-import logo2 from "@/../public/assets/image/logoDev/burp-icon.svg";
-import logo3 from "@/../public/assets/image/logoDev/docker-icon.svg";
-import logo4 from "@/../public/assets/image/logoDev/apache-icon.svg";
-import logo5 from "@/../public/assets/image/logoDev/scrum-icon.svg";
-import logo6 from "@/../public/assets/image/logoDev/oracle-server-icon.svg";
-import logo7 from "@/../public/assets/image/logoDev/windows-server-icon.svg";
-import logo8 from "@/../public/assets/image/logoDev/linux-icon.svg";
-import logo9 from "@/../public/assets/image/logoDev/wireshark-icon.svg";
-import React from "react";
+"use client";
 
-export default function SkillSection() {
+import React, {useEffect, useRef} from 'react';
+import {gsap} from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
+import Image from 'next/image';
+import mercury from '@/../public/assets/image/planete/mercure.png';
+import venus from '@/../public/assets/image/planete/venus.png';
+import terre from '@/../public/assets/image/planete/terre.png';
+import mars from '@/../public/assets/image/planete/mars.png';
+import jupiter from '@/../public/assets/image/planete/jupiter.png';
+import saturne from '@/../public/assets/image/planete/saturne.png';
+import uranus from '@/../public/assets/image/planete/uranus.png';
+import neptune from '@/../public/assets/image/planete/neptune.png';
+import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
 
+
+function ScrollSection() {
+    const sectionRef = useRef(null);
+    const triggerRef = useRef(null);
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    useEffect(() => {
+        const pin = gsap.fromTo(
+            sectionRef.current,
+            {
+                translateX: 0,
+            },
+            {
+                translateX: "-700vw",  // Adjust for the number of images (7 planets + earth)
+                ease: "none",
+                scrollTrigger: {
+                    trigger: triggerRef.current,
+                    start: "top top",
+                    end: "8500 top",  // Adjust end based on scroll length needed
+                    scrub: 0.6,
+                    pin: true,
+                },
+            }
+        );
+
+        return () => {
+            pin.kill();  // Clean up the animation on unmount
+        };
+    }, []);
 
     return (
-        <section id="skills" className="min-h-screen relative z-10 mt-[-15px] second-section">
-            <div className="bg-tertiary py-12 w-full md:w-3/4 mx-auto flex flex-col items-center rounded-3xl">
-                <h2 className="text-3xl md:text-4xl text-secondary font-aquire font-bold mb-4">Compétences</h2>
-                <p className="mb-8 text-tertiary text-center w-full md:w-2/3">
-                    Un aperçu de mon expertise dans le domaine :
-                </p>
-                <div className="tools pt-16 w-full md:w-3/4 mx-auto">
-                    <h4 className="text-xl md:text-2xl text-tertiary font-normal">Outils :</h4>
-                    <div className="flex flex-wrap items-start justify-start gap-4 pt-4 ml-14">
-                        <Image src={logo1} alt="git icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo2} alt="burp icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo3} alt="docker icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo4} alt="apache icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo5} alt="scrum icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo6} alt="oracle server icon" width={40} height={40}
-                               style={{objectFit: 'contain'}}/>
-                        <Image src={logo7} alt="windows server icon" width={40} height={40}
-                               style={{objectFit: 'contain'}}/>
-                        <Image src={logo8} alt="linux icon" width={40} height={40} style={{objectFit: 'contain'}}/>
-                        <Image src={logo9} alt="wireshark icon" width={40} height={40} style={{objectFit: 'contain'}}/>
+        <section className="overflow-hidden">
+            <div ref={triggerRef}>
+                <div ref={sectionRef} className="min-h-screen w-[800vw] flex flex-row relative">
+                    {/* Mercury */}
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <Image
+                            src={mercury}
+                            alt="Mercure"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+
                     </div>
-                </div>
-                <div className="protocols pt-16 w-full md:w-3/4 mx-auto">
-                    <h4 className="text-xl md:text-2xl text-tertiary font-normal">Protocoles :</h4>
-                    <p className="text-tertiary text-center w-full pr-40 mt-2 md:w-3/4">
-                        tcp/ip, POST, GET, DELETE, PUT, HEAD, csma/cd, DNS, DHCP, ARP, OSPF, UDP, Proxy
-                    </p>
+                    {/* Venus */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={venus}
+                            alt="Venus"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Earth */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={terre}
+                            alt="Terre"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Mars */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={mars}
+                            alt="Mars"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Jupiter */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={jupiter}
+                            alt="Jupiter"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Saturn */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={saturne}
+                            alt="Saturne"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Uranus */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={uranus}
+                            alt="Uranus"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    {/* Neptune */}
+                    <div className="min-h-screen w-screen flex justify-center items-center">
+                        <Image
+                            src={neptune}
+                            alt="Neptune"
+                            className="object-contain h-[80vh] w-auto"
+                        />
+                    </div>
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center">
+                        <p className={"text-8xl"}>La suite</p>
+                        <Image src={arrow} alt={"arrow"} className={"rotate-90 translate-y-10"}></Image>
+                    </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
+
+export default ScrollSection;
