@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
     } else if (token) {
         // Si l'utilisateur est connecté mais pas admin
         if ((pathname.startsWith('/admin')) && !(token.isAdmin)) {
-            res = NextResponse.redirect(new URL('/sign', req.url));
+            res = NextResponse.redirect(new URL('/profile', req.url));
             res.cookies.set('flashMessage', 'Accès réservé aux administrateurs.', { path: '/' });
             return res;
         }
