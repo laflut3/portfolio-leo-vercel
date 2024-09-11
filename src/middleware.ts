@@ -11,7 +11,7 @@ export async function middleware(req: NextRequest) {
     const token = await getToken({ req, secret });
     console.log('Token:', token);  // Debug pour voir le token récupéré
 
-    // Routes protégées avec le routeur app
+    // Définir les routes protégées
     const protectedRoutes: { [key: string]: string } = {
         admin: '/admin',
         sign: '/sign',
@@ -21,37 +21,37 @@ export async function middleware(req: NextRequest) {
         change: '/forgot/change',
     };
 
-    // Vérification des routes protégées
+    // Si l'utilisateur n'est pas connecté
     if (!token) {
-        // Si l'utilisateur n'est pas connecté
+        // Bloquer l'accès à /profile et /admin pour les non-connectés
         if (pathname.startsWith(protectedRoutes.profile) || pathname.startsWith(protectedRoutes.admin)) {
             const res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
             res.cookies.set('flashMessage', 'Vous devez être connecté pour accéder à cette page.', { path: '/' });
             return res;
         }
     } else {
-        // Si l'utilisateur est connecté mais pas admin
+        // Si l'utilisateur est connecté mais pas admin, bloquer l'accès à /admin
         if (pathname.startsWith(protectedRoutes.admin) && !token.isAdmin) {
             const res = NextResponse.redirect(new URL(protectedRoutes.sign, req.url));
             res.cookies.set('flashMessage', 'Accès réservé aux administrateurs.', { path: '/' });
             return res;
         }
 
-        // Empêcher l'accès à la page de connexion si déjà connecté
+        // Bloquer l'accès à /sign si déjà connecté
         if (pathname.startsWith(protectedRoutes.sign)) {
             const res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
             res.cookies.set('flashMessage', 'Vous êtes déjà connecté.', { path: '/' });
             return res;
         }
 
-        // Si l'utilisateur est connecté mais non vérifié
+        // Rediriger vers /validation si l'utilisateur n'est pas vérifié
         if (pathname.startsWith(protectedRoutes.profile) && !token.isVerified) {
             const res = NextResponse.redirect(new URL(protectedRoutes.verify, req.url));
             res.cookies.set('flashMessage', 'Veuillez vérifier votre compte pour accéder à cette page.', { path: '/' });
             return res;
         }
 
-        // Bloquer l'accès à la page de validation si déjà vérifié
+        // Bloquer l'accès à /validation si l'utilisateur est déjà vérifié
         if (pathname.startsWith(protectedRoutes.verify) && token.isVerified) {
             const res = NextResponse.redirect(new URL(protectedRoutes.profile, req.url));
             res.cookies.set('flashMessage', 'Votre compte est déjà vérifié.', { path: '/' });
