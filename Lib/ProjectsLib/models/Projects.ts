@@ -1,12 +1,12 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-export interface LinkDocument {
+export interface ProjectDocument {
     url: string;
     type: string;
     image?: Buffer; 
 }
 
-const LinkSchema = new Schema({
+const ProjectSchema = new Schema({
     url: {
         type: String,
         required: true,
@@ -21,5 +21,5 @@ const LinkSchema = new Schema({
     },
 });
 
-const Link = mongoose.models?.Link || model<LinkDocument>('Link', LinkSchema);
-export default Link;
+const Project = mongoose.models?.Link || model<ProjectDocument>('Project', ProjectSchema);
+export default Project;
