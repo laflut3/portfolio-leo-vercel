@@ -14,18 +14,18 @@ import Image from "next/image";
 
 export default function OutilsDevDiv() {
     return (
-        <div className={"flex justify-center text-center items-center space-x-4 w-full"}>
-            <Image className={"w-24 h-24"} src={burp} alt={"burp"} />
-            <Image className={"w-24 h-24"} src={docker} alt={"docker"} />
-            <Image className={"w-24 h-24"} src={figma} alt={"figma"} />
-            <Image className={"w-24 h-24"} src={git} alt={"git"} />
-            <Image className={"w-24 h-24"} src={github} alt={"github"} />
-            <Image className={"w-24 h-24"} src={gitlab} alt={"gitlab"} />
-            <Image className={"w-24 h-24"} src={googleCloud} alt={"google cloud"} />
-            <Image className={"w-24 h-24"} src={jdea} alt={"idea"} />
-            <Image className={"w-24 h-24"} src={phpStorm} alt={"phpStorm"} />
-            <Image className={"w-24 h-24"} src={vscode} alt={"vscode"} />
-            <Image className={"w-24 h-24"} src={webStorm} alt={"webStorm"} />
+        <div className={"flex flex-wrap justify-center items-center gap-4 w-full"}>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={burp} alt="burp"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={docker} alt="docker"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={figma} alt="figma"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={git} alt="git"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={github} alt="github"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={gitlab} alt="gitlab"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={googleCloud} alt="google cloud"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={jdea} alt="idea"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={phpStorm} alt="phpStorm"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={vscode} alt="vscode"/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={webStorm} alt="webStorm"/>
         </div>
     );
 }

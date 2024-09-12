@@ -11,15 +11,15 @@ import Image from "next/image";
 
 export default function ReseauDiv() {
     return (
-        <div className={"flex justify-center text-center items-center space-x-4 w-full mt-10"}>
-            <Image className={"w-28 h-28"} src={dhcp} alt={"dhcp"} />
-            <Image className={"w-28 h-28"} src={gns3} alt={"gns3"} />
-            <Image className={"w-28 h-28"} src={http} alt={"http"} />
-            <Image className={"w-28 h-28"} src={ipv4} alt={"ipv4"} />
-            <Image className={"w-28 h-28"} src={ipv6} alt={"ipv6"} />
-            <Image className={"w-28 h-28"} src={ospf} alt={"ospf"} />
-            <Image className={"w-28 h-28"} src={tcpip} alt={"tcpip"} />
-            <Image className={"w-28 h-28"} src={wireshark} alt={"wireshark"} />
+        <div className={"flex flex-wrap justify-center items-center gap-4 w-full"}>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={dhcp} alt={"dhcp"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={gns3} alt={"gns3"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={http} alt={"http"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={ipv4} alt={"ipv4"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={ipv6} alt={"ipv6"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={ospf} alt={"ospf"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={tcpip} alt={"tcpip"} />
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={wireshark} alt={"wireshark"} />
         </div>
     );
 }

@@ -10,14 +10,14 @@ import Image from "next/image";
 
 export default function BDDiv() {
     return (
-        <div className={"flex justify-center text-center items-center space-x-3 w-full"}>
-            <Image className={"w-24 h-24"} src={mongodb} alt={"mongodb"}/>
-            <Image className={"w-28 h-28"} src={postgres} alt={"postgres"}/>
-            <Image className={"w-28 h-28"} src={phpMyAdmin} alt={"phpMyAdmin"}/>
-            <Image className={"w-28 h-28"} src={oracle} alt={"oracle"}/>
-            <Image className={"w-28 h-28"} src={sql} alt={"sql"}/>
-            <Image className={"w-28 h-28"} src={plsql} alt={"plsql"}/>
-            <Image className={"w-28 h-28"} src={nosql} alt={"nosql"}/>
+        <div className={"flex flex-wrap justify-center items-center gap-4 w-full"}>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={mongodb} alt={"mongodb"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={postgres} alt={"postgres"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={phpMyAdmin} alt={"phpMyAdmin"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={oracle} alt={"oracle"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={sql} alt={"sql"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={plsql} alt={"plsql"}/>
+            <Image className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain" src={nosql} alt={"nosql"}/>
         </div>
     )
 }
