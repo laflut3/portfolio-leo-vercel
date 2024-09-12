@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import fleoLogo from "../../../public/assets/image/fleo/fleo-logo.svg";
+import fleoLogo from "../../public/assets/image/fleo/fleo-logo.svg";
 
 import { Variants, Transition } from "framer-motion";
 

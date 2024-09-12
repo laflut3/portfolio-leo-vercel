@@ -11,12 +11,12 @@ import Image from "next/image";
 
 export default function WebDiv() {
     return (
-        <div className={"flex justify-center text-center items-center space-x-3 w-full"}>
+        <div className={"flex justify-center text-center items-center space-x-4 w-full"}>
             <Image className={"w-28 h-28"} src={css} alt={"css"}/>
             <Image className={"w-28 h-28"} src={html} alt={"html"}/>
             <Image className={"w-28 h-28"} src={js} alt={"js"}/>
             <Image className={"w-28 h-28"} src={next} alt={"next"}/>
-            <Image className={"w-44 h-28"} src={node} alt={"node"}/>
+            <Image className={"w-28 h-28"} src={node} alt={"node"}/>
             <Image className={"w-28 h-28"} src={php} alt={"php"}/>
             <Image className={"w-28 h-28"} src={react} alt={"react"}/>
             <Image className={"w-28 h-28"} src={tailwind} alt={"tailwind"}/>

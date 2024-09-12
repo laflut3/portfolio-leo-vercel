@@ -1,6 +1,6 @@
 import Image from "next/image";
 import bg_third_sec from "@/../public/assets/image/designIcon/planet-icon.png";
-import ThirdSectionContainer from "@/components/home/ThirdSectionContainer";
+import ThirdSectionContainer from "@/components/home/thirdSectionUtils/ThirdSectionContainer";
 import React from "react";
 
 export default function ThirdSection() {

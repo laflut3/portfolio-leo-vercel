@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import FifthSection from "@/components/home/FifthSection";
-import Preloader from "@/components/home/Preload";
+import Preloader from "@/components/Preload";
 import CompanySection from "@/components/home/CompanySection";
 import SkillSection from "@/components/home/SkillSection";
 import ThirdSection from "@/components/home/ThirdSection";

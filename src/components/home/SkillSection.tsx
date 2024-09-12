@@ -14,6 +14,7 @@ import uranus from '@/../public/assets/image/planete/uranus.png';
 import neptune from '@/../public/assets/image/planete/neptune.png';
 import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
 import WebDiv from "@/components/home/skillUtils/WebDiv";
+import AppDevDiv from "@/components/home/skillUtils/AppDevDiv";
 
 
 function ScrollSection() {
@@ -58,7 +59,7 @@ function ScrollSection() {
 
                     {/* Mercury */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
-                        <h3 className="text-3xl">WEb</h3>
+                        <h3 className="text-3xl">Devellopement Web</h3>
                         <Image
                             src={mercury}
                             alt="Mercure"
@@ -67,15 +68,17 @@ function ScrollSection() {
                         <WebDiv/>
                     </div>
                     {/* Venus */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className="text-3xl">devellopement d&apos;application</h3>
                         <Image
                             src={venus}
                             alt="Venus"
                             className="object-contain h-[70vh] w-auto"
                         />
+                        <AppDevDiv/>
                     </div>
                     {/* Earth */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={terre}
                             alt="Terre"
@@ -83,7 +86,7 @@ function ScrollSection() {
                         />
                     </div>
                     {/* Mars */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={mars}
                             alt="Mars"
@@ -91,7 +94,7 @@ function ScrollSection() {
                         />
                     </div>
                     {/* Jupiter */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={jupiter}
                             alt="Jupiter"
@@ -99,7 +102,7 @@ function ScrollSection() {
                         />
                     </div>
                     {/* Saturn */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={saturne}
                             alt="Saturne"
@@ -107,7 +110,7 @@ function ScrollSection() {
                         />
                     </div>
                     {/* Uranus */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={uranus}
                             alt="Uranus"
@@ -115,7 +118,7 @@ function ScrollSection() {
                         />
                     </div>
                     {/* Neptune */}
-                    <div className="min-h-screen w-screen flex justify-center items-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
                         <Image
                             src={neptune}
                             alt="Neptune"
