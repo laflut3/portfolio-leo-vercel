@@ -4,6 +4,7 @@ import React, {useEffect, useRef} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import soleil from '@/../public/assets/image/planete/soleil.png';
 import mercury from '@/../public/assets/image/planete/mercure.png';
 import venus from '@/../public/assets/image/planete/venus.png';
 import terre from '@/../public/assets/image/planete/terre.png';
@@ -16,6 +17,9 @@ import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
 import WebDiv from "@/components/home/skillUtils/WebDiv";
 import AppDevDiv from "@/components/home/skillUtils/AppDevDiv";
 import BDDiv from "@/components/home/skillUtils/BDDiv";
+import SystemDiv from "@/components/home/skillUtils/SystemDiv";
+import ReseauDiv from "@/components/home/skillUtils/RéseauProtocoleDiv";
+import OutilsDevDiv from "@/components/home/skillUtils/OutilsDev";
 
 
 function ScrollSection() {
@@ -53,9 +57,18 @@ function ScrollSection() {
             <div ref={triggerRef}>
                 <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
 
-                    <div className="min-h-screen w-screen flex justify-center items-center">
-                        <h2 className="text-6xl text-center items-center">Bienvenue dans mon système de compétences</h2>
-                        <Image src={arrow} alt={arrow} className={"ml-10 mt-3"}/>
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <div className={"flex justify-center items-center mb-10"}>
+                            <h2 className="text-6xl text-center items-center">
+                                Bienvenue dans mon système de compétences
+                            </h2>
+                            <Image src={arrow} alt={arrow} className={"ml-10 mt-3"}/>
+                        </div>
+                        <Image
+                            src={soleil}
+                            alt="soleil"
+                            className="object-contain h-3/4 w-auto"
+                        />
                     </div>
 
                     {/* Mercury */}
@@ -64,7 +77,7 @@ function ScrollSection() {
                         <Image
                             src={mercury}
                             alt="Mercure"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
                         <WebDiv/>
                     </div>
@@ -74,7 +87,7 @@ function ScrollSection() {
                         <Image
                             src={venus}
                             alt="Venus"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
                         <AppDevDiv/>
                     </div>
@@ -84,48 +97,56 @@ function ScrollSection() {
                         <Image
                             src={terre}
                             alt="Terre"
-                            className="object-contain h-[70vh] w-auto mb-6"
+                            className="object-contain h-3/4 w-auto mb-6"
                         />
                         <BDDiv/>
                     </div>
                     {/* Mars */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className="text-3xl">Système</h3>
                         <Image
                             src={mars}
                             alt="Mars"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
+                        <SystemDiv/>
                     </div>
                     {/* Jupiter */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className={"text-3xl "}>Réseau et protocoles</h3>
                         <Image
                             src={jupiter}
                             alt="Jupiter"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-2/3 w-auto"
                         />
+                        <ReseauDiv/>
                     </div>
                     {/* Saturn */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className="text-3xl">Outils developpement et sécurité</h3>
                         <Image
                             src={saturne}
                             alt="Saturne"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
+                        <OutilsDevDiv/>
                     </div>
                     {/* Uranus */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className={"text-3xl"}>Management</h3>
                         <Image
                             src={uranus}
                             alt="Uranus"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
                     </div>
                     {/* Neptune */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className={"text-3xl"}>Outils autre</h3>
                         <Image
                             src={neptune}
                             alt="Neptune"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-3/4 w-auto"
                         />
                     </div>
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center">
