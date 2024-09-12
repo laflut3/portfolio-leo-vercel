@@ -22,6 +22,7 @@ import BDDiv from "@/components/home/skillUtils/BDDiv";
 import SystemDiv from "@/components/home/skillUtils/SystemDiv";
 import ReseauDiv from "@/components/home/skillUtils/RéseauProtocoleDiv";
 import OutilsDevDiv from "@/components/home/skillUtils/OutilsDev";
+import ManagementDiv from "@/components/home/skillUtils/ManagementDiv";
 
 
 function ScrollSection() {
@@ -165,6 +166,7 @@ function ScrollSection() {
                             alt="Uranus"
                             className="object-contain max-h-[30vh] sm:max-h-[40vh] md:max-h-[50vh] w-auto mb-4"
                         />
+                        <ManagementDiv/>
                     </div>
 
                     {/* Neptune */}
