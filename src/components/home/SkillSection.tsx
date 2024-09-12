@@ -4,6 +4,7 @@ import React, {useEffect, useRef} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+
 import soleil from '@/../public/assets/image/planete/soleil.png';
 import mercury from '@/../public/assets/image/planete/mercure.png';
 import venus from '@/../public/assets/image/planete/venus.png';
@@ -14,6 +15,7 @@ import saturne from '@/../public/assets/image/planete/saturne.png';
 import uranus from '@/../public/assets/image/planete/uranus.png';
 import neptune from '@/../public/assets/image/planete/neptune.png';
 import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
+
 import WebDiv from "@/components/home/skillUtils/WebDiv";
 import AppDevDiv from "@/components/home/skillUtils/AppDevDiv";
 import BDDiv from "@/components/home/skillUtils/BDDiv";
@@ -94,7 +96,7 @@ function ScrollSection() {
                         <h3
                             className="text-xl sm:text-2xl md:text-4xl font-semibold text-center mb-4 sm:mb-6"
                         >
-                            Développement d'application
+                            Développement d&apos;application
                         </h3>
                         <Image
                             src={venus}
@@ -155,7 +157,6 @@ function ScrollSection() {
                         <OutilsDevDiv/>
                     </div>
 
-
                     {/* Uranus */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center px-4 md:px-10">
                         <h3 className="text-2xl md:text-4xl font-semibold text-center mb-4">Management</h3>
@@ -165,6 +166,7 @@ function ScrollSection() {
                             className="object-contain max-h-[30vh] sm:max-h-[40vh] md:max-h-[50vh] w-auto mb-4"
                         />
                     </div>
+
                     {/* Neptune */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center px-4 md:px-10">
                         <h3 className="text-2xl md:text-4xl font-semibold text-center mb-4">Outils autre</h3>
