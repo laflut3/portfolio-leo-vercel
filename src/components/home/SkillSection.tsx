@@ -15,6 +15,7 @@ import neptune from '@/../public/assets/image/planete/neptune.png';
 import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
 import WebDiv from "@/components/home/skillUtils/WebDiv";
 import AppDevDiv from "@/components/home/skillUtils/AppDevDiv";
+import BDDiv from "@/components/home/skillUtils/BDDiv";
 
 
 function ScrollSection() {
@@ -48,7 +49,7 @@ function ScrollSection() {
     }, []);
 
     return (
-        <section className="overflow-hidden">
+        <section className="starry-background overflow-hidden">
             <div ref={triggerRef}>
                 <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
 
@@ -79,11 +80,13 @@ function ScrollSection() {
                     </div>
                     {/* Earth */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                        <h3 className="text-3xl">Base de données</h3>
                         <Image
                             src={terre}
                             alt="Terre"
-                            className="object-contain h-[70vh] w-auto"
+                            className="object-contain h-[70vh] w-auto mb-6"
                         />
+                        <BDDiv/>
                     </div>
                     {/* Mars */}
                     <div className="min-h-screen w-screen flex flex-col justify-center items-center">
