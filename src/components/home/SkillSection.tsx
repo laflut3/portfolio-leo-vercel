@@ -55,7 +55,7 @@ function ScrollSection() {
     }, []);
 
     return (
-        <section className="overflow-hidden">
+        <section id='#skill' className="overflow-hidden">
             <div ref={triggerRef}>
                 <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
 
