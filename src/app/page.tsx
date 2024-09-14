@@ -5,7 +5,7 @@ import ContactSection from "@/components/home/ContactSection";
 import Preloader from "@/components/Preload";
 import CompanySection from "@/components/home/CompanySection";
 import SkillSection from "@/components/home/SkillSection";
-import ThirdSection from "@/components/home/ThirdSection";
+import ProjectSection from "@/components/home/ProjectSection";
 import PresentationSection from "@/components/home/PresentationSection";
 
 const TWELVE_HOURS = 12 * 60 * 60 * 1000; // 12 heures en millisecondes
@@ -33,7 +33,7 @@ export default function HomePage() {
         {preloaderVisible && <Preloader />}
         <PresentationSection />
         <SkillSection />
-        <ThirdSection />
+        <ProjectSection />
         <CompanySection />
         <ContactSection />
       </main>

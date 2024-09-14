@@ -3,7 +3,7 @@ import bg_third_sec from "@/../public/assets/image/designIcon/planet-icon.png";
 import ThirdSectionContainer from "@/components/home/thirdSectionUtils/ThirdSectionContainer";
 import React from "react";
 
-export default function ThirdSection() {
+export default function ProjectSection() {
     return (
         <section className="min-h-screen relative third-section" id="projects">
             <div className="absolute inset-0 overflow-hidden">
