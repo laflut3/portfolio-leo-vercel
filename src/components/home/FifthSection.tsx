@@ -1,18 +1,13 @@
 "use client";
 
-import { dotWave } from "ldrs";
+import {dotWave} from "ldrs";
 import Image from 'next/image';
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import ValidationPopUp from "@/components/utils/ValidationPopUp";
-import astronaute from "@/../public/assets/image/designIcon/astronaute-icon.png"
+import astronaute from "@/../public/assets/image/designIcon/astronaute-icon.png";
 
 export default function FifthSection() {
-
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            dotWave.register();
-        }
-    }, []);
+    dotWave.register();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -24,9 +19,9 @@ export default function FifthSection() {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value, type } = e.target;
+        const {name, value, type} = e.target;
         if (type === "checkbox") {
-            const { checked } = e.target as HTMLInputElement;
+            const {checked} = e.target as HTMLInputElement;
             setFormData((prevData) => ({
                 ...prevData,
                 [name]: checked,
@@ -44,7 +39,7 @@ export default function FifthSection() {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setStatus("Sending");
+        setStatus("sending");
         const res = await fetch("/api/contact", {
             method: "POST",
             headers: {
@@ -55,10 +50,10 @@ export default function FifthSection() {
 
         const data = await res.json();
         if (data.success) {
-            setStatus("Message envoyé !");
-            setFormData({ name: "", email: "", message: "", consent: false });
+            setStatus("sent");
+            setFormData({name: "", email: "", message: "", consent: false});
         } else {
-            setStatus("Problème lors de l'envoi du mail");
+            setStatus("error");
         }
     };
 
@@ -67,7 +62,7 @@ export default function FifthSection() {
             <div className="form-flex-container flex flex-col md:flex-row justify-evenly items-center w-full px-4">
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col space-y-4 w-full max-w-lg p-6 rounded-lg shadow-lg"
+                    className="flex flex-col space-y-4 w-full max-w-lg p-6 rounded-lg shadow-lg text-black"
                 >
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="flex flex-col w-full">
@@ -101,7 +96,7 @@ export default function FifthSection() {
                         id="message"
                         name="message"
                         placeholder="Votre message"
-                        className="border rounded-lg w-full px-6 py-2 h-32 resize-none text-tertiary placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
+                        className="border rounded-lg w-full px-6 py-2 h-32 resize-none placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                         value={formData.message}
                         onChange={handleChange}
                         required
@@ -116,17 +111,29 @@ export default function FifthSection() {
                             onChange={handleChange}
                             required
                         />
-                        <label htmlFor="consent" className="text-sm">J&apos;accepte que mes informations soient utilisées pour le traitement de ma demande*</label>
+                        <label htmlFor="consent" className="text-secondary text-sm">J&apos;accepte que mes informations soient
+                            utilisées pour le traitement de ma demande*</label>
                     </div>
+
                     <button
                         type="submit"
                         className={`bg-secondary text-tertiary px-12 py-2 rounded-full font-semibold hover:bg-secondary-dark transition-colors ${status === 'sending' ? 'bg-gray-500' : ''}`}
                         disabled={status === 'sending'}
                     >
-                        {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
+                        {status === 'sending' ? (
+                            <l-dot-wave
+                                size="47"
+                                speed="1"
+                                color="white"
+                            />
+                        ) : 'Envoyer'}
                     </button>
-                    {status === 'sent' && <p className="text-green-500 text-center mt-4">Message envoyé avec succès !</p>}
-                    {status === 'error' && <p className="text-red-500 text-center mt-4">Erreur lors de l&apos;envoi. Veuillez réessayer.</p>}
+
+                    {status === 'sent' &&
+                        <p className="text-green-500 text-center mt-4">Message envoyé avec succès !</p>}
+                    {status === 'error' &&
+                        <p className="text-red-500 text-center mt-4">Erreur lors de l&apos;envoi. Veuillez
+                            réessayer.</p>}
                 </form>
                 <div className="mt-8 md:mt-0">
                     <h3 className="text-3xl md:text-4xl font-bold text-center">Entrer en contact</h3>
@@ -136,7 +143,7 @@ export default function FifthSection() {
                         width={280}
                         height={661}
                         className="mx-auto"
-                        style={{ objectFit: 'contain' }}
+                        style={{objectFit: 'contain'}}
                     />
                 </div>
             </div>
