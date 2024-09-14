@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import FifthSection from "@/components/home/FifthSection";
+import ContactSection from "@/components/home/ContactSection";
 import Preloader from "@/components/Preload";
 import CompanySection from "@/components/home/CompanySection";
 import SkillSection from "@/components/home/SkillSection";
@@ -35,7 +35,7 @@ export default function HomePage() {
         <SkillSection />
         <ThirdSection />
         <CompanySection />
-        <FifthSection />
+        <ContactSection />
       </main>
   );
 }
