@@ -97,14 +97,14 @@ export default function Navbar() {
                         <div className="flex space-x-1 ml-4">
                             {session?.user ? (
                                 <button
-                                    className="hidden md:flex items-center justify-center rounded-full text-center bg-secondary px-2"
+                                    className="flex items-center justify-center rounded-full text-center bg-secondary px-2"
                                     onClick={ProfileClick}
                                 >
                                     <AiOutlineUser size={35}/>
                                 </button>
                             ) : (
                                 <button
-                                    className="hidden md:flex items-center justify-center rounded-full text-center bg-secondary px-2"
+                                    className="flex items-center justify-center rounded-full text-center bg-secondary px-2"
                                     onClick={SignClick}
                                 >
                                     Se connecter
@@ -114,7 +114,7 @@ export default function Navbar() {
                                 href="https://www.linkedin.com/in/leo-torres-804687264/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                                className="hidden lg:flex rounded-full bg-tertiary border border-black w-10 h-10  items-center justify-center"
                             >
                                 <Image src={linkedin} alt='linkedin icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
@@ -123,7 +123,7 @@ export default function Navbar() {
                                 href="https://github.com/laflut3/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                                className="rounded-full bg-tertiary border border-black w-10 h-10 hidden lg:flex items-center justify-center"
                             >
                                 <Image src={github} alt='github icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
@@ -132,13 +132,13 @@ export default function Navbar() {
                                 href="https://www.instagram.com/le0_trs/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="rounded-full bg-tertiary border border-black w-10 h-10 flex items-center justify-center"
+                                className="rounded-full bg-tertiary border border-black w-10 h-10 hidden lg:flex items-center justify-center"
                             >
                                 <Image src={insta} alt='instagram icon' width={30} height={30}
                                        style={{objectFit: 'contain'}}/>
                             </a>
                             <button
-                                className="md:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
+                                className="lg:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
                                 onClick={() => handleNavClick("contactUs")}
                             >
                                 <Image src={phone} alt="Phone Icon" width={24} height={24}
