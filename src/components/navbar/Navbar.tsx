@@ -81,11 +81,11 @@ export default function Navbar() {
                     <div className="flex items-center">
                         <div className="hidden lg:flex">
                             <ul className="flex justify-between w-full items-center space-x-4 text-primary">
-                                <li onClick={() => handleNavClick("top")}>Accueil</li>
-                                <li onClick={() => handleNavClick("skills")}>Compétences</li>
-                                <li onClick={() => handleNavClick("projects")}>Projets</li>
-                                <li onClick={() => handleNavClick("company")}>Mon entreprise</li>
-                                <li onClick={() => handleNavClick("contactUs")}> Contact</li>
+                                <li className="cursor-pointer" onClick={() => handleNavClick("top")}>Accueil</li>
+                                <li className="cursor-pointer" onClick={() => handleNavClick("skills")}>Compétences</li>
+                                <li className="cursor-pointer" onClick={() => handleNavClick("projects")}>Projets</li>
+                                <li className="cursor-pointer" onClick={() => handleNavClick("company")}>Mon entreprise</li>
+                                <li className="cursor-pointer" onClick={() => handleNavClick("contactUs")}> Contact</li>
                             </ul>
                         </div>
                     </div>
@@ -116,8 +116,13 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="hidden lg:flex rounded-full bg-tertiary border border-black w-10 h-10  items-center justify-center"
                             >
-                                <Image src={linkedin} alt='linkedin icon' width={30} height={30}
-                                       style={{objectFit: 'contain'}}/>
+                                <Image
+                                    src={linkedin}
+                                    alt='linkedin icon'
+                                    width={30}
+                                    height={30}
+                                    style={{objectFit: 'contain'}}
+                                />
                             </a>
                             <a
                                 href="https://github.com/laflut3/"
@@ -125,8 +130,12 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 hidden lg:flex items-center justify-center"
                             >
-                                <Image src={github} alt='github icon' width={30} height={30}
-                                       style={{objectFit: 'contain'}}/>
+                                <Image
+                                    src={github}
+                                    alt='github icon'
+                                    width={30}
+                                    height={30}
+                                    style={{objectFit: 'contain'}}/>
                             </a>
                             <a
                                 href="https://www.instagram.com/le0_trs/"
@@ -134,15 +143,25 @@ export default function Navbar() {
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-tertiary border border-black w-10 h-10 hidden lg:flex items-center justify-center"
                             >
-                                <Image src={insta} alt='instagram icon' width={30} height={30}
-                                       style={{objectFit: 'contain'}}/>
+                                <Image
+                                    src={insta}
+                                    alt='instagram icon'
+                                    width={30}
+                                    height={30}
+                                    style={{objectFit: 'contain'}}
+                                />
                             </a>
                             <button
                                 className="lg:hidden rounded-full w-10 h-10 flex items-center justify-center bg-secondary"
                                 onClick={() => handleNavClick("contactUs")}
                             >
-                                <Image src={phone} alt="Phone Icon" width={24} height={24}
-                                       style={{objectFit: 'contain'}}/>
+                                <Image
+                                    src={phone}
+                                    alt="Phone Icon"
+                                    width={24}
+                                    height={24}
+                                    style={{objectFit: 'contain'}}
+                                />
                             </button>
                         </div>
                     </div>

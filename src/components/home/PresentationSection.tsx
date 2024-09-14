@@ -39,10 +39,17 @@ export default function PresentationSection() {
             <div className="flex items-center border-secondary p-4 md:p-7">
                 {isMobile ? (
                     <div className="flex items-center justify-center w-full mb-2">
-                        <h3 className="text-white text-xl md:text-2xl">Bienvenue sur mon portfolio</h3>
-                        <Image src={leo1} alt="Photo de Léo" width={60} height={60}
-                               className="rounded-full ml-12 border-[3px] object-cover object-center border-white"
-                               style={{objectFit: 'contain'}}/>
+                        <h3 className="text-white text-xl md:text-2xl">
+                            Bienvenue sur mon portfolio
+                        </h3>
+                        <Image
+                            src={leo1}
+                            alt="Photo de Léo"
+                            width={60}
+                            height={60}
+                            className="rounded-full ml-12 border-[3px] object-cover object-center border-white"
+                            style={{objectFit: 'contain'}}
+                        />
                     </div>
                 ) : (
                     <h3 className="text-white text-xl md:text-2xl">Bienvenue sur mon portfolio</h3>
@@ -52,18 +59,30 @@ export default function PresentationSection() {
                 Salut je suis Léo, Full Stack Developer
             </h1>
             <div className="absolute bottom-10 left-0 p-4">
-                <button className="text-primary text-lg md:text-xl p-2 rounded flex items-center"
-                        onClick={() => handleNavClick("contactUs")}>
+                <button
+                    className="text-primary text-lg md:text-xl p-2 rounded flex items-center"
+                    onClick={() => handleNavClick("contactUs")}
+                >
                     Me contacter
-                    <Image src={specialArrow} alt="special arrow icon" width={32}
-                           height={32} className="pl-2" style={{objectFit: 'contain'}}/>
+                    <Image
+                        src={specialArrow}
+                        alt="special arrow icon"
+                        width={32}
+                        height={32}
+                        className="pl-2"
+                        style={{objectFit: 'contain'}}
+                    />
                 </button>
             </div>
             <div className="absolute bottom-0 right-0 hidden md:block">
                 <div className="overflow-hidden">
                     <div className="animate-slide-in-from-right">
-                        <Image src={leo2} alt="Photo de Léo" width={700} height={949}
-                               style={{objectFit: 'contain'}}/>
+                        <Image
+                            src={leo2}
+                            alt="Photo de Léo"
+                            width={600}
+                            height={849}
+                            style={{objectFit: 'contain'}}/>
                     </div>
                 </div>
             </div>
