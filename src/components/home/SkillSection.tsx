@@ -6,7 +6,6 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 
 import soleil from '@/../public/assets/image/planete/soleil.png';
-import mercury from '@/../public/assets/image/planete/mercure.png';
 import venus from '@/../public/assets/image/planete/venus.png';
 import terre from '@/../public/assets/image/planete/terre.png';
 import mars from '@/../public/assets/image/planete/mars.png';
@@ -16,13 +15,13 @@ import uranus from '@/../public/assets/image/planete/uranus.png';
 import neptune from '@/../public/assets/image/planete/neptune.png';
 import arrow from '@/../public/assets/image/utils/special-arrow-icon.svg';
 
-import WebDiv from "@/components/home/skillUtils/WebDiv";
-import AppDevDiv from "@/components/home/skillUtils/AppDevDiv";
-import BDDiv from "@/components/home/skillUtils/BDDiv";
-import SystemDiv from "@/components/home/skillUtils/SystemDiv";
-import ReseauDiv from "@/components/home/skillUtils/RéseauProtocoleDiv";
-import OutilsDevDiv from "@/components/home/skillUtils/OutilsDev";
-import ManagementDiv from "@/components/home/skillUtils/ManagementDiv";
+import AppDevDiv from "@/components/home/SkillDiv/skillUtils/AppDevDiv";
+import BDDiv from "@/components/home/SkillDiv/skillUtils/BDDiv";
+import SystemDiv from "@/components/home/SkillDiv/skillUtils/SystemDiv";
+import ReseauDiv from "@/components/home/SkillDiv/skillUtils/RéseauProtocoleDiv";
+import OutilsDevDiv from "@/components/home/SkillDiv/skillUtils/OutilsDev";
+import ManagementDiv from "@/components/home/SkillDiv/skillUtils/ManagementDiv";
+import WebSection from "@/components/home/SkillDiv/WebSection";
 
 
 function ScrollSection() {
@@ -62,7 +61,9 @@ function ScrollSection() {
 
                     <div className={"min-h-screen w-52"}></div>
 
-                    <div className="min-h-screen w-screen flex flex-col justify-center items-center">
+                    <div
+                        className="min-h-screen w-screen flex flex-col justify-center items-center"
+                    >
                         <h2 className="flex text-2xl md:text-4xl xl:text-6xl text-center items-center">
                             <p className={"hidden sm:block"}>Bienvenue dans mon système de compétences</p>
                             <p className={"sm:hidden block"}>Mes compétences</p>
@@ -73,23 +74,10 @@ function ScrollSection() {
                             alt="soleil"
                             className="object-contain max-h-[40vh] sm:max-h-[60vh] w-auto mb-4"
                         />
-
                     </div>
 
                     {/* Mercury */}
-                    <div
-                        className="min-h-screen w-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-10">
-                        <h3 className="text-xl sm:text-2xl md:text-4xl font-semibold text-center mb-4 sm:mb-6">
-                            Développement Web
-                        </h3>
-                        <Image
-                            src={mercury}
-                            alt="Mercure"
-                            className="object-contain max-h-[30vh] sm:max-h-[40vh] md:max-h-[50vh] w-auto mb-4"
-                        />
-                        <WebDiv/>
-                    </div>
-
+                    <WebSection/>
 
                     {/* Venus */}
                     <div

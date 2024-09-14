@@ -1,11 +1,11 @@
-import windows from "@/../public/assets/image/logoDev/systeme/windows.png"
-import winServ from "@/../public/assets/image/logoDev/systeme/win serveur.png"
-import linux from "@/../public/assets/image/logoDev/systeme/linux-icon.svg"
-import virtualBox from "@/../public/assets/image/logoDev/systeme/virtualBox.svg"
-import hyperV from "@/../public/assets/image/logoDev/systeme/hyperV.png"
-import apache from "@/../public/assets/image/logoDev/systeme/apache.png"
-import nginx from "@/../public/assets/image/logoDev/systeme/nginx.png"
-import vercel from "@/../public/assets/image/logoDev/systeme/vercel.png"
+import windows from "../../../../../public/assets/image/logoDev/systeme/windows.png"
+import winServ from "../../../../../public/assets/image/logoDev/systeme/win serveur.png"
+import linux from "../../../../../public/assets/image/logoDev/systeme/linux-icon.svg"
+import virtualBox from "../../../../../public/assets/image/logoDev/systeme/virtualBox.svg"
+import hyperV from "../../../../../public/assets/image/logoDev/systeme/hyperV.png"
+import apache from "../../../../../public/assets/image/logoDev/systeme/apache.png"
+import nginx from "../../../../../public/assets/image/logoDev/systeme/nginx.png"
+import vercel from "../../../../../public/assets/image/logoDev/systeme/vercel.png"
 
 import Image from "next/image";
 

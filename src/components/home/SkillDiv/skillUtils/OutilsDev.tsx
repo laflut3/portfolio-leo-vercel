@@ -1,14 +1,14 @@
-import burp from "@/../public/assets/image/logoDev/outilsDev/burp-icon.svg";
-import docker from "@/../public/assets/image/logoDev/outilsDev/docker-icon.svg";
-import figma from "@/../public/assets/image/logoDev/outilsDev/figma.png";
-import git from "@/../public/assets/image/logoDev/outilsDev/git-icon.svg";
-import github from "@/../public/assets/image/logoDev/outilsDev/github.png";
-import gitlab from "@/../public/assets/image/logoDev/outilsDev/gitlab.png";
-import googleCloud from "@/../public/assets/image/logoDev/outilsDev/google cloud.png";
-import jdea from "@/../public/assets/image/logoDev/outilsDev/jdea.png";
-import phpStorm from "@/../public/assets/image/logoDev/outilsDev/phpStorm.png";
-import vscode from "@/../public/assets/image/logoDev/outilsDev/vscode.png";
-import webStorm from "@/../public/assets/image/logoDev/outilsDev/webstorm.png";
+import burp from "../../../../../public/assets/image/logoDev/outilsDev/burp-icon.svg";
+import docker from "../../../../../public/assets/image/logoDev/outilsDev/docker-icon.svg";
+import figma from "../../../../../public/assets/image/logoDev/outilsDev/figma.png";
+import git from "../../../../../public/assets/image/logoDev/outilsDev/git-icon.svg";
+import github from "../../../../../public/assets/image/logoDev/outilsDev/github.png";
+import gitlab from "../../../../../public/assets/image/logoDev/outilsDev/gitlab.png";
+import googleCloud from "../../../../../public/assets/image/logoDev/outilsDev/google cloud.png";
+import jdea from "../../../../../public/assets/image/logoDev/outilsDev/jdea.png";
+import phpStorm from "../../../../../public/assets/image/logoDev/outilsDev/phpStorm.png";
+import vscode from "../../../../../public/assets/image/logoDev/outilsDev/vscode.png";
+import webStorm from "../../../../../public/assets/image/logoDev/outilsDev/webstorm.png";
 
 import Image from "next/image";
 

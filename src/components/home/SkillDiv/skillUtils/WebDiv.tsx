@@ -1,12 +1,12 @@
-import css from "@/../public/assets/image/logoDev/web/css.png";
-import html from "@/../public/assets/image/logoDev/web/html.png";
-import js from "@/../public/assets/image/logoDev/web/js-icon.svg";
-import next from "@/../public/assets/image/logoDev/web/nextjs.png";
-import node from "@/../public/assets/image/logoDev/web/node.png";
-import php from "@/../public/assets/image/logoDev/web/php-icon.svg";
-import react from "@/../public/assets/image/logoDev/web/react.png";
-import tailwind from "@/../public/assets/image/logoDev/web/tailwind.png";
-import ts from "@/../public/assets/image/logoDev/web/ts-icon.svg";
+import css from "../../../../../public/assets/image/logoDev/web/css.png";
+import html from "../../../../../public/assets/image/logoDev/web/html.png";
+import js from "../../../../../public/assets/image/logoDev/web/js-icon.svg";
+import next from "../../../../../public/assets/image/logoDev/web/nextjs.png";
+import node from "../../../../../public/assets/image/logoDev/web/node.png";
+import php from "../../../../../public/assets/image/logoDev/web/php-icon.svg";
+import react from "../../../../../public/assets/image/logoDev/web/react.png";
+import tailwind from "../../../../../public/assets/image/logoDev/web/tailwind.png";
+import ts from "../../../../../public/assets/image/logoDev/web/ts-icon.svg";
 import Image from "next/image";
 
 export default function WebDiv() {

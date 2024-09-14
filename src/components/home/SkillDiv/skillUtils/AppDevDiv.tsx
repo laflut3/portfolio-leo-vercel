@@ -1,8 +1,8 @@
-import c from "@/../public/assets/image/logoDev/appLanguage/c-icon.svg"
-import cpp from "@/../public/assets/image/logoDev/appLanguage/cpp-icon.svg"
-import java from "@/../public/assets/image/logoDev/appLanguage/java-icon.png"
-import python from "@/../public/assets/image/logoDev/appLanguage/python.png"
-import maeven from "@/../public/assets/image/logoDev/appLanguage/maeven.png"
+import c from "../../../../../public/assets/image/logoDev/appLanguage/c-icon.svg"
+import cpp from "../../../../../public/assets/image/logoDev/appLanguage/cpp-icon.svg"
+import java from "../../../../../public/assets/image/logoDev/appLanguage/java-icon.png"
+import python from "../../../../../public/assets/image/logoDev/appLanguage/python.png"
+import maeven from "../../../../../public/assets/image/logoDev/appLanguage/maeven.png"
 
 import Image from "next/image";
 

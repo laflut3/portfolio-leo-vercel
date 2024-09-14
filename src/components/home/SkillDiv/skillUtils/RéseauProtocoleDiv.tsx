@@ -1,11 +1,11 @@
-import dhcp from "@/../public/assets/image/logoDev/reseau/dhcp.png";
-import gns3 from "@/../public/assets/image/logoDev/reseau/gns3.png";
-import http from "@/../public/assets/image/logoDev/reseau/http.png";
-import ipv4 from "@/../public/assets/image/logoDev/reseau/ipV4.png";
-import ipv6 from "@/../public/assets/image/logoDev/reseau/ipV6.png";
-import ospf from "@/../public/assets/image/logoDev/reseau/ospf.png";
-import tcpip from "@/../public/assets/image/logoDev/reseau/tcpip.png";
-import wireshark from "@/../public/assets/image/logoDev/reseau/wireshark.png";
+import dhcp from "../../../../../public/assets/image/logoDev/reseau/dhcp.png";
+import gns3 from "../../../../../public/assets/image/logoDev/reseau/gns3.png";
+import http from "../../../../../public/assets/image/logoDev/reseau/http.png";
+import ipv4 from "../../../../../public/assets/image/logoDev/reseau/ipV4.png";
+import ipv6 from "../../../../../public/assets/image/logoDev/reseau/ipV6.png";
+import ospf from "../../../../../public/assets/image/logoDev/reseau/ospf.png";
+import tcpip from "../../../../../public/assets/image/logoDev/reseau/tcpip.png";
+import wireshark from "../../../../../public/assets/image/logoDev/reseau/wireshark.png";
 
 import Image from "next/image";
 

@@ -1,10 +1,10 @@
-import mongodb from "@/../public/assets/image/logoDev/baseData/mongodb.png"
-import phpMyAdmin from "@/../public/assets/image/logoDev/baseData/phpMyAdmin.png"
-import plsql from "@/../public/assets/image/logoDev/baseData/plsql-icon.svg"
-import postgres from "@/../public/assets/image/logoDev/baseData/postgres.png"
-import nosql from "@/../public/assets/image/logoDev/baseData/nosql.png"
-import sql from "@/../public/assets/image/logoDev/baseData/sql.png"
-import oracle from "@/../public/assets/image/logoDev/baseData/oracle.png"
+import mongodb from "../../../../../public/assets/image/logoDev/baseData/mongodb.png"
+import phpMyAdmin from "../../../../../public/assets/image/logoDev/baseData/phpMyAdmin.png"
+import plsql from "../../../../../public/assets/image/logoDev/baseData/plsql-icon.svg"
+import postgres from "../../../../../public/assets/image/logoDev/baseData/postgres.png"
+import nosql from "../../../../../public/assets/image/logoDev/baseData/nosql.png"
+import sql from "../../../../../public/assets/image/logoDev/baseData/sql.png"
+import oracle from "../../../../../public/assets/image/logoDev/baseData/oracle.png"
 
 import Image from "next/image";
 

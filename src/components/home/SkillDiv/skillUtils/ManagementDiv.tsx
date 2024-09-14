@@ -1,8 +1,7 @@
-import gantt from "@/../public/assets/image/logoDev/management/gantt.png";
-import pert from "@/../public/assets/image/logoDev/management/PERT.png";
-import scrum from "@/../public/assets/image/logoDev/management/scrum-icon.svg";
-import trello from "@/../public/assets/image/logoDev/management/trello.png";
-
+import gantt from "../../../../../public/assets/image/logoDev/management/gantt.png";
+import pert from "../../../../../public/assets/image/logoDev/management/PERT.png";
+import scrum from "../../../../../public/assets/image/logoDev/management/scrum-icon.svg";
+import trello from "../../../../../public/assets/image/logoDev/management/trello.png";
 
 import Image from "next/image";
 
