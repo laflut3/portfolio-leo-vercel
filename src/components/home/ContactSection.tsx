@@ -2,7 +2,7 @@
 
 import {dotWave} from "ldrs";
 import Image from 'next/image';
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useState} from "react";
 import ValidationPopUp from "@/components/utils/ValidationPopUp";
 import astronaute from "@/../public/assets/image/designIcon/astronaute-icon.png";
 
