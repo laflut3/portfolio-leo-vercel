@@ -17,9 +17,15 @@ const ProjectSchema = new Schema({
     },
     image: {
         type: Buffer,
-        required: true,
+        required: false,
+        validate: {
+            validator: function (v: Buffer) {
+                return true;
+            },
+            message: 'Invalid image buffer',
+        },
     },
 });
 
-const Project = mongoose.models?.Link || model<ProjectDocument>('Project', ProjectSchema);
+const Project = mongoose.models?.Project || model<ProjectDocument>('Project', ProjectSchema);
 export default Project;

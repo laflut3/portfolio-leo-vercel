@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/../Lib/MongoLib/mongodb';
-import Link from '@/../Lib/ProjectsLib/models/Projects';
+import Project from '@/../Lib/ProjectsLib/models/Projects';
 
 export async function POST(request: Request) {
     await connectDB();
@@ -16,16 +16,16 @@ export async function POST(request: Request) {
             return NextResponse.json({ message: 'URL and type are required' }, { status: 400 });
         }
 
-        const newLink = new Link({
+        const newProject = new Project({
             url,
             type,
             image: image ? Buffer.from(await image.arrayBuffer()) : undefined,
         });
 
 
-        const savedLink = await newLink.save();
+        const savedProject = await newProject.save();
 
-        return NextResponse.json({ message: 'Link created successfully', link: savedLink }, { status: 201 });
+        return NextResponse.json({ message: 'Project created successfully', Project: savedProject }, { status: 201 });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: 'Server error' }, { status: 500 });
@@ -40,12 +40,12 @@ export async function GET(request: Request) {
         const page = parseInt(url.searchParams.get('page') || '0', 10);  // Récupère le paramètre 'page'
         const limit = 10;  // Nombre de liens par page
 
-        const links = await Link.find().skip(page * limit).limit(limit);
-        const totalLinks = await Link.countDocuments();
+        const Projects = await Project.find().skip(page * limit).limit(limit);
+        const totalProjects = await Project.countDocuments();
 
         return NextResponse.json({
-            links,
-            nextPage: page + 1 < Math.ceil(totalLinks / limit) ? page + 1 : null,
+            Projects,
+            nextPage: page + 1 < Math.ceil(totalProjects / limit) ? page + 1 : null,
         });
     } catch (error) {
         return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 });
@@ -63,16 +63,16 @@ export async function DELETE(request: Request) {
             return NextResponse.json({ message: 'ID is required' }, { status: 400 });
         }
 
-        const deletedLink = await Link.findByIdAndDelete(id);
-        console.log('Deleted Link:', deletedLink);
+        const deletedProject = await Project.findByIdAndDelete(id);
+        console.log('Deleted Project:', deletedProject);
 
-        if (!deletedLink) {
-            return NextResponse.json({ message: 'Link not found' }, { status: 404 });
+        if (!deletedProject) {
+            return NextResponse.json({ message: 'Project not found' }, { status: 404 });
         }
 
-        return NextResponse.json({ message: 'Link deleted successfully' }, { status: 200 });
+        return NextResponse.json({ message: 'Project deleted successfully' }, { status: 200 });
     } catch (error) {
-        console.error('Error deleting link:', error);
+        console.error('Error deleting Project:', error);
         return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
 }
@@ -91,7 +91,7 @@ export async function PUT(request: Request) {
             return NextResponse.json({ message: 'ID, URL, and type are required' }, { status: 400 });
         }
 
-        const updatedLink = await Link.findByIdAndUpdate(
+        const updatedProject = await Project.findByIdAndUpdate(
             id,
             {
                 url,
@@ -101,13 +101,13 @@ export async function PUT(request: Request) {
             { new: true }
         );
 
-        console.log('Updated Link:', updatedLink);
+        console.log('Updated Project:', updatedProject);
 
-        if (!updatedLink) {
-            return NextResponse.json({ message: 'Link not found' }, { status: 404 });
+        if (!updatedProject) {
+            return NextResponse.json({ message: 'Project not found' }, { status: 404 });
         }
 
-        return NextResponse.json({ message: 'Link updated successfully', link: updatedLink }, { status: 200 });
+        return NextResponse.json({ message: 'Project updated successfully', project: updatedProject }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
