@@ -56,15 +56,14 @@ export async function DELETE(request: Request) {
     await connectDB();
 
     try {
-        const { id } = await request.json();
-        console.log('Received ID:', id);
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
 
         if (!id) {
             return NextResponse.json({ message: 'ID is required' }, { status: 400 });
         }
 
         const deletedProject = await Project.findByIdAndDelete(id);
-        console.log('Deleted Project:', deletedProject);
 
         if (!deletedProject) {
             return NextResponse.json({ message: 'Project not found' }, { status: 404 });
@@ -81,14 +80,20 @@ export async function PUT(request: Request) {
     await connectDB();
 
     try {
+        const { searchParams } = new URL(request.url);
+        const id = searchParams.get('id');
+
+        if (!id) {
+            return NextResponse.json({ message: 'ID is required' }, { status: 400 });
+        }
+
         const formData = await request.formData();
-        const id = formData.get('id')?.toString();
         const url = formData.get('url')?.toString();
         const type = formData.get('type')?.toString();
         const image = formData.get('image') as File | null;
 
-        if (!id || !url || !type) {
-            return NextResponse.json({ message: 'ID, URL, and type are required' }, { status: 400 });
+        if (!url || !type) {
+            return NextResponse.json({ message: 'URL and type are required' }, { status: 400 });
         }
 
         const updatedProject = await Project.findByIdAndUpdate(
@@ -100,8 +105,6 @@ export async function PUT(request: Request) {
             },
             { new: true }
         );
-
-        console.log('Updated Project:', updatedProject);
 
         if (!updatedProject) {
             return NextResponse.json({ message: 'Project not found' }, { status: 404 });

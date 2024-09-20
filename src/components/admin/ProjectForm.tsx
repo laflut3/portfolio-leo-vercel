@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from "next/image";
 
 interface ProjectFormProps {
     isEditMode: boolean;
@@ -14,6 +15,7 @@ interface Project {
 
 const ProjectForm: React.FC<ProjectFormProps> = ({ isEditMode, onSave, project }) => {
     const [formData, setFormData] = useState<Project>({ url: '', type: '', image: null });
+    const [previewImage, setPreviewImage] = useState<string | null>(null); // Prévisualisation de l'image
 
     useEffect(() => {
         if (project) {
@@ -31,6 +33,13 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ isEditMode, onSave, project }
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] || null;
         setFormData((prevFormData) => ({ ...prevFormData, image: file }));
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setPreviewImage(reader.result as string); // Prévisualiser l'image choisie
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -70,6 +79,14 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ isEditMode, onSave, project }
                 onChange={handleFileChange}
                 className="text-white border p-2 mb-2 w-full"
             />
+
+            {/* Afficher l'image choisie */}
+            {previewImage && (
+                <div className="my-4">
+                    <Image src={previewImage} alt="Image choisie" width={100} height={100} className="mb-2" />
+                </div>
+            )}
+
             <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
                 {isEditMode ? 'Modifier le projet' : 'Ajouter le projet'}
             </button>
