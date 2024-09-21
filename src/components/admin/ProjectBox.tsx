@@ -7,23 +7,43 @@ interface ProjectBoxProps {
     onDelete: () => void;
 }
 
-const ProjectBox: React.FC<ProjectBoxProps> = ({project, onEdit, onDelete}) => {
+const ProjectBox: React.FC<ProjectBoxProps> = ({ project, onEdit, onDelete }) => {
     const imageSrc = project.image
         ? `data:image/jpeg;base64,${Buffer.from(project.image.data).toString('base64')}`
         : "/default-image.jpg"; // Image par défaut si pas d'image
 
     return (
-        <div className="border p-4 rounded shadow-md">
-            <div className={`flex justify-center items-center text-center`}>
-                <Image src={imageSrc} alt={project.type} width={100} height={100} className="mb-2"/>
+        <div className="border border-gray-200 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-white">
+            {/* Image du projet */}
+            <div className="flex justify-center items-center mb-4">
+                <Image src={imageSrc} alt={project.titre} width={150} height={150} className="rounded-lg object-cover" />
             </div>
-            <h3 className="text-lg font-bold">{project.type}</h3>
-            <p>{project.url}</p>
-            <div className="flex space-x-2 mt-4">
-                <button onClick={onEdit} className="bg-yellow-500 p-2 rounded text-white">
+
+            {/* Titre du projet */}
+            <h3 className="text-2xl font-semibold text-center text-gray-800 mb-2 truncate">
+                {project.titre}
+            </h3>
+
+            {/* Type et URL */}
+            <p className="text-sm text-gray-500 text-center mb-2">{project.type}</p>
+            <p className="text-sm text-blue-600 text-center mb-4 truncate">
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    {project.url}
+                </a>
+            </p>
+
+            {/* Boutons */}
+            <div className="flex justify-center space-x-4">
+                <button
+                    onClick={onEdit}
+                    className="flex items-center justify-center bg-yellow-400 text-white py-2 px-4 rounded-full shadow hover:bg-yellow-500 transition-colors duration-300"
+                >
                     ✏️ Modifier
                 </button>
-                <button onClick={onDelete} className="bg-red-500 p-2 rounded text-white">
+                <button
+                    onClick={onDelete}
+                    className="flex items-center justify-center bg-red-500 text-white py-2 px-4 rounded-full shadow hover:bg-red-600 transition-colors duration-300"
+                >
                     🗑️ Supprimer
                 </button>
             </div>

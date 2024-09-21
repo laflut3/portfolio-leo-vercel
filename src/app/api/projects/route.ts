@@ -7,21 +7,21 @@ export async function POST(request: Request) {
 
     try {
         const formData = await request.formData();
+        const titre = formData.get('titre')?.toString();  // Ajout du titre
         const url = formData.get('url')?.toString();
         const type = formData.get('type')?.toString();
         const image = formData.get('image') as File | null;
 
-
-        if (!url || !type) {
-            return NextResponse.json({ message: 'URL and type are required' }, { status: 400 });
+        if (!titre || !url || !type) {
+            return NextResponse.json({ message: 'Titre, URL, and type are required' }, { status: 400 });
         }
 
         const newProject = new Project({
+            titre,
             url,
             type,
             image: image ? Buffer.from(await image.arrayBuffer()) : undefined,
         });
-
 
         const savedProject = await newProject.save();
 
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ message: 'Server error' }, { status: 500 });
     }
 }
+
 
 export async function GET(request: Request) {
     await connectDB();
@@ -88,17 +89,19 @@ export async function PUT(request: Request) {
         }
 
         const formData = await request.formData();
+        const titre = formData.get('titre')?.toString();  // Ajout du titre
         const url = formData.get('url')?.toString();
         const type = formData.get('type')?.toString();
         const image = formData.get('image') as File | null;
 
-        if (!url || !type) {
-            return NextResponse.json({ message: 'URL and type are required' }, { status: 400 });
+        if (!titre || !url || !type) {
+            return NextResponse.json({ message: 'Titre, URL, and type are required' }, { status: 400 });
         }
 
         const updatedProject = await Project.findByIdAndUpdate(
             id,
             {
+                titre,
                 url,
                 type,
                 image: image ? Buffer.from(await image.arrayBuffer()) : undefined,
