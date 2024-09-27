@@ -3,6 +3,7 @@ import Loader from '@/components/utils/Loader';
 import ProjectCard from './ProjectDiv/ProjectCard';
 import { fetchProjects } from '@/services/api'; // Utilise axios maintenant
 import { IProject } from "@/types/IProject";
+import bg from "@/../public/assets/image/designIcon/planet-icon.png";
 
 const ProjectFilterBar = React.lazy(() => import('./ProjectDiv/ProjectFilterBar'));
 
@@ -38,37 +39,49 @@ const ProjectSection: React.FC = () => {
 
     return (
         <section
-            className="min-h-screen flex flex-col items-center mb-4 mt-4 pt-8 w-full"
-            id={"projects"}
+            className="relative min-h-screen flex flex-col items-center mb-4 mt-4 pt-8 w-full"
+            id="projects"
         >
-            <h1 className="text-8xl p-6 mb-12 font-aquire">Mes projets</h1>
-            <Suspense fallback={<Loader />}>
-                <ProjectFilterBar onFilterChange={handleFilterChange} />
-            </Suspense>
-            {filterType && (
-                <div className="flex justify-center mt-4 px-4">
-                    <div className="flex items-center bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
-                        <span>{filterType}</span>
-                        <button
-                            className="ml-2 text-gray-500 hover:text-gray-700"
-                            onClick={handleRemoveFilter}
-                        >
-                            &#x2715;
-                        </button>
+            <div
+                className="flex justify-center items-center text-center absolute inset-0 bg-black opacity-50 z-0 min-h-screen"
+                style={{
+                    background: `url(${bg.src}) no-repeat center center`,
+                    backgroundSize: 'contain',
+                    width: '100%',
+                    height: '100%',
+                }}
+            />
+            <div className="relative z-10 w-full flex flex-col items-center justify-center">
+                <h1 className="text-8xl p-6 mb-12 font-aquire">Mes projets</h1>
+                <Suspense fallback={<Loader/>}>
+                    <ProjectFilterBar onFilterChange={handleFilterChange}/>
+                </Suspense>
+                {filterType && (
+                    <div className="flex justify-center mt-4 px-4">
+                        <div className="flex items-center bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
+                            <span>{filterType}</span>
+                            <button
+                                className="ml-2 text-gray-500 hover:text-gray-700"
+                                onClick={handleRemoveFilter}
+                            >
+                                &#x2715;
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mt-6 px-4">
-                {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
-                    filteredProjects.map((project) => (
-                        <ProjectCard key={project._id} project={project} />
-                    ))
-                ) : (
-                    <p>No projects found</p>
                 )}
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mt-6 px-4">
+                    {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
+                        filteredProjects.map((project) => (
+                            <ProjectCard key={project._id} project={project}/>
+                        ))
+                    ) : (
+                        <p>No projects found</p>
+                    )}
+                </div>
             </div>
         </section>
-    );
+);
 };
 
 export default ProjectSection;
