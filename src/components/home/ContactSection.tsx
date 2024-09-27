@@ -63,7 +63,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section className="fifth-section min-h-screen py-8 mt-5" id="contactUs">
+        <section className="fifth-section h-full py-8 mt-5" id="contactUs">
             <div className="form-flex-container flex flex-col md:flex-row justify-evenly items-center w-full px-4">
                 <form
                     onSubmit={handleSubmit}
