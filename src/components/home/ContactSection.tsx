@@ -2,12 +2,17 @@
 
 import {dotWave} from "ldrs";
 import Image from 'next/image';
-import {ChangeEvent, FormEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import ValidationPopUp from "@/components/utils/ValidationPopUp";
 import astronaute from "@/../public/assets/image/designIcon/astronaute-icon.png";
 
 export default function ContactSection() {
-    dotWave.register();
+    useEffect(() => {
+        // Code exécuté uniquement côté client
+        if (typeof window !== "undefined") {
+            dotWave.register();
+        }
+    }, []);
 
     const [formData, setFormData] = useState({
         name: "",

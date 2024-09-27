@@ -43,7 +43,7 @@ export default function SkillIntro() {
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }} // Montée et descente
             transition={{ duration: 1, ease: "easeInOut" }} // Durée et transition
         >
-            <h2 className="flex text-2xl md:text-4xl xl:text-6xl text-center items-center">
+            <h2 className="flex text-2xl md:text-4xl xl:text-6xl text-center items-center font-aquire">
                 <p className={"hidden sm:block"}>Bienvenue dans mon système de compétences</p>
                 <p className={"sm:hidden block"}>Mes compétences</p>
                 <Image src={arrow} alt="Flèche spéciale" className={"h-auto ml-5"} />

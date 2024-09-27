@@ -63,7 +63,7 @@ function ScrollSection() {
                     <ManagementSection/>
                     <OtherOutilsSection/>
 
-                    <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center">
+                    <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center font-aquire">
                         <p className={"text-8xl"}>La suite</p>
                         <Image src={arrow} alt={"arrow"} className={"rotate-90 translate-y-10"}></Image>
                     </div>
