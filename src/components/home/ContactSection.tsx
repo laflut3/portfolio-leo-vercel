@@ -141,7 +141,7 @@ export default function ContactSection() {
                             réessayer.</p>}
                 </form>
                 <div className="mt-8 md:mt-0">
-                    <h3 className="text-3xl md:text-4xl font-bold text-center">Entrer en contact</h3>
+                    <h3 className="text-3xl md:text-4xl font-bold text-center font-aquire">Entrer en contact</h3>
                     <Image
                         src={astronaute}
                         alt="Astronaute"

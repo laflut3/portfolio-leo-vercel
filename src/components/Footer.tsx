@@ -12,7 +12,7 @@ export default function Footer() {
     return (
         <footer className='border-t-4 border-white w-full bg-primary py-8 px-4 md:px-8 flex flex-col md:flex-row justify-center items-center'>
             <div className='flex flex-col items-center md:items-start md:w-1/3 mb-8 md:mb-0'>
-                <h4 className='text-white text-lg md:text-xl mb-4 text-center md:text-left'>RAPIDE CONTACT</h4>
+                <h4 className='text-white text-lg md:text-xl mb-4 text-center md:text-left font-aquire'>RAPIDE CONTACT</h4>
                 <div className='flex items-center mb-4'>
                     <Image src={mail} alt='Mail icon' width={24} height={24} />
                     <p className='ml-2 text-white text-sm md:text-base'>leo0609leo@gmail.com</p>
@@ -26,7 +26,7 @@ export default function Footer() {
                     <p className='ml-2 text-white text-sm md:text-base'>206 rue du triolet, 34090 Montpellier</p>
                 </div>
             </div>
-            <div className='flex justify-center items-center md:w-1/3 mb-8 md:mb-0'>
+            <div className='flex justify-center items-center md:w-1/3 mb-8 md:mb-0 font-aquire'>
                 <p className='text-white text-3xl md:text-7xl font-erasbold text-center'>
                     LEO TORRES
                 </p>
