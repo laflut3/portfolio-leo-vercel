@@ -11,9 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        akaya: ['AkayaKanadaka', 'sans-serif'],
-        erasbold: ['ErasBoldITC', 'sans-serif'],
         aquire: ['Aquire', 'sans-serif'],
+        space: ['Space', 'sans-serif'],
       },
     },
   },
@@ -49,11 +48,11 @@ const config: Config = {
           borderColor: 'var(--border-tertiary)',
         },
 
-        '.font-akaya': {
-          fontFamily: 'AkayaKanadaka, sans-serif',
+        '.font-space': {
+          fontFamily: 'Space, sans-serif',
         },
-        '.font-erasbold': {
-          fontFamily: 'ErasBoldITC, sans-serif',
+        '.font-Aquire': {
+          fontFamily: 'Aquire, sans-serif',
         },
         '.text-stroke': {
           '-webkit-text-stroke': '.5px #000',

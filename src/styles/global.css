@@ -1,22 +1,15 @@
 /* global.css */
 
 @font-face {
-    font-family: 'AkayaKanadaka';
-    src: url('/assets/fonts/AkayaKanadaka-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ErasBoldITC';
-    src: url('/assets/fonts/ErasBoldITC.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'Aquire';
     src: url('/assets/fonts/aquire-font/Aquire-BW0ox.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Space';
+    src: url('/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -32,9 +25,8 @@
     --color-primary: #FFFFFF;
     --color-secondary: #EB9D5A;
     --color-tertiary: #000000;
-    --font-primary: 'AkayaKanadaka', sans-serif;
-    --font-secondary: 'ErasBoldITC', sans-serif;
-    --font-tertiary: 'Aquire', sans-serif;
+    --font-primary: 'Space', sans-serif /*'AkayaKanadaka', sans-serif;*/;
+    --font-secondary: 'Aquire', sans-serif /*'ErasBoldITC', sans-serif*/;
 }
 
 body {
