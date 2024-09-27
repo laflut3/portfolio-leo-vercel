@@ -127,14 +127,18 @@ const SectionProfile: React.FC = () => {
             style={{background: "url('/assets/image/background/fondEtoile.png') center center / cover no-repeat fixed"}}
 
         >
-            <h2 className="text-2xl font-bold text-center mb-8">Profil</h2>
-            <div className="shadow-2xl mx-5 lg:w-1/3 sm:w-1/2 rounded-lg p-8 bg-white bg-opacity-80 flex flex-col items-center">
+            <h2 className="text-6xl font-bold text-center mb-8 font-aquire">Profil</h2>
+            <div
+                className="shadow-2xl mx-5 lg:w-1/3 sm:w-1/2 rounded-lg p-8 bg-white bg-opacity-80 flex flex-col items-center">
                 <div className="mb-8">
                     <FaUserCircle className="text-gray-700 w-36 h-36"/>
                 </div>
                 <div className="w-full text-center text-black">
-                    <h3 className="text-2xl font-semibold mb-4">Détails</h3>
 
+                    <h3 className="text-center text-2xl font-semibold mb-4 font-aquire">Détails</h3>
+                    <div className={"flex justify-center items-center w-full p-7 pt-2"}>
+                        <hr className={"border-2 rounded-full border-black w-1/2"}/>
+                    </div>
                     {["nom", "prenom", "username", "dateOfBirth", "email"].map((field) => (
                         <div key={field} className="mb-4 flex justify-between items-center">
                             <div>
@@ -172,7 +176,7 @@ const SectionProfile: React.FC = () => {
                         </div>
                     ))}
 
-                    <div className="space-y-2 text-center justify-center items-center">
+                    <div className="space-y-2 text-center justify-center items-center mt-8">
                         <div className={`flex flex-row space-x-4 justify-center items-center text-center`}>
                             <button
                                 className={Button.customButton}

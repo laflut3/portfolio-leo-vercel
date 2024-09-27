@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import neptune from "../../../../public/assets/image/planete/neptune.png";
 import React from "react";
+import OutilsOtherDiv from "@/components/home/SkillDiv/skillUtils/OutilsOtherDiv";
 
 export default function OtherOutilsSection() {
     const [isVisible, setIsVisible] = useState(false);
@@ -46,6 +47,7 @@ export default function OtherOutilsSection() {
                 alt="Neptune"
                 className="object-contain max-h-[30vh] sm:max-h-[40vh] md:max-h-[50vh] w-auto mb-4"
             />
+            <OutilsOtherDiv/>
         </motion.div>
     );
 }

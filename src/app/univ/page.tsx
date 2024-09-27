@@ -1,6 +1,6 @@
 export default function UnivPage() {
     return (
-        <main>
+        <main className="w-full">
 
         </main>
     )

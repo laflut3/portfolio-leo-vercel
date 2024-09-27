@@ -71,7 +71,7 @@ export default function Navbar() {
         >
             <nav className="mt-2">
                 <div className="name flex justify-between items-center w-full px-4 md:px-8">
-                <span className="flex items-center text-primary text-xl md:text-2xl">
+                <span className="flex items-center text-primary text-xl md:text-2xl font-aquire">
                     LEO TORRES
                     <Image
                         src={france}
