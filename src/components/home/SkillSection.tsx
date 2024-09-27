@@ -52,6 +52,21 @@ function ScrollSection() {
         <section id='skills' className="overflow-hidden">
             <div ref={triggerRef}>
                 <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
+                    <div className="absolute inset-0">
+                        {Array.from({length: 200}).map((_, index) => (
+                            <span
+                                key={index}
+                                className="block rounded-full absolute bg-white opacity-80"
+                                style={{
+                                    width: `${Math.random() * 3 + 1}px`,
+                                    height: `${Math.random() * 3 + 1}px`,
+                                    top: `${Math.random() * 100}%`,
+                                    left: `${Math.random() * 100}%`,
+                                    animation: `twinkle ${Math.random() * 5 + 2}s infinite ease-in-out`,
+                                }}
+                            ></span>
+                        ))}
+                    </div>
                     <div className={"min-h-screen w-36"}></div>
                     <SkillIntro/>
                     <WebSection/>
@@ -63,7 +78,8 @@ function ScrollSection() {
                     <ManagementSection/>
                     <OtherOutilsSection/>
 
-                    <div className="min-h-screen w-screen flex flex-col justify-center items-center text-center font-aquire">
+                    <div
+                        className="min-h-screen w-screen flex flex-col justify-center items-center text-center font-aquire">
                         <p className={"text-8xl"}>La suite</p>
                         <Image src={arrow} alt={"arrow"} className={"rotate-90 translate-y-10"}></Image>
                     </div>
