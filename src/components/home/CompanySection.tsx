@@ -10,7 +10,7 @@ export default function CompanySection() {
             <div id="company"></div>
             <section className="py-8 mt-5 fourth-section">
                 <div className="flex items-center md:flex-row md:items-center justify-center w-full mb-12">
-                    <h2 className="text-3xl md:text-4xl text-primary font-bold mb-4">FLEO-Web</h2>
+                    <h2 className="text-3xl md:text-4xl text-primary font-bold font-aquire">FLEO-Web</h2>
                     <Image src={fleo} alt="FLEO-Web" width={80} height={80}
                            style={{objectFit: 'contain'}}/>
                 </div>
