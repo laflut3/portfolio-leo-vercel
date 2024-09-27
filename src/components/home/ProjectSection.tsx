@@ -37,7 +37,11 @@ const ProjectSection: React.FC = () => {
         : projects;
 
     return (
-        <section className="min-h-screen flex flex-col items-center mb-4 mt-4 pt-8 w-full">
+        <section
+            className="min-h-screen flex flex-col items-center mb-4 mt-4 pt-8 w-full"
+            id={"projects"}
+        >
+            <h1 className="text-8xl p-6 mb-12">Mes projets</h1>
             <Suspense fallback={<Loader />}>
                 <ProjectFilterBar onFilterChange={handleFilterChange} />
             </Suspense>

@@ -48,12 +48,6 @@ const config: Config = {
           borderColor: 'var(--border-tertiary)',
         },
 
-        '.font-space': {
-          fontFamily: 'Space, sans-serif',
-        },
-        '.font-Aquire': {
-          fontFamily: 'Aquire, sans-serif',
-        },
         '.text-stroke': {
           '-webkit-text-stroke': '.5px #000',
         },
