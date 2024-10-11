@@ -25,14 +25,22 @@ const CatalogueFilterBar: React.FC<CatalogueFilterBarProps> = ({ onFilterChange 
     };
 
     return (
-        <div
-            className="w-full flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 font-merriweather text-white items-center justify-center">
-            <button className="px-8 py-2 bg-secondary rounded-xl" onClick={handleEcommerce}>Site E-commerce</button>
-            <button className="px-14 py-2 bg-secondary rounded-xl" onClick={handleVitrine}>Site Vitrine</button>
-            <button className="px-12 py-2 bg-secondary rounded-xl" onClick={handlePortefolio}>Site Portfolio</button>
-            <button className="px-12 py-2 bg-secondary rounded-xl" onClick={handleAppJava}>Application java</button>
+        <div className="w-full flex flex-wrap justify-center items-center gap-4 font-merriweather text-white">
+            <button className="px-4 sm:px-8 py-2 bg-secondary rounded-xl w-full sm:w-auto text-center" onClick={handleEcommerce}>
+                Site E-commerce
+            </button>
+            <button className="px-6 sm:px-14 py-2 bg-secondary rounded-xl w-full sm:w-auto text-center" onClick={handleVitrine}>
+                Site Vitrine
+            </button>
+            <button className="px-4 sm:px-12 py-2 bg-secondary rounded-xl w-full sm:w-auto text-center" onClick={handlePortefolio}>
+                Site Portfolio
+            </button>
+            <button className="px-4 sm:px-12 py-2 bg-secondary rounded-xl w-full sm:w-auto text-center" onClick={handleAppJava}>
+                Application Java
+            </button>
         </div>
     );
 };
 
 export default CatalogueFilterBar;
+

@@ -4,13 +4,28 @@ import ProjectCard from './ProjectDiv/ProjectCard';
 import { fetchProjects } from '@/services/api'; // Utilise axios maintenant
 import { IProject } from "@/types/IProject";
 import bg from "@/../public/assets/image/designIcon/planet-icon.png";
+import Carroussel from "@/components/utils/Carroussel";
 
 const ProjectFilterBar = React.lazy(() => import('./ProjectDiv/ProjectFilterBar'));
 
 const ProjectSection: React.FC = () => {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
     const [filterType, setFilterType] = useState<string | null>(null);
     const [projects, setProjects] = useState<IProject[]>([]);
     const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         setIsClient(typeof window !== 'undefined');
@@ -42,6 +57,7 @@ const ProjectSection: React.FC = () => {
             className="relative min-h-screen flex flex-col items-center mb-4 mt-4 pt-8 w-full"
             id="projects"
         >
+            {/* Background */}
             <div
                 className="flex justify-center items-center text-center absolute inset-0 bg-black opacity-50 z-0 min-h-screen"
                 style={{
@@ -51,11 +67,20 @@ const ProjectSection: React.FC = () => {
                     height: '100%',
                 }}
             />
-            <div className="relative z-10 w-full flex flex-col items-center justify-center">
-                <h1 className="text-8xl p-6 mb-12 font-aquire">Mes projets</h1>
-                <Suspense fallback={<Loader/>}>
-                    <ProjectFilterBar onFilterChange={handleFilterChange}/>
+
+            {/* Content */}
+            <div className="relative z-10 w-full flex flex-col items-center justify-center px-4 sm:px-8">
+                {/* Title */}
+                <h1 className="w-full text-4xl sm:text-6xl md:text-7xl lg:text-8xl p-6 mb-8 font-aquire text-center">
+                    Mes projets
+                </h1>
+
+                {/* Filter Bar */}
+                <Suspense fallback={<Loader />}>
+                    <ProjectFilterBar onFilterChange={handleFilterChange} />
                 </Suspense>
+
+                {/* Filter Tag */}
                 {filterType && (
                     <div className="flex justify-center mt-4 px-4">
                         <div className="flex items-center bg-gray-200 text-gray-800 px-3 py-1 rounded-full">
@@ -69,19 +94,28 @@ const ProjectSection: React.FC = () => {
                         </div>
                     </div>
                 )}
+
+                {/* Projects Grid */}
                 <div
-                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mt-6 px-4">
+                    className="flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl mt-6 px-4">
                     {Array.isArray(filteredProjects) && filteredProjects.length > 0 ? (
-                        filteredProjects.map((project) => (
-                            <ProjectCard key={project._id} project={project}/>
-                        ))
+                        !isMobile ? (
+                            filteredProjects.map((project) => (
+                                <ProjectCard key={project._id} project={project}/>
+                            ))
+                        ) : (
+                            <Carroussel items={filteredProjects.map((project) => (
+                                <ProjectCard key={project._id} project={project}/>
+                            ))}
+                            />
+                        )
                     ) : (
-                        <p>No projects found</p>
+                        <p className="text-center text-gray-500 text-xl">No projects found</p>
                     )}
                 </div>
             </div>
         </section>
-);
+    );
 };
 
 export default ProjectSection;

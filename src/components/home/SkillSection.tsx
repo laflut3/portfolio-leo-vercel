@@ -36,7 +36,7 @@ function ScrollSection() {
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: "9000 top",  // Adjust end based on scroll length needed
+                    end: "8500 top",  // Adjust end based on scroll length needed
                     scrub: 0.6,
                     pin: true,
                 },
@@ -77,7 +77,6 @@ function ScrollSection() {
                     <OutilsSection/>
                     <ManagementSection/>
                     <OtherOutilsSection/>
-
                     <div
                         className="min-h-screen w-screen flex flex-col justify-center items-center text-center font-aquire">
                         <p className={"text-8xl"}>La suite</p>
