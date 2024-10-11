@@ -16,7 +16,7 @@ export default function HomePage() {
         const lastShown = localStorage.getItem("lastPreloaderShown");
         const now = new Date().getTime();
 
-        if (!lastShown || now - parseInt(lastShown) > TWELVE_HOURS) {
+        if (!lastShown || now - parseInt(lastShown)) {
             setPreloaderVisible(true);
             const timer = setTimeout(() => {
                 setPreloaderVisible(false);
