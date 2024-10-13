@@ -5,34 +5,38 @@ import vercel from '@/../public/assets/image/logoDev/systeme/vercel.png'
 
 export default function AboutSite() {
     return (
-        <section className="relative h-screen bg-black w-full flex flex-col items-center justify-center">
-            <h2 className={"text-6xl"}>A propos de ce site</h2>
-            <div className="p-6 flex w-full justify-center space-x-6">
-                <Image src={next} alt={'next logo'} className={"w-[200px] h-auto"}/>
-                <Image src={vercel} alt={'vercel logo'} className={"bg-white p-2 w-[200px] h-auto rounded-full"}/>
+        <section className="relative min-h-screen bg-black w-full flex flex-col items-center justify-center px-4 lg:px-8 overflow-y-auto mt-16"> {/* Ajout de mt-16 */}
+            <h2 className="text-3xl lg:text-6xl font-bold text-white mb-8 text-center">
+                À propos de ce site
+            </h2>
+
+            {/* Logos */}
+            <div className="p-4 flex w-full justify-center space-x-4 lg:space-x-12 mb-8">
+                <Image src={next} alt="Next.js logo" className="h-auto w-1/4 md:w-1/6"/>
+                <Image src={vercel} alt="Vercel logo" className="bg-white p-2 h-auto w-1/4 md:w-1/6 rounded-full"/>
             </div>
-            <div className="flex flex-col w-full justify-center text-center space-y-6">
-                <p>
-                    Ce site est un espace dédié à la présentation de mon parcours professionnel et
+
+            {/* Text Content */}
+            <div className="flex flex-col w-full p-5 text-center text-white space-y-6 lg:space-y-8">
+                <p className="text-sm lg:text-lg leading-relaxed">
+                    Ce site est un espace dédié à la présentation de mon parcours professionnel et académique.
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    académique. En tant que future professionnel dans le domaine de l'informatique, ce site
-                    constitue la vitrine de tous mes projets, autant scolaires que personnels.
+                    En tant que futur professionnel dans le domaine de l'informatique, ce site constitue la vitrine
+                    de tous mes projets, autant scolaires que personnels.
                 </p>
-                <p>
-                    Il est programmer en next.js et typescript, le design est fait majoritairement grâce à tailwind.
-                    Certaine librairie tels que framer-motion, gsap, ou three.js on aider a faire quelque éléments de
-                    design. Enfin la base de donnée de projet est sur dans une collection dans un cluster mongodb et le
-                    site est héberger sur vercel.
+                <p className="text-sm lg:text-lg leading-relaxed">
+                    Il est programmé en Next.js et TypeScript, le design est majoritairement réalisé grâce à Tailwind CSS.
+                    Certaines librairies telles que Framer Motion, GSAP, ou Three.js ont aidé à créer des éléments de design.
+                    Enfin, la base de données des projets est stockée dans un cluster MongoDB et le site est hébergé sur Vercel.
                 </p>
-                <p>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    Je vous invite à explorer les différentes pages de ce site pour en apprendre d'avantage sur
+                <p className="text-sm lg:text-lg leading-relaxed">
+                    Je vous invite à explorer les différentes pages de ce site pour en apprendre davantage sur
                     mon parcours et mes réalisations.
                 </p>
-                <p>
+                <p className="text-sm lg:text-lg leading-relaxed">
                     Merci de votre visite, et je vous souhaite une agréable découverte de mon Portfolio.
                 </p>
             </div>
         </section>
-    )
+    );
 }

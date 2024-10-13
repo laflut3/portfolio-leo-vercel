@@ -5,7 +5,7 @@ export default function AboutMeSection() {
     return (
         <section className="relative h-screen bg-black overflow-hidden">
             <div className="absolute inset-0">
-                {Array.from({length: 200}).map((_, index) => (
+                {Array.from({ length: 200 }).map((_, index) => (
                     <span
                         key={index}
                         className="block rounded-full absolute bg-white opacity-80"
@@ -18,13 +18,30 @@ export default function AboutMeSection() {
                     ></span>
                 ))}
             </div>
+
+            {/* Dégradé très subtil avec flou en haut */}
+            <div className="absolute top-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
+                 style={{
+                     background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
+                     backdropFilter: "blur(3px)"
+                 }}>
+            </div>
+
+            {/* Dégradé très subtil avec flou en bas */}
+            <div className="absolute bottom-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
+                 style={{
+                     background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
+                     backdropFilter: "blur(3px)"
+                 }}>
+            </div>
+
             <div className="absolute inset-0 flex justify-center items-center">
                 <motion.div
-                    className="text-yellow-500 text-center space-y-4 text-xl leading-relaxed w-3/4 max-w-2xl"
-                    initial={{y: "100%"}}
-                    animate={{y: "-100%"}}
-                    transition={{duration: 30, ease: "linear", repeat: Infinity}}
-                    style={{transform: "rotateX(25deg)", perspective: "400px"}}
+                    className="text-yellow-500 text-center space-y-4 text-xl leading-relaxed w-11/12 max-w-2xl z-0"
+                    initial={{ y: "100%" }}
+                    animate={{ y: "-100%" }}
+                    transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+                    style={{ transform: "rotateX(25deg)", perspective: "400px" }}
                 >
                     <p>Bonjour, je me nomme Léo Torres.</p>
                     <p>
