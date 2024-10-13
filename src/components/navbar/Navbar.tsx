@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Image from "next/image";
 import {useSession} from 'next-auth/react';
 import {AiOutlineUser} from "react-icons/ai";
@@ -11,6 +11,7 @@ import linkedin from "@/../public/assets/image/reseauSociaux/linkedin-icon.svg";
 import insta from "@/../public/assets/image/reseauSociaux/insta-icon.png";
 import phone from "@/../public/assets/image/utils/phone-icon2.png";
 import MenuBurger from "@/components/navbar/MenuBurger";
+import {FaChevronRight} from "react-icons/fa";
 
 export default function Navbar() {
     const [isBlurred, setIsBlurred] = useState(false);
@@ -18,6 +19,47 @@ export default function Navbar() {
     const router = useRouter();
     const [menuBurgerIsVisible, setMenuBurgerIsVisible] = useState<boolean>(false);
 
+    // États pour contrôler la visibilité des sous-menus
+    const [isAccueilOpen, setIsAccueilOpen] = useState<boolean>(false);
+    const [isAProposOpen, setIsAProposOpen] = useState<boolean>(false);
+    const [isUniversiteOpen, setIsUniversiteOpen] = useState<boolean>(false);
+
+    // Références pour détecter les clics en dehors des sous-menus
+    const accueilRef = useRef<HTMLLIElement | null>(null);
+    const aProposRef = useRef<HTMLLIElement | null>(null);
+    const universiteRef = useRef<HTMLLIElement | null>(null);
+
+    // Gestion des clics en dehors des sous-menus
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                accueilRef.current &&
+                !accueilRef.current.contains(event.target as Node) &&
+                isAccueilOpen
+            ) {
+                setIsAccueilOpen(false);
+            }
+            if (
+                aProposRef.current &&
+                !aProposRef.current.contains(event.target as Node) &&
+                isAProposOpen
+            ) {
+                setIsAProposOpen(false);
+            }
+            if (
+                universiteRef.current &&
+                !universiteRef.current.contains(event.target as Node) &&
+                isUniversiteOpen
+            ) {
+                setIsUniversiteOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isAccueilOpen, isAProposOpen, isUniversiteOpen]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -103,76 +145,139 @@ export default function Navbar() {
                     <div className="hidden lg:flex space-x-6">
                         <ul className="flex text-primary items-center space-x-10">
                             {/* Accueil Submenu */}
-                            <li className="group relative cursor-pointer">
-                                <span>Accueil</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
+                            <li className="relative cursor-pointer" ref={accueilRef}>
+                                <button
+                                    onClick={() => {
+                                        setIsAccueilOpen(!isAccueilOpen);
+                                        setIsAProposOpen(false);
+                                        setIsUniversiteOpen(false);
+                                    }}
+                                    className="flex items-center space-x-1 focus:outline-none"
+                                    aria-expanded={isAccueilOpen}
+                                >
+                                    <span>Accueil</span>
+                                    <FaChevronRight
+                                        className={`transform transition-transform duration-300 ${
+                                            isAccueilOpen ? 'rotate-90' : ''
+                                        }`}
+                                    />
+                                </button>
+                                <ul
+                                    className={`absolute w-48 ${
+                                        isAccueilOpen
+                                            ? 'opacity-100 pointer-events-auto scale-100'
+                                            : 'opacity-0 pointer-events-none scale-95'
+                                    } flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform transition-all duration-300 ease-in-out text-start`}
+                                >
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAcceuilNavClick("top")}
+                                        onClick={() => handleAcceuilNavClick('top')}
                                     >
-                                        <span className="block py-4">Introduction</span>
+                                        <span className="block py-2">Introduction</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAcceuilNavClick("skills")}
+                                        onClick={() => handleAcceuilNavClick('skills')}
                                     >
-                                        <span className="block py-4">Compétences</span>
+                                        <span className="block py-2">Compétences</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAcceuilNavClick("projects")}
+                                        onClick={() => handleAcceuilNavClick('projects')}
                                     >
-                                        <span className="block py-4">Projets</span>
+                                        <span className="block py-2">Projets</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAcceuilNavClick("company")}
+                                        onClick={() => handleAcceuilNavClick('company')}
                                     >
-                                        <span className="block py-4">Mon entreprise</span>
+                                        <span className="block py-2">Mon entreprise</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAcceuilNavClick("contactUs")}
+                                        onClick={() => handleAcceuilNavClick('contactUs')}
                                     >
-                                        <span className="block py-4">Contact</span>
+                                        <span className="block py-2">Contact</span>
                                     </li>
                                 </ul>
                             </li>
 
                             {/* À propos Submenu */}
-                            <li className="group relative cursor-pointer">
-                                <span>À propos</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
+                            <li className="relative cursor-pointer" ref={aProposRef}>
+                                <button
+                                    onClick={() => {
+                                        setIsAProposOpen(!isAProposOpen);
+                                        setIsAccueilOpen(false);
+                                        setIsUniversiteOpen(false);
+                                    }}
+                                    className="flex items-center space-x-1 focus:outline-none"
+                                    aria-expanded={isAProposOpen}
+                                >
+                                    <span>À propos</span>
+                                    <FaChevronRight
+                                        className={`transform transition-transform duration-300 ${
+                                            isAProposOpen ? 'rotate-90' : ''
+                                        }`}
+                                    />
+                                </button>
+                                <ul
+                                    className={`absolute w-48 ${
+                                        isAProposOpen
+                                            ? 'opacity-100 pointer-events-auto scale-100'
+                                            : 'opacity-0 pointer-events-none scale-95'
+                                    } flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform transition-all duration-300 ease-in-out text-start`}
+                                >
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAboutNavClick("aboutSite")}
+                                        onClick={() => handleAboutNavClick('aboutSite')}
                                     >
-                                        <span className="block py-4">de ce site</span>
+                                        <span className="block py-2">de ce site</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAboutNavClick("aboutMe")}
+                                        onClick={() => handleAboutNavClick('aboutMe')}
                                     >
-                                        <span className="block py-4">de moi</span>
+                                        <span className="block py-2">de moi</span>
                                     </li>
                                 </ul>
                             </li>
 
                             {/* Université Submenu */}
-                            <li className="group relative cursor-pointer">
-                                <span>Université</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
+                            <li className="relative cursor-pointer" ref={universiteRef}>
+                                <button
+                                    onClick={() => {
+                                        setIsUniversiteOpen(!isUniversiteOpen);
+                                        setIsAccueilOpen(false);
+                                        setIsAProposOpen(false);
+                                    }}
+                                    className="flex items-center space-x-1 focus:outline-none"
+                                    aria-expanded={isUniversiteOpen}
+                                >
+                                    <span>Université</span>
+                                    <FaChevronRight
+                                        className={`transform transition-transform duration-300 ${
+                                            isUniversiteOpen ? 'rotate-90' : ''
+                                        }`}
+                                    />
+                                </button>
+                                <ul
+                                    className={`absolute w-48 ${
+                                        isUniversiteOpen
+                                            ? 'opacity-100 pointer-events-auto scale-100'
+                                            : 'opacity-0 pointer-events-none scale-95'
+                                    } flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform transition-all duration-300 ease-in-out text-start`}
+                                >
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleUnivNavClick("formation")}
+                                        onClick={() => handleUnivNavClick('formation')}
                                     >
-                                        <span className="block py-4">Ma formation</span>
+                                        <span className="block py-2">Ma formation</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleUnivNavClick("university")}
+                                        onClick={() => handleUnivNavClick('university')}
                                     >
-                                        <span className="block py-4">Mes projets</span>
+                                        <span className="block py-2">Mes projets</span>
                                     </li>
                                 </ul>
                             </li>
