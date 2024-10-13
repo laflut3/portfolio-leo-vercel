@@ -42,11 +42,33 @@ export default function Navbar() {
                 behavior: "smooth",
             });
         }
+    };
+
+    const handleAcceuilNavClick = (targetId: string) => {
+        handleNavClick(targetId);
 
         if (window.location.pathname !== "/") {
             router.push("/");
         }
     };
+
+    const handleAboutNavClick = (targetId: string) => {
+        handleNavClick(targetId);
+
+        if (window.location.pathname !== "/about") {
+            router.push("/about");
+        }
+    };
+
+    const handleUnivNavClick = (targetId: string) => {
+        handleNavClick(targetId);
+
+        if (window.location.pathname !== "/univ") {
+            router.push("/univ");
+        }
+    };
+
+
 
     const SignClick = () => {
         router.push("/sign");
@@ -77,15 +99,84 @@ export default function Navbar() {
                             style={{objectFit: 'contain'}}
                         />
                     </span>
-                    <div className="hidden lg:flex space-x-4">
-                        <ul className="flex space-x-4 text-primary items-center">
-                            <li className="cursor-pointer" onClick={() => handleNavClick("top")}>Accueil</li>
-                            <li className="cursor-pointer" onClick={() => handleNavClick("skills")}>Compétences</li>
-                            <li className="cursor-pointer" onClick={() => handleNavClick("projects")}>Projets</li>
-                            <li className="cursor-pointer" onClick={() => handleNavClick("company")}>Mon entreprise</li>
-                            <li className="cursor-pointer" onClick={() => handleNavClick("contactUs")}>Contact</li>
+                    <div className="hidden lg:flex space-x-6">
+                        <ul className="flex text-primary items-center space-x-10">
+                            {/* Accueil Submenu */}
+                            <li className="group relative cursor-pointer">
+                                <span>Accueil</span>
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAcceuilNavClick("top")}
+                                    >
+                                        <span className="block py-4">Introduction</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAcceuilNavClick("skills")}
+                                    >
+                                        <span className="block py-4">Compétences</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAcceuilNavClick("projects")}
+                                    >
+                                        <span className="block py-4">Projets</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAcceuilNavClick("company")}
+                                    >
+                                        <span className="block py-4">Mon entreprise</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAcceuilNavClick("contactUs")}
+                                    >
+                                        <span className="block py-4">Contact</span>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {/* À propos Submenu */}
+                            <li className="group relative cursor-pointer">
+                                <span>À propos</span>
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAboutNavClick("aboutMe")}
+                                    >
+                                        <span className="block py-4">de moi</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAboutNavClick("aboutSite")}
+                                    >
+                                        <span className="block py-4">de ce site</span>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li className="group relative cursor-pointer">
+                                <span>Université</span>
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleUnivNavClick("formation")}
+                                    >
+                                        <span className="block py-4">Ma formation</span>
+                                    </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleUnivNavClick("university")}
+                                    >
+                                        <span className="block py-4">Mes projet</span>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
+
                     <div className="flex items-center space-x-2">
                         <button className="block lg:hidden" onClick={menuIsVisible}>
                             ☰
