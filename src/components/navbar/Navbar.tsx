@@ -69,7 +69,6 @@ export default function Navbar() {
     };
 
 
-
     const SignClick = () => {
         router.push("/sign");
     };
@@ -89,8 +88,10 @@ export default function Navbar() {
         >
             <nav className="mt-2">
                 <div className="flex justify-between items-center w-full px-4 md:px-8">
-                    <span className="flex items-center text-primary text-sm sm:text-lg md:text-2xl font-aquire">
-                        LEO TORRES
+                    <div className="flex">
+                        <p className="flex items-center text-primary text-sm sm:text-lg md:text-2xl font-aquire pr-2">
+                            LEO TORRES
+                        </p>
                         <Image
                             src={france}
                             alt='France Icon'
@@ -98,13 +99,13 @@ export default function Navbar() {
                             height={20}
                             style={{objectFit: 'contain'}}
                         />
-                    </span>
+                    </div>
                     <div className="hidden lg:flex space-x-6">
                         <ul className="flex text-primary items-center space-x-10">
                             {/* Accueil Submenu */}
                             <li className="group relative cursor-pointer">
                                 <span>Accueil</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
                                         onClick={() => handleAcceuilNavClick("top")}
@@ -141,25 +142,26 @@ export default function Navbar() {
                             {/* À propos Submenu */}
                             <li className="group relative cursor-pointer">
                                 <span>À propos</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
-                                    <li
-                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
-                                        onClick={() => handleAboutNavClick("aboutMe")}
-                                    >
-                                        <span className="block py-4">de moi</span>
-                                    </li>
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
                                         onClick={() => handleAboutNavClick("aboutSite")}
                                     >
                                         <span className="block py-4">de ce site</span>
                                     </li>
+                                    <li
+                                        className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
+                                        onClick={() => handleAboutNavClick("aboutMe")}
+                                    >
+                                        <span className="block py-4">de moi</span>
+                                    </li>
                                 </ul>
                             </li>
 
+                            {/* Université Submenu */}
                             <li className="group relative cursor-pointer">
                                 <span>Université</span>
-                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:flex flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-center">
+                                <ul className="absolute w-48 opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto flex-col bg-black/80 backdrop-blur-md text-white space-y-2 shadow-lg mt-2 transform scale-95 group-hover:scale-100 transition-all duration-300 ease-in-out delay-100 group-hover:delay-100 text-start">
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
                                         onClick={() => handleUnivNavClick("formation")}
@@ -170,7 +172,7 @@ export default function Navbar() {
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
                                         onClick={() => handleUnivNavClick("university")}
                                     >
-                                        <span className="block py-4">Mes projet</span>
+                                        <span className="block py-4">Mes projets</span>
                                     </li>
                                 </ul>
                             </li>
