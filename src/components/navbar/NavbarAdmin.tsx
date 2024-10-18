@@ -14,17 +14,8 @@ export default function NavbarAdmin() {
                 <div className="name flex justify-between items-center w-full px-4 md:px-8">
                     <span className="flex items-center text-primary text-xl md:text-2xl">
                         ADMINISTRATEUR
-                        <Image src='/assets/france-icon.jpg' alt='France Icon' width={20} height={20} />
                     </span>
                     <div className="flex items-center">
-                        <div className="hidden md:flex">
-                            <ul className="flex justify-between w-full items-center space-x-4 text-primary">
-                                <li><a href="/admin/home">Situation Actuelle</a></li>
-                                <li><a href="/admin/skills">Compétences</a></li>
-                                <li><a href="/admin/projects">Projets</a></li>
-                                <li><a href="/admin/contacts">Contacts</a></li>
-                            </ul>
-                        </div>
                         <button className="block md:hidden" onClick={toggleMenu}>
                             ☰
                         </button>
