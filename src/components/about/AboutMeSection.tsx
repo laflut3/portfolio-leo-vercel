@@ -11,17 +11,10 @@ export default function AboutMeSection() {
         <section id="aboutMe" className="relative h-screen bg-black overflow-hidden">
             <BackEtoile/>
 
-            <div className="absolute top-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
+            <div className="absolute top-0 left-0 right-0 h-[15vh] pointer-events-none z-10"
                  style={{
-                     background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
-                     backdropFilter: "blur(3px)"
-                 }}>
-            </div>
-
-            <div className="absolute bottom-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
-                 style={{
-                     background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
-                     backdropFilter: "blur(3px)"
+                     background: "linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8))",
+                     backdropFilter: "blur(10px)"
                  }}>
             </div>
 
