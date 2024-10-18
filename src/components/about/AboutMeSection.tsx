@@ -1,23 +1,11 @@
 import { motion } from "framer-motion";
 import React from "react";
+import BackEtoile from "@/components/utils/BackEtoile";
 
 export default function AboutMeSection() {
     return (
-        <section className="relative h-screen bg-black overflow-hidden">
-            <div className="absolute inset-0">
-                {Array.from({ length: 200 }).map((_, index) => (
-                    <span
-                        key={index}
-                        className="block rounded-full absolute bg-white opacity-80"
-                        style={{
-                            width: `${Math.random() * 3 + 1}px`,
-                            height: `${Math.random() * 3 + 1}px`,
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                        }}
-                    ></span>
-                ))}
-            </div>
+        <section id="aboutMe" className="relative h-screen bg-black overflow-hidden">
+            <BackEtoile/>
 
             {/* Dégradé très subtil avec flou en haut */}
             <div className="absolute top-0 left-0 right-0 h-[10vh] pointer-events-none z-10"

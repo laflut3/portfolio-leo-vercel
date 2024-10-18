@@ -5,7 +5,7 @@ import vercel from '@/../public/assets/image/logoDev/systeme/vercel.png'
 
 export default function AboutSite() {
     return (
-        <section className="relative min-h-screen bg-black w-full flex flex-col items-center justify-center px-4 lg:px-8 overflow-y-auto mt-16"> {/* Ajout de mt-16 */}
+        <section id="aboutSite" className="relative min-h-screen bg-black w-full flex flex-col items-center justify-center px-4 lg:px-8 overflow-y-auto mt-16"> {/* Ajout de mt-16 */}
             <h2 className="text-3xl lg:text-6xl font-bold text-white mb-8 text-center">
                 À propos de ce site
             </h2>
