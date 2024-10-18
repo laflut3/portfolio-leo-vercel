@@ -25,7 +25,7 @@ export default function AboutMeSection() {
 
             <div className="absolute inset-0 flex justify-center items-center">
                 <motion.div
-                    className="text-yellow-500 text-center space-y-4 text-xl leading-relaxed w-11/12 max-w-2xl z-0"
+                    className="text-yellow-500 text-center space-y-8 text-xl leading-relaxed w-1/2 z-0"
                     initial={{ y: "100%" }}
                     animate={{ y: "-100%" }}
                     transition={{ duration: 30, ease: "linear", repeat: Infinity }}
