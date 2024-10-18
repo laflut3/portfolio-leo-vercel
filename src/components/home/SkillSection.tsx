@@ -17,6 +17,7 @@ import OutilsSection from "@/components/home/SkillDiv/OutilsSection";
 import ManagementSection from "@/components/home/SkillDiv/ManagementSection";
 import ReseauSection from "@/components/home/SkillDiv/ReseauSection";
 import OtherOutilsSection from "@/components/home/SkillDiv/OtherOutilsSection";
+import BackEtoile from "@/components/utils/BackEtoile";
 
 function ScrollSection() {
     const sectionRef = useRef(null);
@@ -52,21 +53,7 @@ function ScrollSection() {
         <section id='skills' className="overflow-hidden">
             <div ref={triggerRef}>
                 <div ref={sectionRef} className="min-h-screen w-[900vw] flex flex-row relative">
-                    <div className="absolute inset-0">
-                        {Array.from({length: 200}).map((_, index) => (
-                            <span
-                                key={index}
-                                className="block rounded-full absolute bg-white opacity-80"
-                                style={{
-                                    width: `${Math.random() * 3 + 1}px`,
-                                    height: `${Math.random() * 3 + 1}px`,
-                                    top: `${Math.random() * 100}%`,
-                                    left: `${Math.random() * 100}%`,
-                                    animation: `twinkle ${Math.random() * 5 + 2}s infinite ease-in-out`,
-                                }}
-                            ></span>
-                        ))}
-                    </div>
+                    <BackEtoile/>
                     <div className={"min-h-screen w-36"}></div>
                     <SkillIntro/>
                     <WebSection/>

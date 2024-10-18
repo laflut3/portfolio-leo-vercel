@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useAnimation, useMotionValue, useTransform } from "framer-motion";
 import fleoLogo from "../../public/assets/image/fleo/fleo-logo.svg";
 import rocketImage from "../../public/assets/image/designIcon/rocket-icon.png";
+import BackEtoile from "@/components/utils/BackEtoile";
 
 export default function Preloader() {
     // État pour contrôler la visibilité du préchargeur
@@ -93,20 +94,7 @@ export default function Preloader() {
                 className="relative w-full h-full flex items-center justify-center bg-black"
                 animate={contentControls}
             >
-                <div className="absolute inset-0">
-                    {Array.from({ length: 200 }).map((_, index) => (
-                        <span
-                            key={index}
-                            className="block rounded-full absolute bg-white opacity-80"
-                            style={{
-                                width: `${Math.random() * 3 + 1}px`,
-                                height: `${Math.random() * 3 + 1}px`,
-                                top: `${Math.random() * 100}%`,
-                                left: `${Math.random() * 100}%`,
-                            }}
-                        ></span>
-                    ))}
-                </div>
+                <BackEtoile/>
 
                 {/* Conteneur pour le positionnement */}
                 <div
