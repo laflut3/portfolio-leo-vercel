@@ -1,13 +1,16 @@
-import { motion } from "framer-motion";
+"use client"
+
+import {motion} from "framer-motion";
 import React from "react";
 import BackEtoile from "@/components/utils/BackEtoile";
+import Image from "next/image";
+import leo from "@images/leo-photo2.svg"
 
 export default function AboutMeSection() {
     return (
         <section id="aboutMe" className="relative h-screen bg-black overflow-hidden">
             <BackEtoile/>
 
-            {/* Dégradé très subtil avec flou en haut */}
             <div className="absolute top-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
                  style={{
                      background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
@@ -15,7 +18,6 @@ export default function AboutMeSection() {
                  }}>
             </div>
 
-            {/* Dégradé très subtil avec flou en bas */}
             <div className="absolute bottom-0 left-0 right-0 h-[10vh] pointer-events-none z-10"
                  style={{
                      background: "linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
@@ -26,10 +28,10 @@ export default function AboutMeSection() {
             <div className="absolute inset-0 flex justify-center items-center">
                 <motion.div
                     className="text-yellow-500 text-center space-y-8 text-xl leading-relaxed w-1/2 z-0"
-                    initial={{ y: "100%" }}
-                    animate={{ y: "-100%" }}
-                    transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-                    style={{ transform: "rotateX(25deg)", perspective: "400px" }}
+                    initial={{y: "100%"}}
+                    animate={{y: "-100%"}}
+                    transition={{duration: 30, ease: "linear", repeat: Infinity}}
+                    style={{transform: "rotateX(25deg)", perspective: "400px"}}
                 >
                     <p>Bonjour, je me nomme Léo Torres.</p>
                     <p>
@@ -74,6 +76,9 @@ export default function AboutMeSection() {
                         qui représente simplement un résumé très court de ma vie, et que cela vous poussera à en
                         apprendre plus sur moi via ce portfolio.
                     </p>
+                    <div className={"w-full text-center flex justify-center"}>
+                        <Image src={leo} alt={"leo"} className={"w-1/4 h-auto rounded-full"} />
+                    </div>
                 </motion.div>
             </div>
         </section>
