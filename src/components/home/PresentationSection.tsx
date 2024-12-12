@@ -55,9 +55,11 @@ export default function PresentationSection() {
                     <h3 className="text-white text-xl md:text-2xl">Bienvenue sur mon portfolio</h3>
                 )}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-primary font-erasbold text-stroke w-full md:w-3/4 pt-6 md:pt-9 font-aquire">
-                Salut je suis Léo, Full Stack Developer
-            </h1>
+            <div className={"p-2 backdrop-blur"}>
+                <h1 className="text-4xl md:text-5xl font-bold text-primary font-erasbold text-stroke w-full md:w-3/4 pt-6 md:pt-9 font-aquire">
+                    Bonjour je suis Léo, Full Stack Developer
+                </h1>
+            </div>
             <div className="absolute bottom-10 left-0 p-4">
                 <button
                     className="text-primary text-lg md:text-xl p-2 rounded flex items-center"
