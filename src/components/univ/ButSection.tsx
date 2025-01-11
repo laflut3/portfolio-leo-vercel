@@ -1,13 +1,24 @@
 import Image from "next/image";
-import iut from "@images/IUT/logoIUT.png"
-import univ from "@images/IUT/logoUniv.png"
+import iut from "@images/IUT/logoIUT.png";
+import univ from "@images/IUT/logoUniv.png";
+import BackEtoile from "@/components/utils/BackEtoile";
+import React from "react";
 
 export default function ButSection() {
     return (
         <section
-            className="relative min-h-screen bg-black w-full flex flex-col items-center justify-center px-4 lg:px-8 overflow-y-auto mt-16"> {/* Ajout de mt-16 */}
-            <div className={"space-y-12"}>
-                <div className={"flex flex-col space-y-8 text-center justify-center text-xl"}>
+            className="relative min-h-screen bg-black w-full flex flex-col items-center justify-center px-4 lg:px-8 overflow-hidden mt-16">
+            <BackEtoile/>
+
+            <div className="flex flex-col items-center w-full max-w-6xl space-y-12">
+                {/* Titre */}
+                <h2 className="text-4xl lg:text-6xl font-extrabold text-white text-center mb-8">
+                    BUT Informatique
+                </h2>
+
+                {/* Contenu du texte */}
+                <div
+                    className="flex flex-col text-center text-gray-300 text-lg lg:text-xl space-y-6 lg:space-y-8 leading-relaxed">
                     <p>
                         Le BUT Informatique est une formation en trois ans offerte par les Instituts Universitaires
                         de Technologie (IUT) en France.
@@ -18,9 +29,7 @@ export default function ButSection() {
                         gestion de projets.
                     </p>
                     <p>
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         Les étudiants ont l'opportunité d'acquérir de l'expérience en entreprise grâce à des stages
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         et de mettre en pratique leurs compétences lors de projets de fin d'études.
                     </p>
                     <p>
@@ -29,15 +38,24 @@ export default function ButSection() {
                     </p>
                     <p>
                         Cette formation les dote de solides compétences techniques et les rend aptes à relever les
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
                         défis de l'informatique en constante évolution.
                     </p>
                 </div>
-                <div className={"flex w-full space-x-6 justify-center"}>
-                    <Image src={univ} alt={"univ"} className={"w-1/6"}/>
-                    <Image src={iut} alt={"iut"} className={"w-1/6 rounded-full p-2"}/>
+
+                {/* Logos */}
+                <div className="flex justify-center space-x-8">
+                    <Image src={univ} alt="Université"
+                           className="w-24 lg:w-32 opacity-90 hover:opacity-100 transition-all duration-300"/>
+                    <Image src={iut} alt="IUT Montpellier"
+                           className="w-24 lg:w-32 bg-white rounded-full p-2 hover:scale-110 transition-transform duration-300"/>
                 </div>
             </div>
+
+            {/* Dégradés Orangés */}
+            <div
+                className="absolute top-10 left-20 w-32 h-32 bg-gradient-to-r from-orange-400 to-yellow-500 rounded-full blur-xl animate-pulse"></div>
+            <div
+                className="absolute bottom-10 right-20 w-40 h-40 bg-gradient-to-r from-red-500 to-orange-600 rounded-full blur-lg animate-spin-slow"></div>
         </section>
     );
 }
