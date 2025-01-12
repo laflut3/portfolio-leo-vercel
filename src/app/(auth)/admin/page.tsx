@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import SectionAdminProjects from '@/components/admin/SectionAdminProjects';
+import SectionAdminProjects from '@/components/admin/Project/SectionAdminProjects';
 import Loader from '@/components/utils/Loader';
 import Image from "next/image";
+import AdminSAESection from "@/components/admin/SAE/AdminSAESection";
 
 const AdminPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true); // Gestion du chargement
@@ -20,6 +21,10 @@ const AdminPage: React.FC = () => {
 
     // Fonction pour gérer le clic sur un bouton d'administration
     const handleClickSection = (section: string) => {
+        setActiveSection(section);
+    };
+
+    const handleClickSAE = (section: string) => {
         setActiveSection(section);
     };
 
@@ -48,13 +53,18 @@ const AdminPage: React.FC = () => {
                     >
                         Projects
                     </button>
-                    {/* Ajouter d'autres boutons pour d'autres sections ici si nécessaire */}
+                    <button
+                        onClick={() => handleClickSAE('SAE')}
+                        className="bg-secondary px-12 hover:bg-secondary-dark text-white font-bold py-2 rounded"
+                    >
+                        SAE
+                    </button>
                 </div>
             )}
 
             {/* Affichage des sections en fonction de la section active */}
             {activeSection === 'projects' && (
-                <section className="min-h-screen mx-auto p-8 mt-[5%] rounded-lg space-y-4">
+                <div className="min-h-screen mx-auto p-8 mt-[5%] rounded-lg space-y-4">
                     <button
                         onClick={handleBackToAdminChoices}
                         className="mt-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
@@ -63,8 +73,20 @@ const AdminPage: React.FC = () => {
                     </button>
                     <SectionAdminProjects/>
 
-                </section>
+                </div>
             )}
+            {activeSection === 'SAE' && (
+                <div className="min-h-screen mx-auto p-8 mt-[5%] rounded-lg space-y-4 w-full">
+                    <button
+                        onClick={handleBackToAdminChoices}
+                        className="mt-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Retour aux choix d&apos;administration
+                    </button>
+                    <AdminSAESection/>
+                </div>
+            )}
+
             {/* Ajouter d'autres conditions pour d'autres sections ici */}
         </main>
     );
