@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/../Lib/MongoLib/mongodb';
 import SAE from '@/../Lib/SAELib/models/SAE';
+import {bufferToBase64} from "@/components/utils/convertBufferToBase64";
 
 export async function POST(request: Request) {
     await connectDB();
@@ -61,9 +62,10 @@ export async function GET() {
     await connectDB();
 
     try {
-        const projects = await SAE.find({});
+        const projects = await SAE.find();
         return NextResponse.json(projects, { status: 200 });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+

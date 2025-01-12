@@ -1,10 +1,14 @@
+'use client'
+
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import SAEItem from "@/components/admin/SAE/SAEItem";
+import EditSAEModal from "@/components/admin/SAE/EditSAEModal";
 
 interface Project {
     _id: string;
     titre: string;
     descriptionGenerale: string;
-    imageGenerale: File | null;
+    imageGenerale: ArrayBuffer; // Utilisation de ArrayBuffer pour correspondre au Buffer
     lien: string;
     type: string;
     annee?: string;
@@ -14,6 +18,7 @@ interface Project {
 
 export default function AdminSAESection() {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [editingProject, setEditingProject] = useState(null);
     const [newProject, setNewProject] = useState<{
         titre: string;
         descriptionGenerale: string;
@@ -113,6 +118,27 @@ export default function AdminSAESection() {
         } catch (error: any) {
             console.error("Erreur lors de la soumission:", error);
             setError(error.message || "Erreur inattendue.");
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        const response = await fetch(`/api/SAE/${id}`, { method: 'DELETE' });
+        if (response.ok) {
+            setProjects((prev) => prev.filter((project) => project._id !== id));
+        }
+    };
+
+    const handleUpdate = async (id: string, updatedProject: any) => {
+        const response = await fetch(`/api/SAE/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedProject),
+        });
+        if (response.ok) {
+            const updated = await response.json();
+            setProjects((prev) =>
+                prev.map((project) => (project._id === id ? updated : project))
+            );
         }
     };
 
@@ -251,60 +277,32 @@ export default function AdminSAESection() {
                 </div>
             </div>
 
+            return (
             <div className="bg-gray-800 p-10 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-semibold mb-6">Projets existants</h2>
                 {loading ? (
                     <p className="text-gray-400">Chargement...</p>
-                ) : projects.length > 0 ? (
+                ) : (
                     <ul className="space-y-8">
                         {projects.map((project) => (
-                            <li
+                            <SAEItem
                                 key={project._id}
-                                className="bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:border-blue-500 transition-all duration-300"
-                            >
-                                <details>
-                                    <summary className="cursor-pointer text-xl font-bold mb-4 text-blue-400">
-                                        {project.titre}
-                                    </summary>
-                                    <div className="mt-4 space-y-4">
-                                        <p className="text-gray-300"><strong>Description
-                                            :</strong> {project.descriptionGenerale}</p>
-                                        {project.note !== undefined && (
-                                            <p className="text-gray-300">
-                                                <strong>Note :</strong> {project.note}
-                                            </p>
-                                        )}
-                                        {project.annee && (
-                                            <p className="text-gray-300">
-                                                <strong>Année :</strong> {project.annee}
-                                            </p>
-                                        )}
-                                        {project.semestre && (
-                                            <p className="text-gray-300">
-                                                <strong>Semestre :</strong> {project.semestre}
-                                            </p>
-                                        )}
-                                        <p className="text-gray-300">
-                                            <strong>Type :</strong> {project.type}
-                                        </p>
-                                        <a
-                                            href={project.lien}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-blue-400 underline hover:text-blue-300"
-                                        >
-                                            Voir le projet
-                                        </a>
-                                    </div>
-                                </details>
-                            </li>
+                                project={project}
+                                onDelete={handleDelete}
+                                onEdit={setEditingProject}
+                            />
                         ))}
                     </ul>
-                ) : (
-                    <p className="text-gray-400">Aucun projet trouvé.</p>
+                )}
+                {editingProject && (
+                    <EditSAEModal
+                        project={editingProject}
+                        onClose={() => setEditingProject(null)}
+                        onUpdate={handleUpdate}
+                    />
                 )}
             </div>
-
+            );
         </section>
     );
 }
