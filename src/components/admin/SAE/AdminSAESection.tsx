@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import {useState, useEffect, ChangeEvent, FormEvent} from "react";
 import SAEItem from "@/components/admin/SAE/SAEItem";
-import EditSAEModal from "@/components/admin/SAE/EditSAEModal";
 
 interface Project {
     _id: string;
@@ -17,8 +16,6 @@ interface Project {
 }
 
 export default function AdminSAESection() {
-    const [projects, setProjects] = useState<Project[]>([]);
-    const [editingProject, setEditingProject] = useState(null);
     const [newProject, setNewProject] = useState<{
         titre: string;
         descriptionGenerale: string;
@@ -38,8 +35,13 @@ export default function AdminSAESection() {
         semestre: "",
         note: undefined,
     });
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [editingProject, setEditingProject] = useState<Project | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [newImage, setNewImage] = useState<File | null>(null);
+
 
     useEffect(() => {
         fetchProjects();
@@ -63,13 +65,28 @@ export default function AdminSAESection() {
     const handleInputChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
+        if (!editingProject) return;
         const { name, value, files } = e.target as HTMLInputElement;
-        if (name === "imageGenerale" && files?.length) {
-            setNewProject((prev) => ({ ...prev, [name]: files[0] }));
+        if (name === 'imageGenerale' && files?.length) {
+            setNewImage(files[0]);
         } else {
-            setNewProject((prev) => ({ ...prev, [name]: value }));
+            setEditingProject({ ...editingProject, [name]: value });
         }
     };
+
+    const handleNewInputChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value, files } = e.target as HTMLInputElement;
+
+        if (name === 'imageGenerale' && files?.length) {
+            setNewProject((prev) => ({ ...prev, imageGenerale: files[0] })); // Met à jour le fichier
+        } else {
+            setNewProject((prev) => ({ ...prev, [name]: value })); // Met à jour les autres champs
+        }
+    };
+
+
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -122,24 +139,47 @@ export default function AdminSAESection() {
     };
 
     const handleDelete = async (id: string) => {
-        const response = await fetch(`/api/SAE/${id}`, { method: 'DELETE' });
+        const response = await fetch(`/api/SAE/${id}`, {method: 'DELETE'});
         if (response.ok) {
             setProjects((prev) => prev.filter((project) => project._id !== id));
         }
     };
 
-    const handleUpdate = async (id: string, updatedProject: any) => {
-        const response = await fetch(`/api/SAE/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedProject),
-        });
-        if (response.ok) {
-            const updated = await response.json();
-            setProjects((prev) =>
-                prev.map((project) => (project._id === id ? updated : project))
-            );
+    const handleEditSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        if (!editingProject) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('titre', editingProject.titre);
+            formData.append('descriptionGenerale', editingProject.descriptionGenerale);
+            formData.append('lien', editingProject.lien);
+            formData.append('type', editingProject.type);
+            if (editingProject.annee) formData.append('annee', editingProject.annee);
+            if (editingProject.semestre) formData.append('semestre', editingProject.semestre);
+            if (editingProject.note !== undefined) formData.append('note', editingProject.note.toString());
+            if (newImage) formData.append('imageGenerale', newImage);
+
+            const response = await fetch(`/api/SAE/${editingProject._id}`, {
+                method: 'PATCH',
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error('Erreur lors de la modification du projet');
+            setIsPopupOpen(false);
+            setEditingProject(null);
+            fetchProjects();
+        } catch (err) {
+            console.error(err);
+            setError('Erreur lors de la modification du projet.');
         }
+    };
+
+
+    const handleEditClick = (project: Project) => {
+        setEditingProject(project);
+        setNewImage(null);
+        setIsPopupOpen(true);
     };
 
     return (
@@ -158,19 +198,20 @@ export default function AdminSAESection() {
                                 id="titre"
                                 name="titre"
                                 value={newProject.titre}
-                                onChange={handleInputChange}
+                                onChange={handleNewInputChange}
                                 className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             />
                         </div>
 
                         <div>
-                            <label htmlFor="descriptionGenerale" className="block font-medium mb-2">Description Générale</label>
+                            <label htmlFor="descriptionGenerale" className="block font-medium mb-2">Description
+                                Générale</label>
                             <textarea
                                 id="descriptionGenerale"
                                 name="descriptionGenerale"
                                 value={newProject.descriptionGenerale}
-                                onChange={handleInputChange}
+                                onChange={handleNewInputChange}
                                 className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             ></textarea>
@@ -182,7 +223,7 @@ export default function AdminSAESection() {
                                 type="file"
                                 id="imageGenerale"
                                 name="imageGenerale"
-                                onChange={handleInputChange}
+                                onChange={handleNewInputChange}
                                 className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 accept="image/*"
                                 required
@@ -196,7 +237,7 @@ export default function AdminSAESection() {
                                 id="lien"
                                 name="lien"
                                 value={newProject.lien}
-                                onChange={handleInputChange}
+                                onChange={handleNewInputChange}
                                 className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             />
@@ -208,7 +249,7 @@ export default function AdminSAESection() {
                                 id="type"
                                 name="type"
                                 value={newProject.type}
-                                onChange={handleInputChange}
+                                onChange={handleNewInputChange}
                                 className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             >
@@ -225,7 +266,7 @@ export default function AdminSAESection() {
                                         id="annee"
                                         name="annee"
                                         value={newProject.annee}
-                                        onChange={handleInputChange}
+                                        onChange={handleNewInputChange}
                                         className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     >
                                         <option value="">Sélectionner une année</option>
@@ -241,7 +282,7 @@ export default function AdminSAESection() {
                                         id="semestre"
                                         name="semestre"
                                         value={newProject.semestre}
-                                        onChange={handleInputChange}
+                                        onChange={handleNewInputChange}
                                         className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     >
                                         <option value="">Sélectionner un semestre</option>
@@ -257,7 +298,7 @@ export default function AdminSAESection() {
                                         id="note"
                                         name="note"
                                         value={newProject.note || ""}
-                                        onChange={handleInputChange}
+                                        onChange={handleNewInputChange}
                                         className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         min="0"
                                         max="20"
@@ -276,8 +317,6 @@ export default function AdminSAESection() {
                     </form>
                 </div>
             </div>
-
-            return (
             <div className="bg-gray-800 p-10 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-semibold mb-6">Projets existants</h2>
                 {loading ? (
@@ -289,20 +328,145 @@ export default function AdminSAESection() {
                                 key={project._id}
                                 project={project}
                                 onDelete={handleDelete}
-                                onEdit={setEditingProject}
+                                onEdit={handleEditClick}
                             />
                         ))}
                     </ul>
                 )}
-                {editingProject && (
-                    <EditSAEModal
-                        project={editingProject}
-                        onClose={() => setEditingProject(null)}
-                        onUpdate={handleUpdate}
-                    />
-                )}
             </div>
-            );
+            {isPopupOpen && editingProject && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-gray-800 p-6 rounded-lg max-w-md w-full shadow-lg">
+                        <h2 className="text-2xl font-bold mb-4 text-white">Modifier le projet</h2>
+                        <form onSubmit={handleEditSubmit}>
+                            <div>
+                                <label htmlFor="titre" className="block font-medium text-white mb-2">Titre</label>
+                                <input
+                                    type="text"
+                                    id="titre"
+                                    name="titre"
+                                    value={editingProject.titre}
+                                    onChange={handleInputChange}
+                                    className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="descriptionGenerale" className="block font-medium text-white mb-2">
+                                    Description Générale
+                                </label>
+                                <textarea
+                                    id="descriptionGenerale"
+                                    name="descriptionGenerale"
+                                    value={editingProject.descriptionGenerale}
+                                    onChange={handleInputChange}
+                                    className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="lien" className="block font-medium text-white mb-2">Lien</label>
+                                <input
+                                    type="url"
+                                    id="lien"
+                                    name="lien"
+                                    value={editingProject.lien}
+                                    onChange={handleInputChange}
+                                    className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="type" className="block font-medium text-white mb-2">Type de Projet</label>
+                                <select
+                                    id="type"
+                                    name="type"
+                                    value={editingProject.type}
+                                    onChange={handleInputChange}
+                                    className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required
+                                >
+                                    <option value="universitaire">Universitaire</option>
+                                    <option value="perso">Personnel</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="imageGenerale" className="block font-medium text-white mb-2">Nouvelle Image</label>
+                                <input
+                                    type="file"
+                                    id="imageGenerale"
+                                    name="imageGenerale"
+                                    onChange={handleInputChange}
+                                    className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    accept="image/*"
+                                />
+                            </div>
+                            {editingProject.type === 'universitaire' && (
+                                <>
+                                    <div>
+                                        <label htmlFor="annee" className="block font-medium text-white mb-2">Année</label>
+                                        <select
+                                            id="annee"
+                                            name="annee"
+                                            value={editingProject.annee || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">Sélectionner une année</option>
+                                            <option value="annee 1">Année 1</option>
+                                            <option value="annee 2">Année 2</option>
+                                            <option value="annee 3">Année 3</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="semestre" className="block font-medium text-white mb-2">Semestre</label>
+                                        <select
+                                            id="semestre"
+                                            name="semestre"
+                                            value={editingProject.semestre || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">Sélectionner un semestre</option>
+                                            <option value="S1">Semestre 1</option>
+                                            <option value="S2">Semestre 2</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label htmlFor="note" className="block font-medium text-white mb-2">Note</label>
+                                        <input
+                                            type="number"
+                                            id="note"
+                                            name="note"
+                                            value={editingProject.note || ''}
+                                            onChange={handleInputChange}
+                                            className="w-full p-4 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            min="0"
+                                            max="20"
+                                            step="0.1"
+                                        />
+                                    </div>
+                                </>
+                            )}
+                            <div className="mt-4 flex justify-end gap-4">
+                                <button
+                                    type="button"
+                                    className="py-2 px-4 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-400"
+                                    onClick={() => setIsPopupOpen(false)}
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="py-2 px-4 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-500"
+                                >
+                                    Sauvegarder
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

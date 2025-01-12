@@ -1,12 +1,12 @@
-import React from 'react';
-import { convertBufferToBase64 } from '@/components/utils/convertBufferToBase64';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface SAEItemProps {
     project: {
         _id: string;
         titre: string;
         descriptionGenerale: string;
-        imageGenerale: ArrayBuffer; // Le `Buffer` reçu depuis la base de données
+        imageGenerale: ArrayBuffer;
         lien: string;
         type: string;
         annee?: string;
@@ -18,7 +18,16 @@ interface SAEItemProps {
 }
 
 const SAEItem: React.FC<SAEItemProps> = ({ project, onDelete, onEdit }) => {
-    const image = `data:image/png;base64,${Buffer.from(project.imageGenerale ).toString('base64')}`
+    const [image, setImage] = useState<string>('');
+
+    useEffect(() => {
+        if (project.imageGenerale) {
+            const base64Image = `data:image/png;base64,${Buffer.from(
+                project.imageGenerale
+            ).toString('base64')}`;
+            setImage(base64Image);
+        }
+    }, [project.imageGenerale]);
 
     return (
         <li className="bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:border-blue-500 transition-all duration-300">
@@ -48,15 +57,14 @@ const SAEItem: React.FC<SAEItemProps> = ({ project, onDelete, onEdit }) => {
                     <p className="text-gray-300">
                         <strong>Type :</strong> {project.type}
                     </p>
-                    {project.imageGenerale && (
+                    {image && (
                         <div>
-                            <p className="text-gray-300">
-                                <strong>Image Générale :</strong>
-                            </p>
-                            <img
+                            <Image
                                 src={image}
                                 alt={`${project.titre} image`}
-                                className="w-1/12 h-auto rounded-lg shadow-md"
+                                width={150}
+                                height={150}
+                                className="rounded-lg shadow-md"
                             />
                         </div>
                     )}

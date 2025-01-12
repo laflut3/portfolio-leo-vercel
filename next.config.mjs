@@ -6,6 +6,9 @@ const nextConfig = {
     rules: {
         "react/no-unescaped-entities": "off",
     },
+    api: {
+        bodyParser: false,
+    },
 };
 
 export default nextConfig;

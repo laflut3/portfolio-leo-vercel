@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/../Lib/MongoLib/mongodb';
 import SAE from '@/../Lib/SAELib/models/SAE';
-import {bufferToBase64} from "@/components/utils/convertBufferToBase64";
 
 export async function POST(request: Request) {
     await connectDB();
