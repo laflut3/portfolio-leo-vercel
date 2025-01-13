@@ -58,13 +58,13 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-    await connectDB();
-
     try {
-        const projects = await SAE.find();
-        return NextResponse.json(projects, { status: 200 });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        await connectDB();
+        const projects = await SAE.find({}); // Récupérer tous les projets
+        return NextResponse.json(projects);
+    } catch (error) {
+        console.error('Erreur lors de la récupération des projets:', error);
+        return NextResponse.json({ error: 'Erreur interne du serveur.' }, { status: 500 });
     }
 }
 

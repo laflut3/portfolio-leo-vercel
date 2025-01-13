@@ -1,12 +1,20 @@
+// src/app/not-found.tsx
+
 export default function NotFound() {
     return (
-        <main className="h-screen">
-            <div className="flex flex-col space-y-16 items-center justify-center h-full w-full">
-                <h2 className="text-8xl text-stroke-white font-lazy-dog text-blue-500">
-                    404 - Not Found
-                </h2>
-                <p className={"text-4xl"}>Could not find the page you were looking for.</p>
+        <section className="py-12 px-6 bg-gradient-to-b from-black via-gray-900 to-black text-white">
+            <div className="text-center">
+                <h1 className="text-4xl font-bold text-yellow-500 mb-6">404 - Produit non trouvé</h1>
+                <p className="text-gray-300">
+                    404 page introuvable
+                </p>
+                <a
+                    href="/"
+                    className="inline-block mt-6 px-6 py-3 bg-yellow-500 text-black rounded-lg hover:bg-yellow-400 transition"
+                >
+                    Retour à l'accueil
+                </a>
             </div>
-        </main>
+        </section>
     );
 }

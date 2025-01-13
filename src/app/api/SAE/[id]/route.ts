@@ -88,3 +88,21 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+    try {
+        await connectDB();
+        const { id } = params;
+
+        const sae = await SAE.findById(id);
+        if (!sae) {
+            return NextResponse.json({ error: 'Produit non trouvé' }, { status: 404 });
+        }
+
+        return NextResponse.json(sae);
+    } catch (error) {
+        console.error('Erreur lors de la récupération du produit:', error);
+        return NextResponse.json({ error: 'Erreur interne du serveur' }, { status: 500 });
+    }
+}
+
