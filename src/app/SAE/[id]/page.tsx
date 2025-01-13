@@ -1,9 +1,6 @@
 import { notFound } from 'next/navigation';
+import { getSession } from 'next-auth/react';
 import ClientSAEPage from "@/components/SAE/ClientSAEPage";
-
-interface SAEDetailProps {
-    params: { id: string };
-}
 
 async function fetchSAEById(id: string) {
     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/SAE/${id}`, { cache: 'no-store' });
@@ -13,16 +10,20 @@ async function fetchSAEById(id: string) {
     return response.json();
 }
 
-export default async function SAEPage({ params }: SAEDetailProps) {
-    const { id } = params;
+export default async function SAEPage({ params }: { params: { id: string } }) {
+    const { id } = params; // Récupère l'ID depuis la route dynamique
     const sae = await fetchSAEById(id);
 
     if (!sae) {
-        notFound(); // Redirige vers une page 404 si le produit n'existe pas
+        notFound(); // Redirige vers une page 404 si l'objet SAE n'est pas trouvé
     }
+
+    const session = await getSession(); // Récupère les informations de l'utilisateur connecté
 
     return (
         <ClientSAEPage
+            id={id}
+            isAdmin={session?.user?.isAdmin || false} // Passe l'état administrateur
             titre={sae.titre}
             descriptionGenerale={sae.descriptionGenerale}
             note={sae.note}
@@ -31,7 +32,7 @@ export default async function SAEPage({ params }: SAEDetailProps) {
             semestre={sae.semestre}
             lien={sae.lien}
             imageGenerale={sae.imageGenerale}
-            section={sae.section} // Ajoute les sections ici
+            section={sae.section}
         />
     );
 }

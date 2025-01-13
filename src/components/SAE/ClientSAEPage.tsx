@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import {useSession} from "next-auth/react";
 
 interface Section {
     texte?: string;
@@ -9,6 +10,8 @@ interface Section {
 }
 
 interface ClientSAEProps {
+    isAdmin: boolean; // Indique si l'utilisateur est administrateur
+    id: string; // ID du SAE
     titre: string;
     descriptionGenerale: string;
     note?: number;
@@ -21,6 +24,7 @@ interface ClientSAEProps {
 }
 
 export default function ClientSAEPage({
+                                          id,
                                           titre,
                                           descriptionGenerale,
                                           note,
@@ -29,10 +33,15 @@ export default function ClientSAEPage({
                                           semestre,
                                           lien,
                                           imageGenerale,
-                                          section = [], // Par défaut, un tableau vide
+                                          section = [],
                                       }: ClientSAEProps) {
     const [image, setImage] = useState<string>('');
     const [sectionImages, setSectionImages] = useState<string[]>([]);
+    const [sections, setSections] = useState<Section[]>(section);
+
+    const [newSectionTexte, setNewSectionTexte] = useState<string>(''); // Texte pour la nouvelle section
+    const [newSectionImage, setNewSectionImage] = useState<File | null>(null); // Image pour la nouvelle section
+    const session = useSession().data?.user;
 
     useEffect(() => {
         if (imageGenerale) {
@@ -40,7 +49,6 @@ export default function ClientSAEPage({
             setImage(base64Image);
         }
 
-        // Convertir les images des sections en Base64
         if (section.length > 0) {
             const images = section
                 .map((sec) =>
@@ -48,19 +56,56 @@ export default function ClientSAEPage({
                         ? `data:image/png;base64,${Buffer.from(sec.image.data).toString('base64')}`
                         : null
                 )
-                .filter((img): img is string => img !== null); // Filtre les nulls et garde uniquement les strings
+                .filter((img): img is string => img !== null);
             setSectionImages(images);
         }
     }, [imageGenerale, section]);
 
+    // Ajouter une section
+    const handleAddSection = async () => {
+        if (!newSectionTexte && !newSectionImage) {
+            alert('Veuillez remplir le texte ou ajouter une image pour la nouvelle section.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('texte', newSectionTexte);
+        if (newSectionImage) formData.append('image', newSectionImage);
+
+        const response = await fetch(`/api/SAE/${id}/section`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setSections(data.sae.section);
+            setNewSectionTexte('');
+            setNewSectionImage(null);
+        } else {
+            alert('Erreur lors de l\'ajout de la section.');
+        }
+    };
 
     return (
         <section className="py-16 px-6 bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white min-h-screen mt-16">
-            <div className="max-w-5xl mx-auto bg-gray-800 p-10 rounded-lg shadow-2xl transform transition-all hover:scale-105">
+            <div className="max-w-5xl mx-auto bg-gray-800 p-10 rounded-lg shadow-2xl">
                 {/* Titre */}
-                <h1 className="text-4xl font-extrabold text-yellow-500 mb-8 text-center">
-                    {titre}
-                </h1>
+                <div className={"flex w-full justify-between items-center mb-10"}>
+                    <h1 className="text-4xl font-extrabold text-yellow-500 mb-8">{titre}</h1>
+
+                    {image && (
+                        <div className="mt-12">
+                            <Image
+                                src={image}
+                                alt={titre}
+                                className="rounded-lg shadow-lg mx-auto max-w-full object-contain"
+                                width={200}
+                                height={150}
+                            />
+                        </div>
+                    )}
+                </div>
 
                 {/* Description générale */}
                 <p className="text-gray-300 text-lg leading-relaxed mb-8">{descriptionGenerale}</p>
@@ -103,25 +148,12 @@ export default function ClientSAEPage({
                     </a>
                 </div>
 
-                {/* Image principale */}
-                {image && (
-                    <div className="mt-12">
-                        <Image
-                            src={image}
-                            alt={titre}
-                            className="rounded-lg shadow-lg mx-auto max-w-full object-contain"
-                            width={400}
-                            height={300}
-                        />
-                    </div>
-                )}
-
                 {/* Sections */}
-                {section.length > 0 && (
+                {sections.length > 0 && (
                     <div className="mt-16">
                         <h2 className="text-2xl font-bold text-yellow-500 mb-6 text-center">Sections</h2>
                         <div className="space-y-8">
-                            {section.map((sec, index) => (
+                            {sections.map((sec, index) => (
                                 <div
                                     key={index}
                                     className="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center"
@@ -146,6 +178,33 @@ export default function ClientSAEPage({
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Formulaire d'ajout de section pour les administrateurs */}
+                {session?.isAdmin && (
+                    <div className="mt-16 bg-gray-700 p-6 rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-bold text-yellow-500 mb-6">Ajouter une Section</h2>
+                        <div className="space-y-4">
+                            <textarea
+                                value={newSectionTexte}
+                                onChange={(e) => setNewSectionTexte(e.target.value)}
+                                placeholder="Texte de la section"
+                                className="w-full p-4 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            />
+                            <input
+                                type="file"
+                                onChange={(e) => setNewSectionImage(e.target.files?.[0] || null)}
+                                accept="image/*"
+                                className="w-full p-4 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            />
+                            <button
+                                onClick={handleAddSection}
+                                className="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg shadow-md"
+                            >
+                                Ajouter la Section
+                            </button>
                         </div>
                     </div>
                 )}
