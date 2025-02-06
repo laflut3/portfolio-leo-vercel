@@ -185,7 +185,7 @@ export default function Navbar() {
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"
                                         onClick={() => handleAcceuilNavClick('projects')}
                                     >
-                                        <span className="block py-2">Projets</span>
+                                        <span className="block py-2">Réalisations de Fleo</span>
                                     </li>
                                     <li
                                         className="cursor-pointer hover:bg-white hover:text-black p-2 rounded w-full"

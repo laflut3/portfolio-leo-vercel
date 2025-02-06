@@ -81,7 +81,7 @@ const MenuBurger: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                             <span>Compétences</span>
                         </li>
                         <li className="cursor-pointer hover:bg-gray-800 p-2 rounded-md transition-all" onClick={() => handlePageNavClick('projects', '/')}>
-                            <span>Projets</span>
+                            <span>Réalisations de Fleo</span>
                         </li>
                         <li className="cursor-pointer hover:bg-gray-800 p-2 rounded-md transition-all" onClick={() => handlePageNavClick('company', '/')}>
                             <span>Mon entreprise</span>

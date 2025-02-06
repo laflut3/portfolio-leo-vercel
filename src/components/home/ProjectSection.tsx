@@ -72,7 +72,7 @@ const ProjectSection: React.FC = () => {
             <div className="relative z-10 w-full flex flex-col items-center justify-center px-4 sm:px-8">
                 {/* Title */}
                 <h1 className="w-full text-4xl sm:text-6xl md:text-7xl lg:text-8xl p-6 mb-8 font-aquire text-center">
-                    Mes projets
+                    Les Réalisations de Fleo
                 </h1>
 
                 {/* Filter Bar */}
