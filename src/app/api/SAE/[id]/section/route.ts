@@ -1,4 +1,4 @@
-import {NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 import {connectDB} from '@/../Lib/MongoLib/mongodb';
 import SAE from '@/../Lib/SAELib/models/SAE';
 
@@ -49,61 +49,64 @@ export async function POST(request: Request, { params }: { params: { id: string 
     }
 }
 
-/**
- * Modifier une section d'un SAE.
- */
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
-    const body = await request.json();
+export async function PATCH(
+    req: NextRequest,
+    { params }: { params: { id: string; index: string } }
+) {
+    const { id, index } = params; // Récupération de l'ID du SAE et l'index de la section
+    const parsedIndex = parseInt(index, 10); // Convertir l'index en nombre
 
-    try {
-        const sae = await SAE.findById(id);
-        if (!sae) {
-            return NextResponse.json({ error: 'SAE introuvable.' }, { status: 404 });
-        }
-
-        // Modifier la section spécifique
-        const sectionIndex = sae.section.findIndex((_ : any, index : any) => index === body.index);
-        if (sectionIndex === -1) {
-            return NextResponse.json({ error: 'Section introuvable.' }, { status: 404 });
-        }
-
-        if (body.texte) {
-            sae.section[sectionIndex].texte = body.texte;
-        }
-
-        if (body.image) {
-            sae.section[sectionIndex].image = body.image;
-        }
-
-        await sae.save();
-        return NextResponse.json({ message: 'Section modifiée avec succès.', sae });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ error: 'Erreur lors de la modification de la section.' }, { status: 500 });
+    if (isNaN(parsedIndex)) {
+        return NextResponse.json(
+            { error: 'Index invalide, veuillez fournir un entier.' },
+            { status: 400 }
+        );
     }
-}
-
-/**
- * Supprimer une section d'un SAE.
- */
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
-    const body = await request.json();
 
     try {
+        // Récupérer les données de la requête
+        const formData = await req.formData();
+        const updatedTexte = formData.get('texte')?.toString() || null;
+        const updatedImage = formData.get('image') as File | null;
+
+        // Charger le SAE correspondant
         const sae = await SAE.findById(id);
         if (!sae) {
-            return NextResponse.json({ error: 'SAE introuvable.' }, { status: 404 });
+            return NextResponse.json(
+                { error: `Aucun SAE trouvé avec l'ID : ${id}` },
+                { status: 404 }
+            );
         }
 
-        // Supprime la section spécifique
-        sae.section = sae.section.filter((_ : any, index : any) => index !== body.index);
+        // Vérifier si l'index de la section est valide
+        if (parsedIndex < 0 || parsedIndex >= sae.section.length) {
+            return NextResponse.json(
+                { error: `Aucune section trouvée à l'index : ${index}` },
+                { status: 404 }
+            );
+        }
+
+        // Mettre à jour la section spécifique
+        if (updatedTexte) {
+            sae.section[parsedIndex].texte = updatedTexte;
+        }
+
+        if (updatedImage) {
+            sae.section[parsedIndex].image = Buffer.from(await updatedImage.arrayBuffer());
+        }
+
+        // Sauvegarder les modifications
         await sae.save();
 
-        return NextResponse.json({ message: 'Section supprimée avec succès.', sae });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json({ error: 'Erreur lors de la suppression de la section.' }, { status: 500 });
+        return NextResponse.json({
+            message: 'Section mise à jour avec succès.',
+            sae,
+        });
+    } catch (error: any) {
+        console.error('Erreur lors de la mise à jour de la section :', error);
+        return NextResponse.json(
+            { error: 'Erreur interne du serveur.' },
+            { status: 500 }
+        );
     }
 }

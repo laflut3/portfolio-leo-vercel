@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import {useSession} from "next-auth/react";
+import { useSession } from 'next-auth/react';
 
 interface Section {
     texte?: string;
@@ -39,8 +39,13 @@ export default function ClientSAEPage({
     const [sectionImages, setSectionImages] = useState<string[]>([]);
     const [sections, setSections] = useState<Section[]>(section);
 
-    const [newSectionTexte, setNewSectionTexte] = useState<string>(''); // Texte pour la nouvelle section
-    const [newSectionImage, setNewSectionImage] = useState<File | null>(null); // Image pour la nouvelle section
+    const [newSectionTexte, setNewSectionTexte] = useState<string>('');
+    const [newSectionImage, setNewSectionImage] = useState<File | null>(null);
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+    const [editIndex, setEditIndex] = useState<number | null>(null);
+    const [editSectionTexte, setEditSectionTexte] = useState<string>('');
+    const [editSectionImage, setEditSectionImage] = useState<File | null>(null);
+
     const session = useSession().data?.user;
 
     useEffect(() => {
@@ -61,7 +66,6 @@ export default function ClientSAEPage({
         }
     }, [imageGenerale, section]);
 
-    // Ajouter une section
     const handleAddSection = async () => {
         if (!newSectionTexte && !newSectionImage) {
             alert('Veuillez remplir le texte ou ajouter une image pour la nouvelle section.');
@@ -87,11 +91,57 @@ export default function ClientSAEPage({
         }
     };
 
+    const handleDeleteSection = async (index: number) => {
+        try {
+            const response = await fetch(`/api/SAE/${id}/section/${index}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setSections(data.sae.section); // Met à jour les sections
+            } else {
+                const errorData = await response.json();
+                console.error('Erreur API :', errorData.error);
+                alert(`Erreur : ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error('Erreur lors de la suppression :', error);
+            alert('Erreur réseau ou serveur.');
+        }
+    };
+
+    const handleEditSectionSubmit = async () => {
+        if (editIndex === null) return;
+
+        const formData = new FormData();
+        formData.append('texte', editSectionTexte);
+        if (editSectionImage) {
+            formData.append('image', editSectionImage);
+        }
+
+        const response = await fetch(`/api/SAE/${id}/section/${editIndex}`, {
+            method: 'PUT',
+            body: formData,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setSections(data.sae.section); // Mettre à jour les sections
+            setIsEditing(false);
+            setEditIndex(null);
+            setEditSectionTexte('');
+            setEditSectionImage(null);
+        } else {
+            alert('Erreur lors de la modification de la section.');
+        }
+    };
+
     return (
         <section className="py-16 px-6 bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white min-h-screen mt-16">
-            <div className="max-w-5xl mx-auto bg-gray-800 p-10 rounded-lg shadow-2xl">
+            <div className="mx-auto bg-gray-800 p-10 rounded-lg shadow-2xl">
                 {/* Titre */}
-                <div className={"flex w-full justify-between items-center mb-10"}>
+                <div className="flex w-full justify-between items-center mb-10">
                     <h1 className="text-4xl font-extrabold text-yellow-500 mb-8">{titre}</h1>
 
                     {image && (
@@ -156,10 +206,13 @@ export default function ClientSAEPage({
                             {sections.map((sec, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gray-700 p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center"
+                                    className={`bg-gray-700 p-6 rounded-lg shadow-md flex flex-col ${
+                                        index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                                    } items-center`}
                                 >
+                                    {/* Image */}
                                     {sec.image && sectionImages[index] && (
-                                        <div className="mb-4 md:mb-0 md:mr-6 flex-shrink-0">
+                                        <div className="mb-4 md:mb-0 md:mr-6 md:ml-6 flex-shrink-0">
                                             <Image
                                                 src={sectionImages[index]}
                                                 alt={`Section ${index + 1}`}
@@ -169,11 +222,35 @@ export default function ClientSAEPage({
                                             />
                                         </div>
                                     )}
-                                    <div>
+
+                                    {/* Texte */}
+                                    <div className="flex-grow">
                                         {sec.texte && (
-                                            <p className="text-gray-300 text-lg leading-relaxed">
+                                            <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-line">
                                                 {sec.texte}
                                             </p>
+                                        )}
+
+                                        {/* Boutons pour l'admin */}
+                                        {session?.isAdmin && (
+                                            <div className="flex space-x-4 mt-4">
+                                                <button
+                                                    onClick={() => handleDeleteSection(index)}
+                                                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg shadow-md"
+                                                >
+                                                    Supprimer
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        setEditIndex(index);
+                                                        setEditSectionTexte(sec.texte || '');
+                                                        setIsEditing(true);
+                                                    }}
+                                                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md"
+                                                >
+                                                    Modifier
+                                                </button>
+                                            </div>
                                         )}
                                     </div>
                                 </div>
@@ -205,6 +282,43 @@ export default function ClientSAEPage({
                             >
                                 Ajouter la Section
                             </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Modale de modification */}
+                {isEditing && (
+                    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                        <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full">
+                            <h2 className="text-2xl font-bold text-yellow-500 mb-4">Modifier la Section</h2>
+                            <div className="space-y-4">
+                                <textarea
+                                    value={editSectionTexte}
+                                    onChange={(e) => setEditSectionTexte(e.target.value)}
+                                    placeholder="Texte de la section"
+                                    className="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                />
+                                <input
+                                    type="file"
+                                    onChange={(e) => setEditSectionImage(e.target.files?.[0] || null)}
+                                    accept="image/*"
+                                    className="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                                />
+                                <div className="flex space-x-4">
+                                    <button
+                                        onClick={handleEditSectionSubmit}
+                                        className="w-full py-4 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded-lg shadow-md"
+                                    >
+                                        Enregistrer
+                                    </button>
+                                    <button
+                                        onClick={() => setIsEditing(false)}
+                                        className="w-full py-4 bg-gray-500 hover:bg-gray-400 text-white font-bold rounded-lg shadow-md"
+                                    >
+                                        Annuler
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}

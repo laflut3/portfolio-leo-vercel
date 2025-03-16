@@ -7,7 +7,7 @@ export interface SAEDocument {
     section?: {
         texte?: string;
         image?: Buffer;
-    }[]; // Tableau de sections optionnelles
+    }[];
     lien: string;
     type: string; // Universitaire, Personnel, etc.
     annee?: string; // Exemple : "annee 1", "annee 2", "annee 3"
