@@ -5,6 +5,8 @@ import "../styles/global.css";
 import {Provider} from "@/app/provider";
 import FlashMessage from "@/components/utils/FlashMessage";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
@@ -84,6 +86,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         </head>
         <body className="font-akaya" suppressHydrationWarning={true}>
         <Analytics />
+        <SpeedInsights/>
         <Provider>
             <ClientNavbar/>
             {children}
