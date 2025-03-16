@@ -8,7 +8,6 @@ import SkillSection from "@/components/home/SkillSection";
 import ProjectSection from "@/components/home/ProjectSection";
 import PresentationSection from "@/components/home/PresentationSection";
 
-const TWELVE_HOURS = 12 * 60 * 60 * 1000; // 12 heures en millisecondes
 export default function HomePage() {
     const [preloaderVisible, setPreloaderVisible] = useState(false);
 
