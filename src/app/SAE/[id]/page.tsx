@@ -24,15 +24,7 @@ export default async function SAEPage({ params }: { params: { id: string } }) {
         <ClientSAEPage
             id={id}
             isAdmin={session?.user?.isAdmin || false} // Passe l'état administrateur
-            titre={sae.titre}
-            descriptionGenerale={sae.descriptionGenerale}
-            note={sae.note}
-            type={sae.type}
-            annee={sae.annee}
-            semestre={sae.semestre}
-            lien={sae.lien}
-            imageGenerale={sae.imageGenerale}
-            section={sae.section}
+            {...sae}
         />
     );
 }
