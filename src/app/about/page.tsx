@@ -11,7 +11,6 @@ export default function AboutPage() {
             <AboutSite/>
             <AboutMeSection/>
             <AboutMore/>
-
         </main>
     );
 }
